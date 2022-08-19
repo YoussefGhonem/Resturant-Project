@@ -12,20 +12,16 @@ export class ActiveStatusBadgeDirective implements OnChanges {
     this._el = el;
   }
 
-  iconCssClass?: string;
-
   ngOnChanges() {
     if (!this._el) return;
     let cssClass: string = 'danger';
 
-    if (!this.value) {
+    if (!this.value)
       cssClass = 'danger';
-      this.iconCssClass = 'close'
-    } else
+    else
       cssClass = 'success';
-    this.iconCssClass = 'checkbox'
 
-    this._el.nativeElement.innerHTML = `<div class="text-${cssClass}"><i class="ri-${(this.iconCssClass)}-circle-line fs-17 align-middle"></i> ${this.value ? 'Active' : 'Inactive'}</div>`;
+    this._el.nativeElement.innerHTML = `<div class="badge bg-${cssClass}">${this.value ? 'Active' : 'Inactive'}</div>`;
   }
 
 }

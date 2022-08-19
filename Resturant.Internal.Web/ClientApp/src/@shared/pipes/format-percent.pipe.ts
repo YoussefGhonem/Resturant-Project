@@ -6,7 +6,7 @@ import * as numeral from 'numeral';
 })
 export class FormatPercentPipe {
   transform(value: number | string, numberOfDigitsAfterDot: number = 2) {
-    if (!value) return 0;
+    if(!value) return 0;
 
     let zeros: string = '';
     for (let i = 0; i < numberOfDigitsAfterDot; i++) {

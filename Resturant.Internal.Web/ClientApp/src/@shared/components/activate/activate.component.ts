@@ -10,7 +10,7 @@ import { BaseComponent } from "@shared/base/base.component";
 })
 export class ActivateComponent extends BaseComponent implements OnInit {
 
-  @Input('title') title: any;
+  @Input('data') data: any;
   @Input('url') url: any;
 
   constructor(public override injector: Injector, public modalService: NgbActiveModal) {
@@ -25,7 +25,7 @@ export class ActivateComponent extends BaseComponent implements OnInit {
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(res => {
           this.modalService.close(true);
-          this.notificationService.success('Activated', `'${this.title}' is successfully activated! 🎉`);
+          this.notificationService.success('Activation', 'Your changes successfully updated! 🎉');
         });
   }
 }

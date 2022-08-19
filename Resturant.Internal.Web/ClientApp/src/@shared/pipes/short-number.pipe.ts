@@ -8,7 +8,8 @@ export class ShortNumberPipe implements PipeTransform {
   transform(number: any): any {
     if (number == 0) {
       return 0;
-    } else {
+    }
+    else {
       // hundreds
       if (number <= 999) {
         return number;
@@ -24,7 +25,8 @@ export class ShortNumberPipe implements PipeTransform {
       // billions
       else if (number >= 1000000000 && number <= 999999999999) {
         return numeral((number / 1000000000)).format(`0,0.00`) + 'B';
-      } else
+      }
+      else
         return number;
     }
   }

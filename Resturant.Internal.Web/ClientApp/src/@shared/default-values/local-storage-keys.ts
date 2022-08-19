@@ -1,4 +1,5 @@
+
 export const LocalStorageKeys = {
-  User: 'TicketManagement-User',
-  AuthToken: 'TicketManagement-AuthToken',
+  User: 'ResturantManagement-User',
+  AuthToken: 'ResturantManagement-AuthToken',
 }

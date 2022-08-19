@@ -6,7 +6,7 @@ import * as numeral from 'numeral';
 })
 export class FormatIntegerPipe {
   transform(value: number | string) {
-    if (!value) return 0;
+    if(!value) return 0;
     return numeral(value).format('0,0');
   }
 }

@@ -2,7 +2,6 @@
   "production": "${production}",
   "environmentName": "${environmentName}",
   "apiConfig": {
-    "apiUrl": "${apiConfig_apiUrl}",
-    "apiVersion": "${apiConfig_apiVersion}"
+    "apiUrl": "${apiUrl}"
   }
 }
