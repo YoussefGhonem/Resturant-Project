@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseComponent } from '@shared/base/base.component';
 import { PressController } from 'app/+settings/controllers/PressController';
+import { Validators } from 'angular-reactive-validation';
 
 @Component({
   selector: 'app-add-edit-press',
@@ -24,10 +25,10 @@ export class AddEditPressComponent extends BaseComponent implements OnInit {
 
   private initForm(): void {
     this.form = this.formBuilder.group({
-      title: new FormControl(null,),
-      description: new FormControl(null,),
-      hyperLink: new FormControl(null,),
-      image: new FormControl(null,),
+      title: new FormControl(null, { validators: [Validators.required('Title is required')] }),
+      description: new FormControl(null, { validators: [Validators.required('Title is required')] }),
+      hyperLink: new FormControl(null, { validators: [Validators.required('Title is required')] }),
+      image: new FormControl(null, { validators: [Validators.required('Title is required')] }),
     });
   }
 
@@ -35,15 +36,18 @@ export class AddEditPressComponent extends BaseComponent implements OnInit {
     return this.form.get(controllerName).errors && this.form.touched;
   }
 
+  onChange(event) {
+    const file = event.target.files[0] as File;
+    if (file == null) return;
+    this.form.controls['image'].patchValue(file);
+  }
 
   submit(): any {
     let body = this.form.getRawValue();
-    this.httpService.POST(PressController.Create, body)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(res => {
+    this.httpService.POST(PressController.Create, this.httpService.objectToFormData(body))
+      .subscribe(() => {
         this.modalService.close(true);
-        this.notificationService.success('Create User', 'Your changes successfully updated! 🎉');
+        this.notificationService.success("Success", "Changes updated successfully");
       });
   }
-
 }

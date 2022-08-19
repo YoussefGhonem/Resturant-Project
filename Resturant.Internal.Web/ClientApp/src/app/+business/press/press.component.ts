@@ -35,9 +35,6 @@ export class PressComponent extends BaseComponent implements OnInit {
       // Pagination
       pageNumber: new FormControl(1),
       pageSize: new FormControl(10),
-      // Filters
-      name: new FormControl(null),
-      isActive: new FormControl(''),
     });
 
     this.form.valueChanges
@@ -59,7 +56,7 @@ export class PressComponent extends BaseComponent implements OnInit {
     this.httpService.GET(SettingsController.Press, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
-        this.data = res;
+        this.data = res.data;
         this.total = this.total;
         console.log(this.data);
       });

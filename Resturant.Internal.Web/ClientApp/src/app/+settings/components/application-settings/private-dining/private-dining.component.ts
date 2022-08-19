@@ -53,7 +53,7 @@ export class PrivateDiningComponent extends BaseComponent implements OnInit, OnC
     let body = this.form.getRawValue();
     this.httpService.PUT(SettingsController.UpdatePrivateDining, this.httpService.objectToFormData(body))
       .subscribe(() => {
-        this.notificationService.success("Success", "Bingo!!!");
+        this.notificationService.success("Success", "Changes updated successfully");
       });
   }
 }

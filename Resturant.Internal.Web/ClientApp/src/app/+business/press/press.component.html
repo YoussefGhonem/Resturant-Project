@@ -1,44 +1,60 @@
-<app-breadcrumbs title="Countries" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<app-breadcrumbs title="Press" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
 <div class="row">
     <div class="col-lg-12">
         <div class="card" id="orderList">
             <div class="card-header  border-0">
                 <div class="d-flex align-items-center">
-                    <h5 class="card-title mb-0 flex-grow-1">Press</h5>
+                    <h5 class="card-title mb-0 flex-grow-1"></h5>
                     <div class="flex-shrink-0 hstack gap-2">
                         <button (click)="create()" type="button" class="btn btn-success add-btn" data-bs-toggle="modal"
                             id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
                             Create</button>
-                        <!-- <button type="button" class="btn btn-info"><i
-                                class="ri-file-download-line align-bottom me-1"></i>
-                            Export</button> -->
                     </div>
                 </div>
             </div>
-            <div class="card-body pt-0 mt-3">
-                <div class="col-xxl col-3" *ngFor="let item of data">
-                    <div class="card h-100">
-                        <div class="card-header">
-                            <h4 class="card-title mb-0">{{item.title}}</h4>
+            <div class="card-body pt-0 mt-3" *ngIf="data?.length > 0 ;else emptyTemp">
+                <div class="row">
+                    <div class="col-xxl-4" *ngFor="let item of data">
+                        <div class="card card-light">
+                            <div class="card-body" style="min-height: 92px;">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                        <img default-image src="{{item.attachmentPath}}" alt=""
+                                            class="avatar-sm rounded-circle">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <p class="card-text"><span class="fw-medium text-primary"> {{item.title}}</span>
+                                            <span [ngbTooltip]="item.description" style="cursor: pointer;">
+                                                {{item.description |truncate : 100: '...'}}
+
+                                            </span>
+
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <div [ngbTooltip]="item.hyperLink" class="text-center">
+                                    <a href="{{item.hyperLink}}" class="link-dark">Hyper-Link <i
+                                            class="ri-arrow-right-s-line align-middle lh-1"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <img class="img-fluid" default-image src="{{item.attachmentPath}}" alt="Card image cap" />
-                        <div class="card-body">
-                            <p class="card-text">
-                                {{item.description}}
-                            </p>
-                            <br>
-                            <a *ngIf="item.hyperLink != null" href="{{item.hyperLink}}">HyperLink</a>
-                        </div>
-                        <div class="card-footer">
-                            <p class="card-text">
-                                <small class="text-muted">{{item.createdDate}}</small>
-                            </p>
-                        </div>
-                    </div>
+                    </div><!-- end col -->
+
                 </div>
+
+
                 <app-pagination (pageChange)="pageChange($event)" [pageNumber]="form.getRawValue().pageNumber"
                     [pageSize]="form.getRawValue().pageSize" [total]="total"></app-pagination>
             </div>
         </div>
     </div>
 </div>
+<ng-template #emptyTemp>
+    <div class="text-center my-3">
+        <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>

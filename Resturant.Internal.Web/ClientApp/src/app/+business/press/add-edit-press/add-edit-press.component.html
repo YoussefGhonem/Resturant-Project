@@ -9,47 +9,41 @@
         <div class="modal-body">
             <div class="row gy-4 mb-3">
                 <div class="col-md-6 form-group">
-                    <label for="amount-field" class="form-label">First Name<small style="color : rgb(179, 62, 62);">
+                    <label for="amount-field" class="form-label">Title<small style="color : rgb(179, 62, 62);">
                             *</small></label>
-                    <input [ngClass]="{ 'is-invalid': isInvalid('firstName') }" type="text" id="customername-field"
-                        class="form-control" placeholder="Enter First Name" formControlName="firstName" />
-                    <arv-validation-messages for="firstName">
+                    <input [ngClass]="{ 'is-invalid': isInvalid('title') }" type="text" id="customername-field"
+                        class="form-control" placeholder="Title" formControlName="title" />
+                    <arv-validation-messages for="title">
                     </arv-validation-messages>
                 </div>
                 <div class="col-md-6 form-group">
-                    <label for="Last-field" class="form-label">Last Name<small style="color : rgb(179, 62, 62);">
+                    <label for="Last-field" class="form-label">Hyper Link<small style="color : rgb(179, 62, 62);">
                             *</small>
                     </label>
-                    <input [ngClass]="{ 'is-invalid': isInvalid('lastName') }" type="text" id="customername-field"
-                        class="form-control" placeholder="Enter Last Name" formControlName="lastName" />
-                    <arv-validation-messages for="lastName">
+                    <input [ngClass]="{ 'is-invalid': isInvalid('hyperLink') }" type="text" id="customername-field"
+                        class="form-control" placeholder="Hyper Link" formControlName="hyperLink" />
+                </div>
+
+                <div class="col-md-12 form-group">
+                    <label for="description-field" class="form-label">Description<small
+                            style="color : rgb(179, 62, 62);">
+                            *</small>
+                    </label>
+                    <textarea [ngClass]="{ 'is-invalid': isInvalid('description') }" type="text" id="description-field"
+                        class="form-control" placeholder="Enter description" formControlName="description"></textarea>
+                    <arv-validation-messages for="description">
                     </arv-validation-messages>
                 </div>
-                <div class="col-md-6 form-group">
-                    <label for="amount-field" class="form-label">Phone Number<small style="color : rgb(179, 62, 62);">
+                <div class="mb-3 form-group">
+                    <label class="form-label">Upload Image <small style="color : rgb(179, 62, 62);">
                             *</small></label>
-                    <input [ngClass]="{ 'is-invalid': isInvalid('phoneNumber') }" type="text" class="form-control"
-                        id="cleave-phone" placeholder="(xxx)xxx-xxxx" mask="(000)000-0000"
-                        formControlName="phoneNumber">
-                    <arv-validation-messages for="phoneNumber">
-                    </arv-validation-messages>
+                    <input class="form-control" [ngClass]="{'is-invalid': isInvalid('image')}" id="image"
+                        formControlName="image" type="file" (change)="onChange($event)" />
+                    <arv-validation-messages for="image"></arv-validation-messages>
 
                 </div>
-                <div class="col-md-6 form-group">
-                    <label for="Email-field" class="form-label">Email<small style="color : rgb(179, 62, 62);">
-                            *</small>
-                    </label>
-                    <input [ngClass]="{ 'is-invalid': isInvalid('email') }" type="text" id="customername-field"
-                        class="form-control" placeholder="Enter Email" formControlName="email" />
-                    <arv-validation-messages for="email">
-                    </arv-validation-messages>
-                </div>
             </div>
-            <!-- Info Alert -->
-            <div class="alert alert-info alert-top-border alert-dismissible fade show" role="alert">
-                <i class="ri-airplay-line me-3 align-middle fs-16 text-info"></i><strong>Hint</strong>
-                - When you create new user we will send an email to him to reset his password.
-            </div>
+
         </div>
         <div class="modal-footer">
             <div class="hstack gap-2 justify-content-end">

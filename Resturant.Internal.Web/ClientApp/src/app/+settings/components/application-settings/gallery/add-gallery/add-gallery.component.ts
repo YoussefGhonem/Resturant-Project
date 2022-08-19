@@ -59,7 +59,7 @@ export class AddGalleryComponent extends BaseComponent implements OnInit {
     this.httpService.POST(SettingsController.CreateGallery, this.formData)
       .subscribe(() => {
         this.modalService.close(true);
-        this.notificationService.success("Success", "Bingo!!!");
+        this.notificationService.success("Success", "Changes updated successfully");
       });
 
   }
