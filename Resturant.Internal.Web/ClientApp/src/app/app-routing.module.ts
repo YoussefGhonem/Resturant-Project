@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'dashboard', canActivate: [AuthGuard], component: LayoutComponent, loadChildren: () => import('./+dashboard/dashboard.module').then(m => m.DashboardModule) },
   { path: 'users', canActivate: [AuthGuard], component: LayoutComponent, loadChildren: () => import('./+users/users.module').then(m => m.UsersModule) },
   { path: 'settings', canActivate: [AuthGuard], component: LayoutComponent, loadChildren: () => import('./+settings/settings.module').then(m => m.SettingsModule) },
+  { path: 'business', canActivate: [AuthGuard], component: LayoutComponent, loadChildren: () => import('./+business/business.module').then(m => m.BusinessModule) },
   {
     path: '',
     redirectTo: '/dashboard',

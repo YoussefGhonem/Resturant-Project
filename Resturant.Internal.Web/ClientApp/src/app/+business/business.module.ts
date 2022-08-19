@@ -1,7 +1,6 @@
 // Template Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsRoutingModule } from "./settings-routing.module";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   NgbAccordionModule,
@@ -24,25 +23,20 @@ import { NgxMaskModule } from "ngx-mask";
 import { SharedDirectivesModule } from "@shared/directives/shared-directives.module";
 import { SharedComponentsModule } from '@shared/components/shared-components.module';
 import { SharedPipesModule } from '@shared/pipes/pipes.module';
-import { ApplicationSettingsComponent } from './components/application-settings/application-settings.component';
-import { AboutUsComponent } from './components/application-settings/about-us/about-us.component';
-import { PrivateDiningComponent } from './components/application-settings/private-dining/private-dining.component';
-import { ReactiveValidationModule } from 'angular-reactive-validation';
-import { GalleryComponent } from './components/application-settings/gallery/gallery.component';
 import { LightboxModule } from 'ngx-lightbox';
-import { AddGalleryComponent } from './components/application-settings/gallery/add-gallery/add-gallery.component';
 // Components
+import { BusinessRoutingModule } from './business-routing.module';
+import { ReactiveValidationModule } from 'angular-reactive-validation';
+import { AddEditPressComponent } from './press/add-edit-press/add-edit-press.component';
+import { PressComponent } from './press/press.component';
 
 @NgModule({
   declarations: [
-    ApplicationSettingsComponent,
-    AboutUsComponent,
-    PrivateDiningComponent,
-    GalleryComponent,
-    AddGalleryComponent
+    PressComponent,
+    AddEditPressComponent
   ],
   imports: [
-    SettingsRoutingModule,
+    BusinessRoutingModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -73,5 +67,4 @@ import { AddGalleryComponent } from './components/application-settings/gallery/a
     NgbActiveModal
   ],
 })
-export class SettingsModule {
-}
+export class BusinessModule { }

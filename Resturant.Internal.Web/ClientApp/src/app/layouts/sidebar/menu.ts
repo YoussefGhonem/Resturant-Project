@@ -2,16 +2,15 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
 
-
   {
     id: 1,
-    label: 'Dashboard',
+    label: 'Business',
     icon: 'ri-dashboard-2-line',
     subItems: [
       {
-        id: 'ANALYTICS',
-        label: 'ANALYTICS',
-        link: '/dashboard/analytics',
+        id: 'Press',
+        label: 'Press',
+        link: '/business/press',
         parentId: 1
       },
       {
