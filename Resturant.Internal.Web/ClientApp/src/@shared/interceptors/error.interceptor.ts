@@ -10,17 +10,17 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class ErrorInterceptor implements HttpInterceptor {
 
   constructor(private _router: Router,
-    private _notificationService: NotificationService,
-    private _spinner: NgxSpinnerService) {
+              private _notificationService: NotificationService,
+              private _spinner: NgxSpinnerService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
-      catchError((err: HttpErrorResponse) => {
-        this._spinner.hide();
-        this.checkHttpStatus(err);
-        return throwError(err);
-      })
+        catchError((err: HttpErrorResponse) => {
+          this._spinner.hide();
+          this.checkHttpStatus(err);
+          return throwError(err);
+        })
     );
   }
 
@@ -30,7 +30,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this._notificationService.error('Invalid Info', this.getErrorMessages(err));
         break;
       case 401:
-        case 403:
+      case 403:
         this._router.navigate(['/auth/unauthorized']);
         break;
       case 402:
@@ -40,7 +40,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         this._router.navigate(['/auth/not-found']);
         break;
       case 500:
-        this._router.navigate(['/auth/server-error']);
+        this._notificationService.error('Server Error', this.getErrorMessages(err));
         break;
       default:
         this._notificationService.error('Something went wrong', this.getErrorMessages(err));

@@ -34,6 +34,23 @@ export class filesService {
     return true;
   }
 
+  isValidPdfExtensions(files: File[]): boolean {
+    for (let i = 0; i < files.length; i++) {
+      if (!this.isValidImageExtension(files[i])) return false
+    }
+    return true;
+  }
+
+  isValidPdfExtension(file: File): boolean {
+    let allowedExtensions: Array<any> = ['pdf'];
+    let fileExtension = file.name.split(".").pop() || '';
+    if (!allowedExtensions.includes(fileExtension.trim().toLowerCase())) {
+      this.notificationService.error('Invalid Pdf', 'Please select a valid Pdf file');
+      return false;
+    }
+    return true;
+  }
+
   isValidImageExtension(file: File): boolean {
     let allowedExtensions: Array<any> = ['png', 'jpg', 'jpeg', 'gif', 'tiff', 'bpg'];
     let fileExtension = file.name.split(".").pop() || '';
@@ -53,7 +70,7 @@ export class filesService {
 
   isValidExcelExtension(file: File): boolean {
     let allowedExtensions: Array<any> = ['xlsx', 'csv'];
-    let fileExtension = file.name.split(".").pop()  || '';
+    let fileExtension = file.name.split(".").pop() || '';
     if (!allowedExtensions.includes(fileExtension.trim().toLowerCase())) {
       this.notificationService.error('Invalid Excel', 'Please select a valid "Excel" sheet');
       return false;

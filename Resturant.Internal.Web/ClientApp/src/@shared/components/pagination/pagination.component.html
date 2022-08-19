@@ -3,7 +3,7 @@
     <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
       Showing
       {{
-      (pageNumber - 1) *pageSize }} to
+        (pageNumber - 1) * pageSize == 0 ? '1' : (pageNumber - 1) * pageSize}} to
       {{(pageNumber - 1) * pageSize + 10}} of {{total}}
       entries
     </div>
@@ -12,9 +12,9 @@
   <div class="col col-sm-6">
 
 
-    <div class="text-sm-right float-sm-end listjs-pagination ">
+    <div class="text-sm-right float-sm-end listjs-pagination">
       <ngb-pagination [collectionSize]="total" [pageSize]="pageSize" [(page)]="pageNumber" [maxSize]="10"
-        [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange.emit($event)">
+                      [rotate]="true" [ellipses]="false" [boundaryLinks]="true" (pageChange)="pageChange.emit($event)">
       </ngb-pagination>
     </div>
 

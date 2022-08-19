@@ -1,4 +1,3 @@
-
 export const NumbersOptions = {
   INT_MAX_VALUE: 2147483647,
   INT_MIN_VALUE: -2147483648,

@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from "rxjs/operators";
 import { environment } from "environments/environment";
-import { of } from "rxjs";
 
 @Pipe({
   name: 'secure'
@@ -28,10 +27,10 @@ export class SecureFilePipe implements PipeTransform {
     let headers = httpOptions.headers.append('Access-Control-Allow-Origin', '*');
 
     return this.http
-      .get(url, { responseType: 'blob', headers: headers })
-      .pipe(
-        map(val => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(val)))
-      );
+        .get(url, {responseType: 'blob', headers: headers})
+        .pipe(
+            map(val => this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(val)))
+        );
   }
 
 }

@@ -22,10 +22,47 @@ jobs:
 - job: Development
   condition: and(succeeded(), eq(variables.isDev, 'true'))
   steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '16.x'
+      displayName: 'Install Node.js'
+
+    - task: Npm@1
+      displayName: 'Angular CLI 13.2.5'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'install -g @angular/cli@13.2.5'
+
+    - task: CmdLine@2
+      displayName: 'Yarn'
+      inputs:
+        script: |
+          yarn install
+          yarn
+          yarn run build
+        workingDirectory: '$(Build.SourcesDirectory)'
+
+    - task: CopyFiles@2
+      displayName: 'Copy File to: $(TargetFolder)'
+      inputs:
+        SourceFolder: "$(Build.SourcesDirectory)"
+        Contents: |
+          nginx.conf
+          dist/**
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+
+
     - task: Docker@2
       displayName: 'Build Docker Image'
       inputs:
         command: build
+        buildContext: $(Build.ArtifactStagingDirectory)
         containerRegistry: $(containerRegistry)
         repository: $(imageRepository)
         tags: dev_$(Build.BuildNumber)
@@ -37,43 +74,4 @@ jobs:
         containerRegistry: $(containerRegistry)
         repository: $(imageRepository)
         tags: dev_$(Build.BuildNumber)
-    
-- job: Staging
-  condition: and(succeeded(), eq(variables.isStaging, 'true'))
-  steps:
-    - task: Npm@0
-      displayName: 'npm install'
-      inputs:
-        arguments: '--force'
 
-    - task: Npm@1
-      displayName: 'npm install angular cli'
-      inputs:
-        command: custom
-        verbose: false
-        customCommand: 'install @angular/cli'
-
-    - task: Npm@1
-      displayName: 'npm build'
-      inputs:
-        command: custom
-        verbose: false
-        customCommand: 'run build'
-
-    - task: ArchiveFiles@1
-      displayName: 'Archive files '
-      inputs:
-        rootFolder: '$(System.DefaultWorkingDirectory)/dist' #name of your project on angular.json .defaultProject value
-        includeRootFolder: false
-
-    - task: CopyFiles@2
-      displayName: 'Copy File to: $(TargetFolder)'
-      inputs:
-        SourceFolder: '$(Build.ArtifactStagingDirectory)'
-        Contents: '$(Build.BuildId).zip'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'
-
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Artifact: drop'
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'

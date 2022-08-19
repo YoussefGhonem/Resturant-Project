@@ -17,8 +17,9 @@ export class HeadersInterceptor implements HttpInterceptor {
    */
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const apiUrl = environment.config?.apiConfig?.apiUrl!;
+    const apiUrl = environment.config?.apiConfig?.apiUrl;
     const isApiUrl = request.url.startsWith(apiUrl);
+
     if (isApiUrl) {
       request = request.clone({
         setHeaders: {

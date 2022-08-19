@@ -9,7 +9,7 @@ import { takeUntil } from "rxjs/operators";
   styleUrls: ['./delete.component.scss']
 })
 export class DeleteComponent extends BaseComponent implements OnInit {
-  @Input('data') data: any;
+  @Input('title') title: any;
   @Input('url') url: any;
 
   constructor(public override injector: Injector, public modalService: NgbActiveModal) {
@@ -24,7 +24,7 @@ export class DeleteComponent extends BaseComponent implements OnInit {
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe(res => {
           this.modalService.close(true);
-          this.notificationService.success('Delete', 'Your changes successfully updated! 🎉');
+          this.notificationService.success('Deleted', `'${this.title}' is successfully deleted! 🎉`);
         });
   }
 }

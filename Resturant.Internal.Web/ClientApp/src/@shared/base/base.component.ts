@@ -1,10 +1,8 @@
-import { ToastService } from './../../app/+dashboard/components/dashboard/toast-service';
 import { Component, Injector, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpService } from '@shared/services';
-import { NotificationService } from '@shared/services';
-import { User } from "app/+auth/models";
+import { HttpService, NotificationService } from '@shared/services';
+import { RolesEnum, User } from "app/+auth/models";
 import { takeUntil } from "rxjs/operators";
 import { AuthService } from "app/+auth/service";
 
@@ -26,6 +24,7 @@ export class BaseComponent implements OnDestroy {
   public httpService: HttpService;
   public notificationService: NotificationService;
   public authService: AuthService;
+
   //#endregion
 
   constructor(public injector: Injector) {
@@ -41,6 +40,26 @@ export class BaseComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  get vendorRole(): string {
+    return RolesEnum[RolesEnum.Vendor];
+  }
+
+  get localAdminRole(): string {
+    return RolesEnum[RolesEnum.LocalAdmin];
+  }
+
+  get superAdminRole(): string {
+    return RolesEnum[RolesEnum.SuperAdmin];
+  }
+
+  get committeeMemberRol(): string {
+    return RolesEnum[RolesEnum.CommitteeMember];
+  }
+
+  get PublicUserRol(): string {
+    return RolesEnum[RolesEnum.PublicUser];
   }
 
 }

@@ -1,30 +1,29 @@
 import { Injectable } from '@angular/core';
-import swal, { SweetAlertOptions } from 'sweetalert2';
+import swal from 'sweetalert2';
 import { sweetAlertOptions } from "@shared/default-values/notification-sweetalert-options";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class NotificationService {
-
-  sweetAlertOptions: SweetAlertOptions = {}
 
   error(title: string, message: string) {
     let html = `
-    <div style="text-align: left; padding: 5px; padding-left: 15px;">
-      <p style="font-weight: 500;color: #f27474; margin-bottom: 1px;">${title}</p>
-      <p style="width: 100%;">${message}</p>
-    </div>`;
+    <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#f06548,secondary:#f7b84b" style="width:120px;height:120px"></lord-icon>
+    <div class="mt-4 pt-2 fs-15 ">
+      <h4>${title}</h4>
+      <p class="text-muted mx-4 mb-0">${message}</p>
+    </div>
+    `;
 
     swal.fire({
       ...sweetAlertOptions,
       html: html,
-      icon: 'error',
     });
   }
 
   info(title: string, message: string) {
     let html = `
-    <div style="text-align: left; padding: 5px; padding-left: 15px;">
-      <p style="font-weight: 500;color: #a2e1f6; margin-bottom: 1px;">${title}</p>
+    <div style="text-align: left;">
+      <p style="font-weight: 400;color: #299cdb; margin-bottom: 1px;">${title}</p>
       <p style="width: 100%;">${message}</p>
     </div>`;
 
@@ -37,16 +36,18 @@ export class NotificationService {
 
   success(title: string, message: string) {
     let html = `
-    <div style="text-align: left; padding: 5px; padding-left: 15px;">
-      <p style="font-weight: 500;color: #28c76f; margin-bottom: 1px;">${title}</p>
-      <p style="width: 100%;">${message}</p>
-    </div>`;
+    <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop" colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
+    <div class="mt-4 pt-2 fs-15">
+        <h4>${title}</h4>
+        <p class="text-muted mx-4 mb-0">${message}</p>
+    </div>
+    `;
 
     swal.fire({
       ...sweetAlertOptions,
       html: html,
-      icon: 'success',
     });
+
   }
 
 }

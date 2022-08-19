@@ -6,7 +6,6 @@ export interface IConfigModel {
   production?: boolean;
   environmentName?: string;
   apiConfig?: IApiConfig;
-  apiUrlIdentity?: string;
 }
 
 export interface IApiConfig {
