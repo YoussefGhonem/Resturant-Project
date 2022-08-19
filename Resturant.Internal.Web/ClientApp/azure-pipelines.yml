@@ -1,0 +1,79 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- dev
+
+variables:
+  buildConfiguration: 'Release'
+  isDev: $[eq(variables['Build.SourceBranch'], 'refs/heads/dev')]
+  isStaging: $[eq(variables['Build.SourceBranch'], 'refs/heads/UAT')]
+  isMaster: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  imageRepository: 'fortteck/ticket-management-ui'
+  dockerfilePath: 'Dockerfile'
+  containerRegistry: 'FortTeckDockerHubRegistry'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Development
+  condition: and(succeeded(), eq(variables.isDev, 'true'))
+  steps:
+    - task: Docker@2
+      displayName: 'Build Docker Image'
+      inputs:
+        command: build
+        containerRegistry: $(containerRegistry)
+        repository: $(imageRepository)
+        tags: dev_$(Build.BuildNumber)
+        Dockerfile: $(dockerfilePath)
+    - task: Docker@2
+      displayName: 'Push Image to Registry'
+      inputs:
+        command: 'push'
+        containerRegistry: $(containerRegistry)
+        repository: $(imageRepository)
+        tags: dev_$(Build.BuildNumber)
+    
+- job: Staging
+  condition: and(succeeded(), eq(variables.isStaging, 'true'))
+  steps:
+    - task: Npm@0
+      displayName: 'npm install'
+      inputs:
+        arguments: '--force'
+
+    - task: Npm@1
+      displayName: 'npm install angular cli'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'install @angular/cli'
+
+    - task: Npm@1
+      displayName: 'npm build'
+      inputs:
+        command: custom
+        verbose: false
+        customCommand: 'run build'
+
+    - task: ArchiveFiles@1
+      displayName: 'Archive files '
+      inputs:
+        rootFolder: '$(System.DefaultWorkingDirectory)/dist' #name of your project on angular.json .defaultProject value
+        includeRootFolder: false
+
+    - task: CopyFiles@2
+      displayName: 'Copy File to: $(TargetFolder)'
+      inputs:
+        SourceFolder: '$(Build.ArtifactStagingDirectory)'
+        Contents: '$(Build.BuildId).zip'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: drop'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)\ArtifactsToBePublished'

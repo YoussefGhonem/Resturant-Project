@@ -1,0 +1,41 @@
+<div class="Main_content">
+  <div class="container Custom_style">
+    <div class="imge" style="width: 31%;">
+      <img class="Image_style" src="../../../../assets/Images/1.jpg">
+    </div>
+    <div class="main">
+      <input type="checkbox" id="chk" aria-hidden="true">
+
+      <div class="signup">
+        <form [formGroup]="LoginForm">
+          <label for="chk" aria-hidden="true">Login</label>
+          <input formControlName="email"
+            [ngClass]="{'is-invalid': LoginForm.get('email').errors && LoginForm.get('email').touched}" type="email"
+            name="email" placeholder="Email" required>
+          <input formControlName="password"
+            [ngClass]="{'is-invalid': LoginForm.get('password').errors && LoginForm.get('password').touched}"
+            type="password" name="pswd" placeholder="Password" required>
+          <button>Login</button>
+        </form>
+      </div>
+      <div class="login">
+        <form [formGroup]="RegisterForm">
+          <label for="chk" aria-hidden="true">Sign up</label>
+          <input formControlName="firstname"
+            [ngClass]="{'is-invalid': RegisterForm.get('firstname').errors && RegisterForm.get('firstname').touched}"
+            type="text" name="txt" placeholder="Firstname" required="">
+          <input formControlName="lastname"
+            [ngClass]="{'is-invalid': RegisterForm.get('lastname').errors && RegisterForm.get('lastname').touched}"
+            type="text" name="txt" placeholder="Lastname" required="">
+          <input formControlName="email"
+            [ngClass]="{'is-invalid': RegisterForm.get('email').errors && RegisterForm.get('email').touched}"
+            type="email" name="email" placeholder="Email" required="">
+          <input formControlName="password"
+            [ngClass]="{'is-invalid': RegisterForm.get('password').errors && RegisterForm.get('password').touched}"
+            type="password" name="pswd" placeholder="Password" required="">
+          <button>Sign up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

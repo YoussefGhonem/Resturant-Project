@@ -1,0 +1,30 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="row">
+        <div class="mb-3 form-group col-6">
+            <div class="mb-3 form-group">
+                <label class="form-label">Private Dining Document</label>
+                <input class="form-control" [ngClass]="{'is-invalid': isInvalid('document')}" id="document"
+                    formControlName="document" type="file" (change)="onChange($event)" />
+                <label *ngIf="settings.privateDiningAttachmentName != null" for="customername-fiel2d"
+                    class="form-label">Currunt document Name:
+                    <strong>{{settings.privateDiningAttachmentName}}</strong></label>
+
+                <arv-validation-messages for="document"></arv-validation-messages>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-3 form-group">
+        <label for="customername-field" class="form-label">Private Dining 'Description'</label>
+        <ckeditor [editor]="UserEditor" [config]="editorConfig"
+            [ngClass]="{'is-invalid': isInvalid('privateDiningDescription')}" id="privateDiningDescription"
+            formControlName="privateDiningDescription" data="">
+        </ckeditor>
+        <arv-validation-messages for="privateDiningDescription">
+        </arv-validation-messages>
+    </div>
+
+    <div class="text-end mb-3">
+        <button type="submit" class="btn btn-success w-sm">Save Changes</button>
+    </div>
+</form>

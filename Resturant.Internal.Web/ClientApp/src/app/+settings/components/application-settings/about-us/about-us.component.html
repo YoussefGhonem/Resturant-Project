@@ -1,0 +1,41 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="row">
+
+        <div class="mb-3 form-group col-6">
+            <label for="customername-field1" class="form-label">Email Service</label>
+            <input [ngClass]="{ 'is-invalid': isInvalid('emailService') }" type="text" id="customername-field1"
+                class="form-control" placeholder="Enter email Service" formControlName="emailService" />
+            <arv-validation-messages for="emailService">
+            </arv-validation-messages>
+        </div>
+
+        <div class="mb-3 form-group col-6">
+            <label for="customername-field1" class="form-label">Number Service </label>
+            <input [ngClass]="{ 'is-invalid': isInvalid('numberService') }" type="text" id="customername-field1"
+                class="form-control" placeholder="Enter Number Service" mask="(000)000-0000"
+                formControlName="numberService" />
+            <arv-validation-messages for="numberService">
+            </arv-validation-messages>
+        </div>
+    </div>
+
+    <div class="mb-3 form-group">
+        <label for="customername-field" class="form-label">Work With Us 'Description'</label>
+        <ckeditor [editor]="UserEditor" [config]="editorConfig"
+            [ngClass]="{'is-invalid': isInvalid('workWithUsDescription')}" id="workWithUsDescription"
+            formControlName="workWithUsDescription" data="">
+        </ckeditor>
+        <arv-validation-messages for="workWithUsDescription">
+        </arv-validation-messages>
+    </div>
+    <div class="mb-3 form-group">
+        <label class="form-label"> About Us 'Description'</label>
+        <ckeditor [editor]="UserEditor" [config]="editorConfig" [ngClass]="{'is-invalid': isInvalid('aboutUs')}"
+            id="aboutUs" formControlName="aboutUs" data="">
+        </ckeditor>
+        <arv-validation-messages for="aboutUs"></arv-validation-messages>
+    </div>
+    <div class="text-end mb-3">
+        <button [disabled]="form.invalid" type="submit" class="btn btn-success w-sm">Save Changes</button>
+    </div>
+</form>

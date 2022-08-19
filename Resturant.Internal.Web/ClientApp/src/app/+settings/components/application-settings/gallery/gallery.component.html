@@ -1,0 +1,50 @@
+<div class="d-flex flex-row-reverse hstack gap-2">
+    <button type="button" (click)="create()" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
+        data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
+        Create</button>
+</div>
+<div class="row" *ngIf="images?.length > 0 ;else emptyTemp">
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row gallery-wrapper">
+                        <div class="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                            data-category="designing development" *ngFor="let data of images;let i=index">
+                            <div class="gallery-box card">
+                                <div class="gallery-container">
+                                    <a class="image-popup" title="">
+                                        <img class="gallery-img img-fluid mx-auto" default-image src="{{data.imageUrl}}"
+                                            alt="" />
+                                        <div class="gallery-overlay" (click)="open(i)">
+                                            <h5 class="overlay-caption">{{data.name}}</h5>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="box-content">
+                                    <div class="d-flex align-items-center mt-1">
+                                        <div class="flex-grow-1 text-muted"> <a href="javascript:void(0);"
+                                                class="text-body text-truncate">{{data.createdDate | date}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <app-pagination (pageChange)="pageChange($event)" [pageNumber]="form.getRawValue().pageNumber"
+                        [pageSize]="form.getRawValue().pageSize" [total]="total"></app-pagination>
+                </div>
+            </div>
+            <!-- end row -->
+            <!-- ene card body -->
+        </div>
+        <!-- end card -->
+    </div>
+</div>
+<ng-template #emptyTemp>
+    <div class="text-center my-3">
+        <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no images to show</h5>
+    </div>
+</ng-template>

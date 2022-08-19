@@ -1,0 +1,8 @@
+{
+  "production": "${production}",
+  "environmentName": "${environmentName}",
+  "apiConfig": {
+    "apiUrl": "${apiUrl}",
+    "apiVersion": "${apiVersion}"
+  }
+}

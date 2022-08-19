@@ -1,0 +1,42 @@
+<!-- Order Create Model -->
+<ng-container #content role="document">
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title" id="addModal"> New Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+            (click)="modalService.close()"></button>
+    </div>
+    <form (ngSubmit)="submit()" [formGroup]="form">
+        <div class="modal-body">
+            <div class="row gy-4 mb-3">
+                <div class="col-md-6 form-group">
+                    <label class="form-label">Name<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input required [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" class="form-control"
+                        placeholder="Enter Name" formControlName="name" />
+                </div>
+
+                <div class="mb-3 form-group">
+                    <label class="form-label">Upload Images <small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input multiple="true" class="form-control" [ngClass]="{'is-invalid': isInvalid('document')}"
+                        id="document" formControlName="images" type="file" (change)="onChange($event)" />
+                    <arv-validation-messages for="images"></arv-validation-messages>
+                    <label *ngIf="filenames.length>0" for="customername-fiel2d" class="form-label">imges selected:
+                        <strong *ngFor="let item of filenames">{{item}} <br></strong></label>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modalService.close()">Close
+                </button>
+
+                <button [disabled]="form.invalid" type="submit" class="btn btn-success" id="add-btn">Add Image
+                </button>
+
+            </div>
+        </div>
+    </form>
+</ng-container>
+<!--End Modal -->

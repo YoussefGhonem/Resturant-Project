@@ -1,0 +1,68 @@
+<!-- Order Create Model -->
+<ng-container #content role="document">
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title" id="addModal">Create New User</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+            (click)="modalService.close()"></button>
+    </div>
+    <form (ngSubmit)="submit()" [formGroup]="form">
+        <div class="modal-body">
+            <div class="row gy-4 mb-3">
+                <div class="col-md-6">
+                    <div>
+                        <label for="amount-field" class="form-label">First Name</label>
+                        <input type="text" id="customername-field" class="form-control" placeholder="Enter First Name"
+                            required formControlName="firstName" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <label for="Last-field" class="form-label">Last Name
+                        </label>
+                        <input type="text" id="customername-field" class="form-control" placeholder="Enter Last Name"
+                            required formControlName="lastName" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <label for="amount-field" class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" id="cleave-phone" placeholder="(xxx)xxx-xxxx"
+                            mask="(000)000-0000" formControlName="phone">
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div>
+                        <label for="Email-field" class="form-label">Email
+                        </label>
+                        <input type="text" id="customername-field" class="form-control" placeholder="Enter Email"
+                            required formControlName="email" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div>
+                        <label for="Role-field" class="form-label">Role </label>
+                        <select class="form-control" data-trigger name="Role-method" id="payment-field"
+                            formControlName="role">
+                            <option value="" selected hidden>Select Role</option>
+                            <option [value]="userRolesEnum.Vendor">Vendor</option>
+                            <option [value]="userRolesEnum.CommitteeMember">Committee Member</option>
+                            <option [value]="userRolesEnum.LocalAdmin">Local Admin</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                    (click)="modalService.close()">Close</button>
+                <button type="submit" class="btn btn-success" id="add-btn">Create User</button>
+
+            </div>
+        </div>
+    </form>
+</ng-container>
+<!--End Modal -->

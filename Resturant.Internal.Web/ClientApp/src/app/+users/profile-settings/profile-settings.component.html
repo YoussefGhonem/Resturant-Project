@@ -1,0 +1,37 @@
+<div class="position-relative mx-n4 mt-n4">
+  <div class="profile-wid-bg profile-setting-img">
+    <img src="assets/images/profile-bg.jpg" class="profile-wid-img" alt="">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xxl-3">
+
+    <!-- <update-profile-image [activeId]="activeId" (onImageChangeSend)="saveImageInComponent($event)"></update-profile-image> -->
+
+    <!--end card-->
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex align-items-center mb-5">
+          <div class="flex-grow-1">
+            <h5 class="card-title mb-0">Complete Your Profile</h5>
+          </div>
+          <div class="flex-shrink-0">
+            <a href="/users/profile-settings" class="badge bg-light text-primary fs-12"><i
+                class="ri-edit-box-line align-bottom me-1"></i> Complete</a>
+          </div>
+        </div>
+        <div class="progress animated-progess custom-progress progress-label">
+          <div class="progress-bar bg-danger" role="progressbar" [attr.aria-valuenow]="completionPercentage"
+            aria-valuemin="0" aria-valuemax="100">
+            <div class="label">{{completionPercentage}}%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end col-->
+
+  <!--end col-->
+</div>
+<!--end row-->
