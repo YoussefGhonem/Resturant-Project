@@ -8,8 +8,13 @@
     }
     public enum SteerPosition
     {
-        LHD = 1,
-        RHD = 2
+        GeneralInquiry = 1,
+        PressInquiry = 2
+    }
+    public enum TouchAbout
+    {
+        GeneralInquiry = 1,
+        PressInquiry = 2
     }
     public enum MealEnum
     {

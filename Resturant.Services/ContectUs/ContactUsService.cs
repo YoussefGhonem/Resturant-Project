@@ -95,8 +95,9 @@ namespace Resturant.Services.ContectUs
         }
         public PaginationResult<ContactUsReturnDto> GetAllContactUs(BaseFilterDto filterDto)
         {
-            var paginationResult = _context.ConntactUss.Where(J => J.IsDeleted == false).AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
-            var dataList = paginationResult.list.Adapt<List<ContactUsReturnDto>>();
+            var paginationResult = _context.ConntactUss.Where(J => J.IsDeleted == false)
+                .AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
+            var dataList = paginationResult.list.OrderByDescending(x=>x.CreatedOn).Adapt<List<ContactUsReturnDto>>();
             return new PaginationResult<ContactUsReturnDto>(dataList, paginationResult.total);
         }
     }

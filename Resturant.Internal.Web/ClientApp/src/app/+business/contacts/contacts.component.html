@@ -1,0 +1,84 @@
+<!-- <ul class="message-list" id="emaildata">
+    <li class="unread" *ngFor="let email of emailDatas; let i = index;" [ngClass]="{ 'unread': email.unread === true }"
+        id="chk-{{email.id}}">
+        <div class="col-mail col-mail-1">
+            <div class="form-check checkbox-wrapper-mail fs-14">
+                <input type="checkbox" class="form-check-input" id="chk-{{i}}" name="checkAll" value="{{email.id}}"
+                    (change)="selectMail($event,email.id)" [(ngModel)]="email.state">
+                <label for="chk-{{i}}" class="toggle"></label>
+            </div>
+            <button type="button" class="btn avatar-xs p-0 favourite-btn fs-15 star_{{email.id}}"
+                [ngClass]="{'active': email.isIcon !== true}" (click)="activeStar(email.id)">
+                <i class="ri-star-fill"></i>
+            </button>
+            <a href="javascript: void(0);" class="title"
+                (click)="onSettingsButtonClicked($event,email.id)">{{email.name}}</a>
+        </div>
+        <div class="col-mail col-mail-2">
+            <a href="javascript: void(0);" class="subject"><span class="subject-title">{{email.badge ? email.badge:
+                    email.subject}}</span><span class="teaser"> - {{email.badge ? email.subject: email.teaser}}
+                    {{email.badge ? ' - '+email.teaser:''}}</span>
+            </a>
+            <div class="date">{{email.date}}</div>
+        </div>
+    </li>
+    <li class="bg-transparent text-center">
+        <button type="button" class="btn btn-soft-info btn-rounded btn-sm px-2"><i
+                class="mdi mdi-spin mdi-loading me-2"></i>Load More</button>
+    </li>
+</ul> -->
+
+
+<div class="email-content" *ngIf="data?.length > 0 ;else emptyTemp">
+    <div class="p-4 pb-0">
+        <div class="border-bottom border-bottom-dashed">
+            <div class="row align-items-end mt-3">
+                <div class="col">
+                    <div id="mail-filter-navlist">
+                        <ul class="message-list" id="emaildata">
+                            <li (click)="selectMail(email)" class="unread" *ngFor="let email of data; let i = index;"
+                                [ngClass]="{ 'unread': email.unread === true }" id="chk-{{email.id}}">
+                                <div class="col-mail col-mail-1">
+                                    <!-- <div class="form-check checkbox-wrapper-mail fs-14" [ngbTooltip]="'Reply'">
+                                        <i class="ri-reply-line text-primary"></i>
+                                    </div> -->
+                                    <!-- <button type="button"
+                                        class="btn avatar-xs p-0 favourite-btn fs-15 star_{{email.id}}"
+                                        [ngClass]="{'active': email.isIcon !== true}">
+                                    </button> -->
+                                    <div class="form-check checkbox-wrapper-mail fs-14">
+                                        <i class="las la-trash-alt text-danger cursor-pointer"
+                                            [ngbTooltip]="'Delete'"></i>
+                                    </div>
+                                    <a href="javascript: void(0);" class="title">{{email.email}}</a>
+                                </div>
+                                <div class="col-mail col-mail-2">
+                                    <a href="javascript: void(0);" class="subject">
+                                        <span class="subject-title text-success">{{ email.touchAbout}}</span><span
+                                            class="teaser"> -
+                                            {{email.massage}}
+                                        </span>
+                                    </a>
+                                    <div class="date">{{email.createdOn |date}}</div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <app-pagination class="mb-2" (pageChange)="pageChange($event)"
+                    [pageNumber]="form.getRawValue().pageNumber" [pageSize]="form.getRawValue().pageSize"
+                    [total]="total"></app-pagination>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<ng-template #emptyTemp>
+    <div class="text-center my-3">
+        <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>

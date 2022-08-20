@@ -14,6 +14,12 @@ export const MENU: MenuItem[] = [
         parentId: 1
       },
       {
+        id: 'PrivateDining',
+        label: 'Private Dining',
+        link: '/business/private-dining',
+        parentId: 1
+      },
+      {
         id: 'CRM',
         label: 'CRM',
         link: '/dashboard/crm',
@@ -49,7 +55,6 @@ export const MENU: MenuItem[] = [
       }
     ]
   },
-
   {
     id: 2,
     label: 'Settings',
@@ -66,6 +71,12 @@ export const MENU: MenuItem[] = [
     label: 'Manage Users',
     icon: ' ri-settings-2-line',
     link: '/users'
+  },
+  {
+    id: 3,
+    label: 'Contacts',
+    icon: ' ri-mail-send-line',
+    link: '/business/contacts'
   },
   {
     id: 11,

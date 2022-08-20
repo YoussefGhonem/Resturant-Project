@@ -33,7 +33,7 @@ namespace Resturant.Services.PrivateDining
                     NumberOfPeople = options.NumberOfPeople,
                     PhoneNumber = options.PhoneNumber,
                     StartTime = options.StartTime,
-                    EvenDate = options.EvenDate,
+                    EventDate = options.EventDate,
                 };
 
                 await _context.PrivateDining.AddAsync(privateDining);

@@ -29,11 +29,17 @@ import { BusinessRoutingModule } from './business-routing.module';
 import { ReactiveValidationModule } from 'angular-reactive-validation';
 import { AddEditPressComponent } from './press/add-edit-press/add-edit-press.component';
 import { PressComponent } from './press/press.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ContactDetailsComponent } from './contacts/contact-details/contact-details.component';
+import { PrivateDiningComponent } from './componenets/private-dining/private-dining.component';
 
 @NgModule({
   declarations: [
     PressComponent,
-    AddEditPressComponent
+    AddEditPressComponent,
+    ContactsComponent,
+    ContactDetailsComponent,
+    PrivateDiningComponent
   ],
   imports: [
     BusinessRoutingModule,

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Resturant.DTO.Business.ContactUs
+﻿namespace Resturant.DTO.Business.ContactUs
 {
     public class ContactUsReturnDto
     {
@@ -13,5 +7,6 @@ namespace Resturant.DTO.Business.ContactUs
         public string? PhoneNumber { get; set; }
         public string? TouchAbout { get; set; }
         public string? Massage { get; set; }
+        public DateTime? CreatedOn { get; set; }
     }
 }

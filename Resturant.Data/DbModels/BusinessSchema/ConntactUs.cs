@@ -1,4 +1,5 @@
 ﻿using Resturant.Core.Common;
+using Resturant.Core.Enums;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Resturant.Data.DbModels.BusinessSchema
@@ -10,7 +11,7 @@ namespace Resturant.Data.DbModels.BusinessSchema
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
-        public string? TouchAbout { get; set; }
+        public TouchAbout? TouchAbout { get; set; }
         public string? Massage { get; set; }
     }
 }

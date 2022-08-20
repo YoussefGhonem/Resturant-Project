@@ -1,0 +1,157 @@
+<app-breadcrumbs title="Private Dining" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card-body pt-0 mt-3" *ngIf="data?.length > 0 ;else emptyTemp">
+      <div class="row">
+        <div class="col-6" *ngFor="let item of data">
+          <div class="card">
+            <div class="card-header">
+              <div class="d-sm-flex align-items-center">
+                <h5 class="card-title flex-grow-1 mb-0">Event Details</h5>
+                <div class="flex-shrink-0 mt-2 mt-sm-0">
+                  <div class="d-flex gap-1">
+                    <a href="javascript:void(0);" [ngbTooltip]="'Created Date'"
+                      class="btn btn-soft-info btn-sm mt-2 mt-sm-0"><i class="ri-timer-line align-middle me-1"></i>
+                      {{item.createdOn |
+                      datetime}}</a>
+                    <a href="javascript:void(0);" class="btn btn-soft-danger btn-sm mt-2 mt-sm-0"><i
+                        class="mdi mdi-archive-remove-outline align-middle me-1"></i> Cancel
+                      Event</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="profile-timeline order-status">
+                <ngb-accordion #acc="ngbAccordion" activeIds="static-1" [closeOthers]="true">
+                  <ngb-panel id="static-1">
+                    <ng-template ngbPanelTitle>
+                      <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse" href="javascript:void(0);"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-shrink-0 avatar-xs">
+                            <div class="avatar-title bg-success rounded-circle">
+                              <i class="ri-user-follow-line"></i>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <h6 class="fs-14 mb-0">User Details - <span class="fw-normal">You found all you need
+                                about user.</span></h6>
+                          </div>
+                        </div>
+                      </a>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body ms-2 ps-4 pt-0">
+                          <ul class="list-unstyled mb-0 vstack gap-2">
+                            <li><i class="ri-user-line me-2 align-middle text-muted fs-16"></i>{{item.firstName}}
+                              {{item.firstName}}
+                            </li>
+                            <li><i class="ri-mail-line me-2 align-middle text-muted fs-16"></i>{{item.email}}
+                            </li>
+                            <li><i class="ri-phone-line me-2 align-middle text-muted fs-16"></i>{{item.phoneNumber}}
+                            </li>
+                            <li><i class=" ri-hotel-fill me-2 align-middle text-muted fs-16"></i>{{item.company}}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="static-2">
+                    <ng-template ngbPanelTitle>
+                      <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse" href="javascript:void(0);"
+                        aria-expanded="false" aria-controls="collapseTwo">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-shrink-0 avatar-xs">
+                            <div class="avatar-title bg-success rounded-circle">
+                              <i class="mdi mdi-gift-outline"></i>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <h6 class="fs-14 mb-1">Event Information - <span class="fw-normal">This details about event
+                              </span></h6>
+                          </div>
+                        </div>
+                      </a>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <div class="accordion-body ms-1 ps-4 pt-0">
+                        <div class="row">
+                          <div class="col-12">
+                            <h6 class="mb-1"><i class=" ri-calendar-2-line me-2 align-middle text-muted fs-16"></i>
+                              Event Date.
+                            </h6>
+                            <p class="text-muted">{{item.eventDate | date}}</p>
+                          </div>
+
+                          <div class="col-4">
+                            <h6 class="mb-1"><i class=" ri-alarm-line me-2 align-middle text-muted fs-16"></i>Start
+                              Time.</h6>
+                            <p class="text-muted">{{item.startTime | time}}</p>
+                          </div>
+                          <div class="col-4">
+                            <h6 class="mb-1"><i class=" ri-alarm-warning-line me-2 align-middle text-muted fs-16"></i>
+                              End Date.
+                            </h6>
+                            <p class="text-muted">{{item.endTime | time}}</p>
+                          </div>
+                          <div class="col-12">
+                            <h6 class="mb-1"><i class=" ri-calculator-line me-2 align-middle text-muted fs-16"></i>
+                              Number Of Pepole.
+                            </h6>
+                            <p class="text-muted">{{item.numberOfPeople}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngb-panel>
+                  <ngb-panel id="static-3">
+                    <ng-template ngbPanelTitle>
+                      <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse" href="javascript:void(0);"
+                        aria-expanded="false" aria-controls="collapseThree">
+                        <div class="d-flex align-items-center">
+                          <div class="flex-shrink-0 avatar-xs">
+                            <div class="avatar-title bg-success rounded-circle">
+                              <i class=" ri-information-line"></i>
+                            </div>
+                          </div>
+                          <div class="flex-grow-1 ms-3">
+                            <h6 class="fs-14 mb-1">Additional Information - <span class="fw-normal">Add more explanation
+                                From User.</span>
+                            </h6>
+                          </div>
+                        </div>
+                      </a>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                      <div class="accordion-body ms-2 ps-5 pt-0">
+
+                        <p class="text-muted mb-0">S{{item.additionalInformation}}</p>
+                      </div>
+                    </ng-template>
+                  </ngb-panel>
+
+                </ngb-accordion>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!--end card-->
+      </div>
+
+
+      <app-pagination (pageChange)="pageChange($event)" [pageNumber]="form.getRawValue().pageNumber"
+        [pageSize]="form.getRawValue().pageSize" [total]="total"></app-pagination>
+    </div>
+  </div>
+</div>
+<ng-template #emptyTemp>
+  <div class="text-center my-3">
+    <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+    <h5 class="py-3 text-muted">There is no data to show</h5>
+  </div>
+</ng-template>
