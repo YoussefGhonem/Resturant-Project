@@ -15,6 +15,8 @@ using Resturant.Services.PrivateDiningImage;
 using Resturant.Services.SendingEmail;
 using Resturant.Services.Settings;
 using Resturant.Services.UploadFiles;
+using Resturant.Services.Cover;
+using Resturant.Services.Happining;
 
 namespace Resturant.Services
 {
@@ -37,6 +39,8 @@ namespace Resturant.Services
             services.AddScoped<IGalleryService, GalleryService>();
             services.AddScoped<IJopService, JopService>();
             services.AddScoped<IContactUs, ContactUsService>();
+            services.AddScoped<ICover, CoverService>();
+            services.AddScoped<IHappining, HappiningService>();
             return services;
         }
     }

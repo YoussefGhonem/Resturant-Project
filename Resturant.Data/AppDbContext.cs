@@ -47,6 +47,8 @@ namespace Resturant.Data
         public DbSet<Gallery> Gallerys { get; set; }
         public DbSet<Jop> Jops { get; set; }
         public DbSet<ConntactUs> ConntactUss { get; set; }
+        public DbSet<Cover> Covers { get; set; }
+        public DbSet<Happining> Happinings { get; set; }
 
     }
 }
