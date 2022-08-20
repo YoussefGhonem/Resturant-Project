@@ -16,5 +16,6 @@ namespace Resturant.Data.DbModels.BusinessSchema
         public string? PrivateDiningAttachmentName { get; set; }
         public string? PrivateDiningAttachmentPath { get; set; }
 
+
     }
 }

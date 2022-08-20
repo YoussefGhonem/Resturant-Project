@@ -137,11 +137,16 @@ namespace Resturant.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Manu",
+                name: "ManuCategories",
                 schema: "Business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkDayes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CategoryFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -149,7 +154,7 @@ namespace Resturant.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Manu", x => x.Id);
+                    table.PrimaryKey("PK_ManuCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -336,17 +341,14 @@ namespace Resturant.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Categories",
+                name: "SubCategories",
                 schema: "Business",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WorkDayes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryFileUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryFileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ManuId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ManuCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -354,12 +356,12 @@ namespace Resturant.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.PrimaryKey("PK_SubCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Manu_ManuId",
-                        column: x => x.ManuId,
+                        name: "FK_SubCategories_ManuCategories_ManuCategoryId",
+                        column: x => x.ManuCategoryId,
                         principalSchema: "Business",
-                        principalTable: "Manu",
+                        principalTable: "ManuCategories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -511,32 +513,6 @@ namespace Resturant.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SubCategories",
-                schema: "Business",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SubCategories", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SubCategories_Categories_CategoryId",
-                        column: x => x.CategoryId,
-                        principalSchema: "Business",
-                        principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "MealNames",
                 schema: "Business",
                 columns: table => new
@@ -570,12 +546,6 @@ namespace Resturant.Data.Migrations
                 column: "MealId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ManuId",
-                schema: "Business",
-                table: "Categories",
-                column: "ManuId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_MealNames_SubcategoryId",
                 schema: "Business",
                 table: "MealNames",
@@ -602,10 +572,10 @@ namespace Resturant.Data.Migrations
                 filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SubCategories_CategoryId",
+                name: "IX_SubCategories_ManuCategoryId",
                 schema: "Business",
                 table: "SubCategories",
-                column: "CategoryId");
+                column: "ManuCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserClaims_UserId",
@@ -731,11 +701,7 @@ namespace Resturant.Data.Migrations
                 schema: "Business");
 
             migrationBuilder.DropTable(
-                name: "Categories",
-                schema: "Business");
-
-            migrationBuilder.DropTable(
-                name: "Manu",
+                name: "ManuCategories",
                 schema: "Business");
         }
     }

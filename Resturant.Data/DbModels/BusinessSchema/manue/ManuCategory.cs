@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Resturant.Data.DbModels.BusinessSchema.manue
 {
-    [Table("Categories", Schema = "Business")]
-    public class Category : BaseEntity
+    [Table("ManuCategories", Schema = "Business")]
+    public class ManuCategory : BaseEntity
     {
         public new Guid Id { get; set; }
         public string? Name { get; set; }
@@ -12,7 +12,6 @@ namespace Resturant.Data.DbModels.BusinessSchema.manue
         public string? Description { get; set; }
         public string? CategoryFileUrl { get; set; }
         public string? CategoryFileName { get; set; }
-        public virtual Manu? Manu { get; set; }
         public virtual ICollection<Subcategory>? SubCatogries { get; set; }
     }
 }

@@ -21,12 +21,23 @@ namespace Resturant.Services.Manue
             _response = response;
         }
 
-        public async Task<IResponseDTO> CreateCategoryManu(CreateCatgoryDto options)
+        public async Task<IResponseDTO> CreateCategoryManu(CreateManuCategoryDto options)
         {
             try
             {
-                var mapping = options.Adapt<Manu>();
-                await _context.Manus.AddAsync(mapping);
+                Random rnd = new Random();
+                var path = $"\\Uploads\\Manu\\Manu_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                var attachmentPath = $"{path}\\{options.File?.FileName}";
+
+                var mapping = options.Adapt<ManuCategory>();
+
+                if (options.File != null)
+                {
+                    mapping.CategoryFileUrl = attachmentPath;
+                    mapping.CategoryFileName = options.File?.FileName;
+                }
+
+                await _context.ManuCategories.AddAsync(mapping);
                 await _context.SaveChangesAsync();
 
                 _response.IsPassed = true;
@@ -50,25 +61,52 @@ namespace Resturant.Services.Manue
             return _response;
         }
 
-        public List<CategoryDetailsDto> GetCategoriesManu()
+        public List<CategoryDetailsDto> GetCategoriesManu(string serverRootPath)
         {
-            var query = _context.Categorys.AsNoTracking();
+            var query = _context.ManuCategories.AsNoTracking();
+            foreach (var item in query)
+            {
+                if (item.CategoryFileUrl != null)
+                {
+                    if (item.CategoryFileUrl.StartsWith("\\"))
+                    {
+                        if (!string.IsNullOrEmpty(item.CategoryFileUrl))
+                        {
+
+                            item.CategoryFileUrl = serverRootPath + item.CategoryFileUrl.Replace('\\', '/');
+                        }
+                    }
+                }
+            }
             return query.Adapt<List<CategoryDetailsDto>>();
         }
 
         public PaginationResult<SubCategoryDto> GetAllSubCategories(SubCategoryFilters filterDto)
         {
-            var paginationResult = _context.Categorys
-                .Where(x => x.Id == filterDto.CategoryId)
-                .Include(x => x.SubCatogries)
-                .AsNoTracking()
-                .Paginate(filterDto.PageSize, filterDto.PageNumber);
+            if (filterDto.CategoryId is null)
+            {
+                var paginationResult = _context.ManuCategories.Where(x => !x.IsDeleted)
+                    .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted))
+                    .AsNoTracking()
+                    .Paginate(filterDto.PageSize, filterDto.PageNumber);
 
-            var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
+                var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
 
-            return new PaginationResult<SubCategoryDto>(dataList, paginationResult.total);
+                return new PaginationResult<SubCategoryDto>(dataList, paginationResult.total);
+            }
+            else
+            {
+                var paginationResult = _context.ManuCategories
+                    .Where(x => x.Id == filterDto.CategoryId && !x.IsDeleted)
+                    .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted))
+                    .AsNoTracking()
+                    .Paginate(filterDto.PageSize, filterDto.PageNumber);
+
+                var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
+
+                return new PaginationResult<SubCategoryDto>(dataList, paginationResult.total);
+            }
         }
-
 
         // TODO : Delete for category 
         // TODO : Update for category 

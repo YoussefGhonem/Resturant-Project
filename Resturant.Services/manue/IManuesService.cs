@@ -7,8 +7,8 @@ namespace Resturant.Services.Manue
 {
     public interface IManuesService
     {
-        Task<IResponseDTO> CreateCategoryManu(CreateCatgoryDto crreateManueDto);
-        List<CategoryDetailsDto> GetCategoriesManu();
+        Task<IResponseDTO> CreateCategoryManu(CreateManuCategoryDto crreateManueDto);
+        List<CategoryDetailsDto> GetCategoriesManu(string serverRootPath);
         PaginationResult<SubCategoryDto> GetAllSubCategories(SubCategoryFilters filterDto);
     }
 }

@@ -32,6 +32,7 @@ import { PressComponent } from './press/press.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ContactDetailsComponent } from './contacts/contact-details/contact-details.component';
 import { PrivateDiningComponent } from './componenets/private-dining/private-dining.component';
+import { MenuComponent } from './componenets/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PrivateDiningComponent } from './componenets/private-dining/private-din
     AddEditPressComponent,
     ContactsComponent,
     ContactDetailsComponent,
-    PrivateDiningComponent
+    PrivateDiningComponent,
+    MenuComponent
   ],
   imports: [
     BusinessRoutingModule,

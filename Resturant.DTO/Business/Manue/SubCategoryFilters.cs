@@ -4,6 +4,6 @@ namespace Resturant.Services.manue.Models
 {
     public class SubCategoryFilters : BaseFilterDto
     {
-        public Guid CategoryId { get; set; }
+        public Guid? CategoryId { get; set; }
     }
 }

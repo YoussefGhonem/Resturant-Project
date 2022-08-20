@@ -3,17 +3,17 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { BaseComponent } from '@shared/base/base.component';
 import { SettingsController } from 'app/+users/controllers';
-import { AddEditPressComponent } from './add-edit-press/add-edit-press.component';
 import { ngbModalOptions } from '@shared/default-values';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-press',
-  templateUrl: './press.component.html',
-  styleUrls: ['./press.component.scss']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
 })
-export class PressComponent extends BaseComponent implements OnInit {
-  data: any[];
+export class MenuComponent extends BaseComponent implements OnInit {
+  categories: any[];
+  subCategories: any[];
   total: number = 0;
   form!: FormGroup;
   breadCrumbItems!: Array<{}>;
@@ -25,10 +25,10 @@ export class PressComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.breadCrumbItems = [
       { label: 'Home' },
-      { label: 'Press', active: true }
+      { label: 'Menu', active: true }
     ];
     this.initSearchForm()
-    this.loadData()
+    this.loadSubCategories()
   }
 
   private initSearchForm(): void {
@@ -36,43 +36,58 @@ export class PressComponent extends BaseComponent implements OnInit {
       // Pagination
       pageNumber: new FormControl(1),
       pageSize: new FormControl(10),
+      categoryId: new FormControl(null),
     });
 
     this.form.valueChanges
       .pipe(debounceTime(500))
       .subscribe(res => {
         this.form?.controls['pageNumber'].patchValue(1, { emitEvent: false });
-        this.loadData();
+        this.loadSubCategories();
       });
   }
 
   pageChange(pageNumber: number) {
     this.form.controls['pageNumber'].patchValue(pageNumber, { emitEvent: false });
-    this.loadData();
+    this.loadCategories();
+  }
+  onCategoryChange(id: any) {
+    this.form?.controls['categoryId'].patchValue(id);
   }
 
-  loadData() {
+  loadCategories() {
     let filters = this.form.getRawValue();
     console.log("filters", filters);
     this.httpService.GET(SettingsController.Press, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
-        this.data = res.data;
+        this.categories = res;
+        console.log("categories", this.categories);
+      });
+  }
+
+  loadSubCategories() {
+    let filters = this.form.getRawValue();
+    console.log("filters", filters);
+    this.httpService.GET(SettingsController.Press, filters)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(res => {
+        this.subCategories = res.data;
         this.total = this.total;
-        console.log(this.data);
+        console.log("subCategories", this.subCategories);
       });
   }
 
   create() {
-    const modalRef = this.modalService.open(AddEditPressComponent, {
-      ...ngbModalOptions,
-      windowClass: 'modal modal-success',
-      size: 'lg'
-    });
-    modalRef
-      .result
-      .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadData())
-      .catch(() => {
-      });
+    // const modalRef = this.modalService.open(AddEditPressComponent, {
+    //   ...ngbModalOptions,
+    //   windowClass: 'modal modal-success',
+    //   size: 'lg'
+    // });
+    // modalRef
+    //   .result
+    //   .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadData())
+    //   .catch(() => {
+    //   });
   }
 }

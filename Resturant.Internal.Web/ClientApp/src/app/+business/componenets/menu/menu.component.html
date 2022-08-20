@@ -1,0 +1,55 @@
+<!-- Start Breadcrumbs -->
+<app-breadcrumbs title="Menu" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<!-- End Breadcrumbs -->
+
+<div class="row">
+    <div class="col-12">
+        <div class="card-header  border-0">
+            <div class="d-flex align-items-center">
+                <h5 class="card-title mb-0 flex-grow-1"></h5>
+                <div class="flex-shrink-0 hstack gap-2">
+                    <button (click)="create()" type="button" class="btn btn-success add-btn" data-bs-toggle="modal"
+                        id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
+                        Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center">
+                            <ul class="list-inline categories-filter animation-nav" id="filter">
+
+                                <li *ngFor="let item of categories" class="list-inline-item"><a class="categories"
+                                        data-filter=".development" (click)="onCategoryChange(item.id)"
+                                        [ngClass]="{'active': item.id === form.get('categoryId')}">{{item |
+                                        humanize}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="row gallery-wrapper">
+                            <div class="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                                data-category="designing development"
+                                *ngFor="let subCategory of subCategories; let i=index">
+
+                            </div>
+                        </div>
+                        <div class="text-center my-2">
+                            <a href="javascript:void(0);" class="text-success"><i
+                                    class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load More </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- ene card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
