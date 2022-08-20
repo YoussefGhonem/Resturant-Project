@@ -35,9 +35,10 @@ namespace Resturant.Data
         public DbSet<Settings> Settings { get; set; }
         public DbSet<PrivateDining> PrivateDining { get; set; }
         public DbSet<PrivateDiningImage> PrivateDiningImages { get; set; }
-        public DbSet<Manue> Manues { get; set; }
+        public DbSet<MealName> MealNames { get; set; }
+        public DbSet<Manu> Manus { get; set; }
         public DbSet<Category> Categorys { get; set; }
-        public DbSet<Subcategory> Subcategorys { get; set; }
+        public DbSet<Subcategory> SubCatogries { get; set; }
         public DbSet<EventType> EventTypes { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Meal> Meals { get; set; }
