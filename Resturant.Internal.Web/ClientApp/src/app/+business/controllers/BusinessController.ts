@@ -7,4 +7,6 @@ export const BusinessController = {
   Deactivate: (id: string) => `contactus/${id}/deactivate`,
   //private dining
   PrivateDining: `private-dining`,
+  //manu
+  CreateManu: `manu`,
 }
