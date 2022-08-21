@@ -11,8 +11,8 @@ namespace Resturant.Services.Manue
         List<CategoryDetailsDto> GetCategoriesManu(string serverRootPath);
         PaginationResult<SubCategoryDto> GetAllSubCategories(SubCategoryFilters filterDto);
         Task<IResponseDTO> DeleteCategoryManu(Guid Id);
-        Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateManuCategoryDto UpdateManueDto);
+        Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateAndUpdateManueDto UpdateManueDto);
         Task<IResponseDTO> DelelteSupCategorys(Guid Id);
-        Task<IResponseDTO> UpdateSupCAtegors(Guid Id, SubCategoryDto subCategoryDto);
+        Task<IResponseDTO> UpdateSupCAtegors(Guid Id, CreateAndUpdateSubcategory subCategoryDto);
     }
 }

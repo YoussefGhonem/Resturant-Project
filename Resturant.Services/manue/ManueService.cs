@@ -167,7 +167,7 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : Update for category 
-        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateManuCategoryDto UpdateManueDto)
+        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateAndUpdateManueDto UpdateManueDto)
         {
             try
             {
@@ -266,7 +266,7 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : update for Sub category 
-        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id,SubCategoryDto subCategoryDto)
+        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id,CreateAndUpdateSubcategory subCategoryDto)
         {
             try
             {

@@ -36,10 +36,30 @@ namespace Resturant.Getway.Controllers.Manue
             return Ok(_iManueService.GetAllSubCategories(filters));
         }
 
-        [HttpDelete("{Id}")]
+        [HttpDelete("DeleteCategory/{Id}")]
         public async Task<IResponseDTO> DeleteCategory(Guid Id)
         {
             _response = await _iManueService.DeleteCategoryManu(Id);
+            return _response;
+        }
+        [HttpPut("UpdateCategory/{Id}")]
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id,[FromForm] CreateAndUpdateManueDto UpdateManueDto)
+        {
+            _response = await _iManueService.UpdateCategoryManu(Id,UpdateManueDto);
+            return _response;
+        }
+
+
+        [HttpDelete("DeleteSupCategory/{Id}")]
+        public async Task<IResponseDTO> DeleteSupCategory(Guid Id)
+        {
+            _response = await _iManueService.DelelteSupCategorys(Id);
+            return _response;
+        }
+        [HttpPut("UpdateSupCategory/{Id}")]
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id,[FromForm] CreateAndUpdateSubcategory subCategoryDto)
+        {
+            _response = await _iManueService.UpdateSupCAtegors(Id, subCategoryDto);
             return _response;
         }
 
