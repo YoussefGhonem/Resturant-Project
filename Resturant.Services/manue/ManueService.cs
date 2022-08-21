@@ -1,5 +1,10 @@
-﻿using Mapster;
+﻿using Dapper;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Nest;
+using NPOI.OpenXmlFormats.Spreadsheet;
+using NPOI.SS.Formula.Functions;
 using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.Data;
@@ -83,7 +88,7 @@ namespace Resturant.Services.Manue
 
         public PaginationResult<SubCategoryDto> GetAllSubCategories(SubCategoryFilters filterDto)
         {
-            if (filterDto.CategoryId is null)
+            if (filterDto.CategoryId == null)
             {
                 var paginationResult = _context.ManuCategories.Where(x => !x.IsDeleted)
                     .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted))
@@ -109,9 +114,195 @@ namespace Resturant.Services.Manue
         }
 
         // TODO : Delete for category 
+        public async Task<IResponseDTO> DeleteCategoryManu(Guid Id)
+        {
+            try
+            {
+                var category = await _context.ManuCategories.Where(m=>m.Id == Id && !m.IsDeleted).Include(m=>m.SubCatogries!.Where(s=>s.IsDeleted)).ToListAsync();
+                if (category == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object id";
+                    return _response;
+                }
+                // Set Data
+                foreach (var maincategory in category)
+                {
+                    foreach (var sup in maincategory.SubCatogries!)
+                    {
+                        foreach (var mealNAmes in sup.MealNames!)
+                        {
+                            if (mealNAmes.IsDeleted == false)
+                            {
+                                mealNAmes.IsDeleted = true;
+                                mealNAmes.UpdatedOn = DateTime.Now;
+                                //_context.MealNames.Attach(mealNAmes);
+                            }                          
+                        }
+                        sup.IsDeleted = true;
+                        sup.UpdatedOn = DateTime.Now;
+                        //_context.SubCatogries.Attach(sup);
+                    }
+                    maincategory.IsDeleted = true;
+                    maincategory.UpdatedOn = DateTime.Now;
+                    _context.ManuCategories.Attach(maincategory);
+                }               
+                // save to the database
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
         // TODO : Update for category 
-        // TODO : Delete for Sub category 
-        // TODO : update for Sub category 
+        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateManuCategoryDto UpdateManueDto)
+        {
+            try
+            {
+                var OneCategory =await _context.ManuCategories.FindAsync(Id);
+                if (OneCategory == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object id";
+                    return _response;
+                }             
+                OneCategory.Name = UpdateManueDto.Name;
+                OneCategory.Description = UpdateManueDto.Description;
+                OneCategory.WorkDayes = UpdateManueDto.WorkDayes;
+                OneCategory.UpdatedOn = DateTime.Now;
 
+                if (UpdateManueDto.File != null)
+                {
+                    Random rnd = new Random();
+                    var path = $"\\Uploads\\Manu\\Manu_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                    var attachmentPath = $"{path}\\{UpdateManueDto.File?.FileName}";
+                    OneCategory.CategoryFileUrl = attachmentPath;
+                    OneCategory.CategoryFileName = UpdateManueDto.File?.FileName;
+                }
+
+                 _context.ManuCategories.Attach(OneCategory);
+                await _context.SaveChangesAsync();
+
+                _response.IsPassed = true;
+                return _response;
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+
+
+        // TODO : Delete for Sub category 
+        public async Task<IResponseDTO> DelelteSupCategorys(Guid Id)
+        {
+            try
+            {
+                var supcategory = await _context.SubCatogries.Where(m => m.Id == Id && !m.IsDeleted).Include(m=>m.MealNames!.Where(m=>m.IsDeleted== false)).ToListAsync();
+                if (supcategory == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object id";
+                    return _response;
+                }
+                // Set Data
+                foreach (var sup in supcategory)
+                {                 
+                        foreach (var mealNAmes in sup.MealNames!)
+                        {
+                            if (mealNAmes.IsDeleted == false)
+                            {
+                                mealNAmes.IsDeleted = true;
+                                mealNAmes.UpdatedOn = DateTime.Now;
+                                //_context.MealNames.Attach(mealNAmes);
+                            }
+                        }
+                    //_context.SubCatogries.Attach(sup);
+                    sup.IsDeleted = true;
+                    sup.UpdatedOn = DateTime.Now;
+                    _context.SubCatogries.Attach(sup);
+                }
+                // save to the database
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+        // TODO : update for Sub category 
+        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id,SubCategoryDto subCategoryDto)
+        {
+            try
+            {
+                var OneCategory = await _context.SubCatogries.FindAsync(Id);
+                if (OneCategory == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object id";
+                    return _response;
+                }
+                OneCategory.Name = subCategoryDto.Name;
+                OneCategory.Description = subCategoryDto.Description;
+                OneCategory.UpdatedOn = DateTime.Now;
+
+                _context.SubCatogries.Attach(OneCategory);
+                await _context.SaveChangesAsync();
+
+                _response.IsPassed = true;
+                return _response;
+
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
     }
 }

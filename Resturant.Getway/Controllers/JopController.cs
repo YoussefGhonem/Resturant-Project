@@ -26,7 +26,7 @@ namespace Resturant.Getway.Controllers
         [HttpGet]
         public PaginationResult<jopForReturnDto> GetAllJopRquest([FromQuery] BaseFilterDto filterDto)
         {
-            return _services.GetAll(filterDto);
+            return _services.GetAll(filterDto, ServerRootPath);
         }
         [HttpPost]
         public async Task<IResponseDTO> SubmitInJopForm([FromForm] CreateJopDto createJopDto)

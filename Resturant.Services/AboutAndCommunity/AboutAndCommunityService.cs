@@ -188,7 +188,7 @@ namespace Resturant.Services.AboutAndCommunity
                 foreach (var image in createAndUpdateTeams.Images)
                 {
                     Random rnd = new Random();
-                    var path = $"\\Uploads\\Team\\Team{DateTime.Now}_{rnd.Next(9000)}";
+                    var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                     var attachmentPath = $"{path}\\{image?.FileName}";
 
                     var obj = new Data.DbModels.BusinessSchema.About.Team()
@@ -237,7 +237,7 @@ namespace Resturant.Services.AboutAndCommunity
                 foreach (var image in createAndUpdateTeams?.Images)
                 {
                     Random rnd = new Random();
-                    var path = $"\\Uploads\\Team\\Team{DateTime.Now}_{rnd.Next(9000)}";
+                    var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                     var attachmentPath = $"{path}\\{image?.FileName}";
 
 
@@ -305,11 +305,24 @@ namespace Resturant.Services.AboutAndCommunity
             }
             return _response;
         }
-        public async Task<IEnumerable<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout()
+        public async Task<List<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout(string serverRootPath)
         {
            var TeamsMember = await _context.Teams.Where(T=>T.IsDeleted == false).ToListAsync();
-           var TeamsForReturn = TeamsMember.Adapt<IEnumerable<ReturnTeamForAboutDto>>();
-           return TeamsForReturn;
+           var TeamsForReturn = TeamsMember.Adapt<List<ReturnTeamForAboutDto>>();
+            foreach (var item in TeamsForReturn)
+            {
+                if (item.ImageUrl != null)
+                {
+                    if (item.ImageUrl.StartsWith("\\"))
+                    {
+                        if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            item.ImageUrl = serverRootPath + item.ImageUrl.Replace('\\', '/');
+                        }
+                    }
+                }
+            }
+            return TeamsForReturn;
         }
 
 
@@ -321,7 +334,7 @@ namespace Resturant.Services.AboutAndCommunity
                 foreach (var image in createAndUpdateCommunity.Images)
                 {
                     Random rnd = new Random();
-                    var path = $"\\Uploads\\Communtiy\\Communtiy{DateTime.Now}_{rnd.Next(9000)}";
+                    var path = $"\\Uploads\\Communtiy\\Communtiy_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                     var attachmentPath = $"{path}\\{image?.FileName}";
 
                     var obj = new Data.DbModels.BusinessSchema.About.Community()
@@ -369,7 +382,7 @@ namespace Resturant.Services.AboutAndCommunity
                 foreach (var image in createAndUpdateCommunity.Images)
                 {
                     Random rnd = new Random();
-                    var path = $"\\Uploads\\Team\\Team{DateTime.Now}_{rnd.Next(9000)}";
+                    var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                     var attachmentPath = $"{path}\\{image?.FileName}";
 
                     OnlyOneCommunity.name = createAndUpdateCommunity?.name;
@@ -436,10 +449,23 @@ namespace Resturant.Services.AboutAndCommunity
             }
             return _response;
         }
-        public async Task<IEnumerable<ReturnCommunityDto>> GetMainCommunity()
+        public async Task<List<ReturnCommunityDto>> GetMainCommunity(string serverRootPath)
         {
             var AllAbout = await _context.Communitys.Where(A=>A.IsDeleted == false).ToListAsync();
-            var AboutToReturn = AllAbout.Adapt<IEnumerable<ReturnCommunityDto>>();
+            var AboutToReturn = AllAbout.Adapt<List<ReturnCommunityDto>>();
+            foreach (var item in AboutToReturn)
+            {
+                if (item.ImageUrl != null)
+                {
+                    if (item.ImageUrl.StartsWith("\\"))
+                    {
+                        if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            item.ImageUrl = serverRootPath + item.ImageUrl.Replace('\\', '/');
+                        }
+                    }
+                }
+            }
             return AboutToReturn;
         }
     }

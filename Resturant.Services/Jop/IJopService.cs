@@ -1,4 +1,5 @@
-﻿using Resturant.Core.Common;
+﻿using Mapster;
+using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.DTO.Business.Gallery;
 using Resturant.DTO.Business.Jop;
@@ -15,6 +16,7 @@ namespace Resturant.Services.Jop
     {
         Task<IResponseDTO> SubmitInJopFormCreate(CreateJopDto createJopDto);
         Task<IResponseDTO> DeleteSubmitedJop(Guid Id);
-        PaginationResult<jopForReturnDto> GetAll(BaseFilterDto filterDto);
+        PaginationResult<jopForReturnDto> GetAll(BaseFilterDto filterDto, string serverRootPath);
+        
     }
 }

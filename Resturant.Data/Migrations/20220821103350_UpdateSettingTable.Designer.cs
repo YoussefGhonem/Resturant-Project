@@ -12,8 +12,8 @@ using Resturant.Data;
 namespace Resturant.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220820135606_CoverAndHappiningTable")]
-    partial class CoverAndHappiningTable
+    [Migration("20220821103350_UpdateSettingTable")]
+    partial class UpdateSettingTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,14 +329,23 @@ namespace Resturant.Data.Migrations
                     b.ToTable("Locations", "Business");
                 });
 
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Category", b =>
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.ManuCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("CategoryFileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CategoryFileUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -350,43 +359,15 @@ namespace Resturant.Data.Migrations
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("manueId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("manueId");
-
-                    b.ToTable("Category", "Business");
-                });
-
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Manue", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("WorkDayes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedOn")
-                        .HasColumnType("datetime2");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Manue", "Business");
+                    b.ToTable("ManuCategories", "Business");
                 });
 
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Subcategory", b =>
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.MealName", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -407,23 +388,54 @@ namespace Resturant.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("SubcategoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime?>("UpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("categoryId")
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubcategoryId");
+
+                    b.ToTable("MealNames", "Business");
+                });
+
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Subcategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("price")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("value")
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ManuCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("categoryId");
+                    b.HasIndex("ManuCategoryId");
 
-                    b.ToTable("Subcategory", "Business");
+                    b.ToTable("SubCategories", "Business");
                 });
 
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Meal", b =>
@@ -598,6 +610,12 @@ namespace Resturant.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AboutAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AboutAttachmentPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AboutUs")
                         .HasColumnType("nvarchar(max)");
 
@@ -612,6 +630,12 @@ namespace Resturant.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ManuAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManuAttachmentPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumberService")
                         .HasColumnType("nvarchar(max)");
@@ -629,6 +653,12 @@ namespace Resturant.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WorkWithUsDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("privateDiningCoverAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("privateDiningCoverAttachmentPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -901,24 +931,20 @@ namespace Resturant.Data.Migrations
                     b.Navigation("Meal");
                 });
 
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Category", b =>
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.MealName", b =>
                 {
-                    b.HasOne("Resturant.Data.DbModels.BusinessSchema.manue.Manue", "manue")
-                        .WithMany("Categorys")
-                        .HasForeignKey("manueId")
+                    b.HasOne("Resturant.Data.DbModels.BusinessSchema.manue.Subcategory", null)
+                        .WithMany("MealNames")
+                        .HasForeignKey("SubcategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("manue");
                 });
 
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Subcategory", b =>
                 {
-                    b.HasOne("Resturant.Data.DbModels.BusinessSchema.manue.Category", "category")
-                        .WithMany("subCatogry")
-                        .HasForeignKey("categoryId")
+                    b.HasOne("Resturant.Data.DbModels.BusinessSchema.manue.ManuCategory", null)
+                        .WithMany("SubCatogries")
+                        .HasForeignKey("ManuCategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("category");
                 });
 
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Meal", b =>
@@ -999,14 +1025,14 @@ namespace Resturant.Data.Migrations
                     b.Navigation("Meals");
                 });
 
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Category", b =>
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.ManuCategory", b =>
                 {
-                    b.Navigation("subCatogry");
+                    b.Navigation("SubCatogries");
                 });
 
-            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Manue", b =>
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.manue.Subcategory", b =>
                 {
-                    b.Navigation("Categorys");
+                    b.Navigation("MealNames");
                 });
 
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Meal", b =>

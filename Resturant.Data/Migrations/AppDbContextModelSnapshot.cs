@@ -608,6 +608,12 @@ namespace Resturant.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AboutAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AboutAttachmentPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("AboutUs")
                         .HasColumnType("nvarchar(max)");
 
@@ -622,6 +628,12 @@ namespace Resturant.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ManuAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ManuAttachmentPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumberService")
                         .HasColumnType("nvarchar(max)");
@@ -639,6 +651,12 @@ namespace Resturant.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WorkWithUsDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("privateDiningCoverAttachmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("privateDiningCoverAttachmentPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

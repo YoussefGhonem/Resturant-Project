@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.Data;
+using Resturant.DTO.Business.Gallery;
 using Resturant.DTO.Business.Jop;
 using Resturant.DTO.Business.Manue;
 using Resturant.DTO.Lookup.EventType;
@@ -61,12 +62,23 @@ namespace Resturant.Services.Jop
             }
             return _response;
         }
-        public  PaginationResult<jopForReturnDto> GetAll(BaseFilterDto filterDto)
+        public PaginationResult<jopForReturnDto> GetAll(BaseFilterDto filterDto, string serverRootPath)
         {
-            var paginationResult = _context.Jops.Where(J=>J.IsDeleted== false).AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
-
+            var paginationResult = _context.Jops.Where(G => G.IsDeleted == false).AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
             var dataList = paginationResult.list.Adapt<List<jopForReturnDto>>();
-
+            foreach (var item in dataList)
+            {
+                if (item.AttachmentPath != null)
+                {
+                    if (item.AttachmentPath.StartsWith("\\"))
+                    {
+                        if (!string.IsNullOrEmpty(item.AttachmentPath))
+                        {
+                            item.AttachmentPath = serverRootPath + item.AttachmentPath.Replace('\\', '/');
+                        }
+                    }
+                }
+            }
             return new PaginationResult<jopForReturnDto>(dataList, paginationResult.total);
         }
         public async Task<IResponseDTO> SubmitInJopFormCreate(CreateJopDto createJopDto)
@@ -77,7 +89,7 @@ namespace Resturant.Services.Jop
                 foreach (var image in createJopDto.Attachment)
                 {
                     Random rnd = new Random();
-                    var path = $"\\Uploads\\Jop\\Jop_{DateTime.Now}_{rnd.Next(9000)}";
+                    var path = $"\\Uploads\\Jop\\Jop_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                     var attachmentPath = $"{path}\\{image?.FileName}";
 
                     var Jop = new Data.DbModels.BusinessSchema.Jop()

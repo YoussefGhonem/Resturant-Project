@@ -20,9 +20,9 @@ namespace Resturant.Getway.Controllers.CommunityAndAbout
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ReturnCommunityDto>> GetAllCommunity()
+        public async Task<List<ReturnCommunityDto>> GetAllCommunity()
         {
-            var AllCommunity = await _services.GetMainCommunity();
+            var AllCommunity = await _services.GetMainCommunity(ServerRootPath);
             return AllCommunity;
         }
 

@@ -9,5 +9,11 @@ namespace Resturant.Services.Settings
         Task<SettingsDetailsDto> SettingsDetails(string serverRootPath);
         Task<IResponseDTO> UpdateAboutUsSettings(UpdateSettingsDto options);
         Task<IResponseDTO> UpdatePrivateDining(UpdateSettingsDto options);
+
+        // upload Covers
+        Task<IResponseDTO> UploadPrivateDiningCover(PrivateDininCoverDto options);
+        Task<IResponseDTO> UploadMenuCover(ManuCoverDto options);
+        Task<IResponseDTO> UploadAboutCover(AboutCoverDto options);
+
     }
 }

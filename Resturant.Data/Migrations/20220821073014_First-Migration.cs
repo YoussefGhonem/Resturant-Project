@@ -62,6 +62,24 @@ namespace Resturant.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Cover",
+                schema: "Business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cover", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "EventTypes",
                 schema: "Lookup",
                 columns: table => new
@@ -95,6 +113,26 @@ namespace Resturant.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Gallery", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Happining",
+                schema: "Business",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Happining", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -625,11 +663,19 @@ namespace Resturant.Data.Migrations
                 schema: "Business");
 
             migrationBuilder.DropTable(
+                name: "Cover",
+                schema: "Business");
+
+            migrationBuilder.DropTable(
                 name: "EventTypes",
                 schema: "Lookup");
 
             migrationBuilder.DropTable(
                 name: "Gallery",
+                schema: "Business");
+
+            migrationBuilder.DropTable(
+                name: "Happining",
                 schema: "Business");
 
             migrationBuilder.DropTable(

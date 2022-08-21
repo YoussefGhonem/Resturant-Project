@@ -111,7 +111,7 @@ namespace Resturant.Services.Happining
         }
         public PaginationResult<HappiningReturnDto> GetAllHappining(BaseFilterDto filterDto, string serverRootPath)
         {
-            var paginationResult = _context.Covers.Where(G => G.IsDeleted == false).AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
+            var paginationResult = _context.Happinings.Where(G => G.IsDeleted == false).AsNoTracking().Paginate(filterDto.PageSize, filterDto.PageNumber);
             var dataList = paginationResult.list.Adapt<List<HappiningReturnDto>>();
             foreach (var item in dataList)
             {

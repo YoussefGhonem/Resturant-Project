@@ -37,6 +37,27 @@ namespace Resturant.Getway.Controllers
             return _response;
         }
 
+        //UpLoad Cover
+        [HttpPut("UploadCoverManue")]
+        public async Task<IResponseDTO> UploadCoverManue([FromForm] ManuCoverDto options)
+        {
+            _response = await _pressServicee.UploadMenuCover(options);
+            return _response;
+        }
+        [HttpPut("UploadAboutManue")]
+        public async Task<IResponseDTO> UploadAboutManue([FromForm] AboutCoverDto options)
+        {
+            _response = await _pressServicee.UploadAboutCover(options);
+            return _response;
+        }
+        [HttpPut("UploadPrivatDiningManue")]
+        public async Task<IResponseDTO> UploadPrivatDiningManue([FromForm] PrivateDininCoverDto options)
+        {
+            _response = await _pressServicee.UploadPrivateDiningCover(options);
+            return _response;
+        }
+
+
 
 
     }

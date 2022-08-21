@@ -12,7 +12,7 @@ using Resturant.Data;
 namespace Resturant.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220820154826_FirstMigration")]
+    [Migration("20220821073014_First-Migration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -169,6 +169,35 @@ namespace Resturant.Data.Migrations
                     b.ToTable("ConntactUs", "Business");
                 });
 
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Cover", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cover", "Business");
+                });
+
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Gallery", b =>
                 {
                     b.Property<Guid>("Id")
@@ -196,6 +225,41 @@ namespace Resturant.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Gallery", "Business");
+                });
+
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Happining", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Happining", "Business");
                 });
 
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Jop", b =>

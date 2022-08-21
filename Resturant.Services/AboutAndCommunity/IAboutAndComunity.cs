@@ -24,7 +24,7 @@ namespace Resturant.Services.AboutAndCommunity
         Task<IResponseDTO> CreateTeamMember(CreateAndUpdateTeams createAndUpdateTeams);
         Task<IResponseDTO> UpdateTeamMember(Guid TeamId, CreateAndUpdateTeams createAndUpdateTeams);
         Task<IResponseDTO> DeleteTeamMember(Guid TeamId);
-        Task<IEnumerable<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout();
+        Task<List<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout(string pathRoter);
 
         //Finish Team Impemntation
 
@@ -32,7 +32,7 @@ namespace Resturant.Services.AboutAndCommunity
         Task<IResponseDTO> CreateCommuntiy(CreateAndUpdateCommunity createAndUpdateCommunity);
         Task<IResponseDTO> UpdateCommuntiy(Guid CommunityId, CreateAndUpdateCommunity createAndUpdateCommunity);
         Task<IResponseDTO> DeleteCommuntiy(Guid CommunityId);
-        Task<IEnumerable<ReturnCommunityDto>> GetMainCommunity();
+        Task<List<ReturnCommunityDto>> GetMainCommunity(string pathrorte);
 
     }
 }

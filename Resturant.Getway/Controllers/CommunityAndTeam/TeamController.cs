@@ -23,9 +23,9 @@ namespace Resturant.Getway.Controllers.CommunityAndAbout
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ReturnTeamForAboutDto>> GetAllTeamMamber()
+        public async Task<List<ReturnTeamForAboutDto>> GetAllTeamMamber()
         {
-            var AllTeamMember = await _services.GetAllTeamMembersForOneAbout();
+            var AllTeamMember = await _services.GetAllTeamMembersForOneAbout(ServerRootPath);
             return AllTeamMember;
         }
 

@@ -45,7 +45,7 @@ namespace Resturant.Services.Gallery
                 // save to the database
                 _context.Gallerys.Attach(Image);
                 await _context.SaveChangesAsync();
-                await _uploadFilesService.DeleteFile(Image?.ImageUrl);
+                await _uploadFilesService.DeleteFile(Image.ImageUrl!);
 
             }
             catch (Exception ex)
