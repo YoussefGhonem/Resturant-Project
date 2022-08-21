@@ -60,6 +60,7 @@ namespace Resturant.Getway.Controllers.Manue
         public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id,[FromForm] CreateAndUpdateSubcategory subCategoryDto)
         {
             _response = await _iManueService.UpdateSupCAtegors(Id, subCategoryDto);
+
             return _response;
         }
 
