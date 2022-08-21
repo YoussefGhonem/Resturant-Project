@@ -221,5 +221,223 @@ namespace Resturant.Services.Settings
             }
             return _response;
         }
+        public async Task<IResponseDTO> DeleteAboutCover()
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (settings == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object Id";
+                    return _response;
+                }
+                await _uploadFilesService.DeleteFile(settings.AboutAttachmentPath!);
+                settings.AboutAttachmentName = null;
+                settings.AboutAttachmentPath = null;
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+        public async Task<IResponseDTO> DeleteMenuCover()
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (settings == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object Id";
+                    return _response;
+                }
+                await _uploadFilesService.DeleteFile(settings.ManuAttachmentPath!);
+                settings.ManuAttachmentName = null;
+                settings.ManuAttachmentPath = null;
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+        public async Task<IResponseDTO> DeletePrivateDiningCover()
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (settings == null)
+                {
+                    _response.IsPassed = false;
+                    _response.Message = "Invalid object Id";
+                    return _response;
+                }
+                await _uploadFilesService.DeleteFile(settings.privateDiningCoverAttachmentPath!);
+                settings.privateDiningCoverAttachmentName = null;
+                settings.privateDiningCoverAttachmentPath = null;
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+        public async Task<IResponseDTO> updatMenuCover(ManuCoverDto options)
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (options.ManuCover != null)
+                {
+                    Random rnd = new Random();
+                    var path = $"\\Uploads\\Covers\\ManuCover{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                    var attachmentPath = $"{path}\\{options.ManuCover?.FileName}";
+                    //Delete Old file
+                    await _uploadFilesService.DeleteFile(settings!.ManuAttachmentPath!);
+
+                    settings!.ManuAttachmentPath = attachmentPath;
+                    settings.ManuAttachmentName = options.ManuCover?.FileName;
+                    await _uploadFilesService.UploadFile(path, options.ManuCover);
+                    settings.UpdatedOn = DateTime.Now;
+                }
+            
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+
+        public async Task<IResponseDTO> updatPrivateDiningCover(PrivateDininCoverDto options)
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (options.PrivateDiningCover != null)
+                {
+                    Random rnd = new Random();
+                    var path = $"\\Uploads\\Covers\\PrivateDiningCover{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                    var attachmentPath = $"{path}\\{options.PrivateDiningCover?.FileName}";
+
+                    await _uploadFilesService.DeleteFile(settings!.PrivateDiningAttachmentPath!);
+
+                    settings!.privateDiningCoverAttachmentPath = attachmentPath;
+                    settings.privateDiningCoverAttachmentName = options.PrivateDiningCover?.FileName;
+                    await _uploadFilesService.UploadFile(path, options!.PrivateDiningCover!);
+                    settings.UpdatedOn = DateTime.Now;
+                }
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
+        public async Task<IResponseDTO> updatAboutCover(AboutCoverDto options)
+        {
+            try
+            {
+                var settings = await _context.Settings.FirstOrDefaultAsync();
+                if (options.AboutCover != null)
+                {
+                    Random rnd = new Random();
+                    var path = $"\\Uploads\\Covers\\AboutCover{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                    var attachmentPath = $"{path}\\{options.AboutCover?.FileName}";
+
+                    await _uploadFilesService.DeleteFile(settings!.AboutAttachmentPath!);
+
+                    settings!.AboutAttachmentPath = attachmentPath;
+                    settings.AboutAttachmentName = options.AboutCover?.FileName;
+                    await _uploadFilesService.UploadFile(path, options.AboutCover);
+                    settings.UpdatedOn = DateTime.Now;
+                }
+                _context.Settings.Attach(settings!);
+                await _context.SaveChangesAsync();
+                _response.IsPassed = true;
+                return _response;
+            }
+            catch (Exception ex)
+            {
+                _response.Data = null;
+                _response.IsPassed = false;
+                _response.Errors.Add($"Error: {ex.Message}");
+            }
+            if (_response.Errors.Count > 0)
+            {
+                _response.Errors = _response.Errors.Distinct().ToList();
+                _response.IsPassed = false;
+                _response.Data = null;
+                return _response;
+            }
+            return _response;
+        }
     }
 }

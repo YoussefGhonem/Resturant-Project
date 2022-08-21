@@ -57,6 +57,46 @@ namespace Resturant.Getway.Controllers
             return _response;
         }
 
+        //Delete cover
+        [HttpDelete("DeleteAboutCover")]
+        public async Task<IResponseDTO> DeleteAboutCover()
+        {
+           _response = await _pressServicee.DeleteAboutCover();
+            return _response;
+        }
+        [HttpDelete("DeleteManuCover")]
+        public async Task<IResponseDTO> DeleteManuCover()
+        {
+            _response = await _pressServicee.DeleteMenuCover();
+            return _response;
+        }
+        [HttpDelete("DeletePrivateDiningCover")]
+        public async Task<IResponseDTO> DeletePrivateDiningCover()
+        {
+            _response = await _pressServicee.DeletePrivateDiningCover();
+            return _response;
+
+        }
+
+        //Update Cover 
+        [HttpPut("UpdateCoverManue")]
+        public async Task<IResponseDTO> UpdateCoverManue([FromForm] ManuCoverDto options)
+        {
+            _response = await _pressServicee.updatMenuCover(options);
+            return _response;
+        }
+        [HttpPut("UpdateAboutManue")]
+        public async Task<IResponseDTO> UpdateAboutManue([FromForm] AboutCoverDto options)
+        {
+            _response = await _pressServicee.updatAboutCover(options);
+            return _response;
+        }
+        [HttpPut("UpdatePrivatDiningManue")]
+        public async Task<IResponseDTO> UpdatePrivatDiningManue([FromForm] PrivateDininCoverDto options)
+        {
+            _response = await _pressServicee.updatPrivateDiningCover(options);
+            return _response;
+        }
 
 
 

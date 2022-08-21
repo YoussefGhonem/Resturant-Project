@@ -15,5 +15,15 @@ namespace Resturant.Services.Settings
         Task<IResponseDTO> UploadMenuCover(ManuCoverDto options);
         Task<IResponseDTO> UploadAboutCover(AboutCoverDto options);
 
+        // Delete Covers
+        Task<IResponseDTO> DeletePrivateDiningCover();
+        Task<IResponseDTO> DeleteMenuCover();
+        Task<IResponseDTO> DeleteAboutCover();
+
+        // update Covers
+        Task<IResponseDTO> updatAboutCover(AboutCoverDto options);
+        Task<IResponseDTO> updatPrivateDiningCover(PrivateDininCoverDto options);
+        Task<IResponseDTO> updatMenuCover(ManuCoverDto options);
+
     }
 }
