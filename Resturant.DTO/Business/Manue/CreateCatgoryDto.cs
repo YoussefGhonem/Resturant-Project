@@ -8,7 +8,7 @@ namespace Resturant.DTO.Business.Manue
         public string? Name { get; set; }
         public string? WorkDayes { get; set; }
         public string? Description { get; set; }
-        public virtual ICollection<SubCategoryDto>? SubCatogries { get; set; }
+        public ICollection<SubCategoryDto>? SubCatogries { get; set; }
         public IFormFile? File { get; set; }
 
     }
@@ -16,7 +16,7 @@ namespace Resturant.DTO.Business.Manue
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public virtual ICollection<MealNameDto>? MealNames { get; set; }
+        public ICollection<MealNameDto>? MealNames { get; set; }
 
     }
     public class MealNameDto
