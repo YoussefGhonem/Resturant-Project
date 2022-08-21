@@ -11,8 +11,5 @@ namespace Resturant.DTO.Business.Manue
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? price { get; set; }
-        public string? value { get; set; }
-        public Guid? categoryId { get; set; }
     }
 }
