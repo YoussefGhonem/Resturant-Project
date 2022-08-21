@@ -33,6 +33,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { ContactDetailsComponent } from './contacts/contact-details/contact-details.component';
 import { PrivateDiningComponent } from './componenets/private-dining/private-dining.component';
 import { MenuComponent } from './componenets/menu/menu.component';
+import { CreateMenuComponent } from './componenets/menu/create-menu/create-menu.component';
+import { MenuSubcategoriesComponent } from './componenets/menu/menu-subcategories/menu-subcategories.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { MenuComponent } from './componenets/menu/menu.component';
     ContactsComponent,
     ContactDetailsComponent,
     PrivateDiningComponent,
-    MenuComponent
+    MenuComponent,
+    CreateMenuComponent,
+    MenuSubcategoriesComponent
   ],
   imports: [
     BusinessRoutingModule,

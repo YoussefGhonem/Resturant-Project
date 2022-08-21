@@ -20,9 +20,9 @@ export const MENU: MenuItem[] = [
         parentId: 1
       },
       {
-        id: 'CRM',
-        label: 'CRM',
-        link: '/dashboard/crm',
+        id: 'Manu',
+        label: 'Manu Management',
+        link: '/business/manu',
         parentId: 1
       },
       {

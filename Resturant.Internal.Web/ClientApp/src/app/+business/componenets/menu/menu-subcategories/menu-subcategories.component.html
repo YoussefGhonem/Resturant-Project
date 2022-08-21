@@ -1,0 +1,52 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-sm-flex align-items-center">
+            <h5 class="card-title flex-grow-1 mb-0">{{subcategory?.name}}</h5>
+            <div class="flex-shrink-0 mt-2 mt-sm-0">
+                <div class="d-flex gap-1">
+                    <a href="javascript:void(0);" [ngbTooltip]="'Created Date'"
+                        class="btn btn-soft-info btn-sm mt-2 mt-sm-0"><i class="ri-timer-line align-middle me-1"></i>
+                        {{subcategory.createdOn | datetime}}</a>
+                    <a href="javascript:void(0);" class="btn btn-soft-danger btn-sm mt-2 mt-sm-0"><i
+                            class="mdi mdi-archive-remove-outline align-middle me-1"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="profile-timeline order-status">
+            <ngb-accordion #acc="ngbAccordion" activeIds="static-1" [closeOthers]="true">
+                <ngb-panel id="static-1" *ngFor="let item of subcategory.mealNames">
+                    <ng-template ngbPanelTitle>
+                        <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse" href="javascript:void(0);"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0 avatar-xs">
+                                    <div class="avatar-title bg-success rounded-circle">
+                                        <i class="ri-user-follow-line"></i>
+                                    </div>
+                                </div>
+                                <div class="flex-grow-1 ms-3">
+                                    <h6 class="fs-14 mb-0">{{item?.name}} - <strong
+                                            class="fw-normal">{{item?.price}}</strong></h6>
+                                </div>
+                            </div>
+                        </a>
+                    </ng-template>
+                    <ng-template ngbPanelContent>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body ms-2 ps-4 pt-0">
+                                <ul class="list-unstyled mb-0 vstack gap-2">
+                                    <li>{{item?.description}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ngb-panel>
+            </ngb-accordion>
+        </div>
+    </div>
+</div>
