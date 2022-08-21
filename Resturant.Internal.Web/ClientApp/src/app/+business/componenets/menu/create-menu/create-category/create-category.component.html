@@ -1,0 +1,43 @@
+<div class="step-body" [formGroup]="form">
+    <div class="modal-body">
+        <div class="row gy-4 mb-3">
+            <div class="col-md-6 form-group">
+                <label for="amount-field" class="form-label">Name<small style="color : rgb(179, 62, 62);">
+                        *</small></label>
+                <input [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" id="customername-field"
+                    class="form-control" placeholder="Name of Category like : Brunch Or Drinks .."
+                    formControlName="name" />
+                <arv-validation-messages for="name">
+                </arv-validation-messages>
+            </div>
+            <div class="col-md-6 form-group">
+                <label for="Last-field" class="form-label">Work Dayes<small style="color : rgb(179, 62, 62);">
+                        *</small>
+                </label>
+                <input [ngClass]="{ 'is-invalid': isInvalid('workDayes') }" type="text" id="customername-field"
+                    class="form-control" placeholder="Friday - Sunday from 10:00 am – 2:30 pm"
+                    formControlName="workDayes" />
+            </div>
+
+            <div class="col-md-12 form-group">
+                <label for="description-field" class="form-label">Description
+                </label>
+                <textarea [ngClass]="{ 'is-invalid': isInvalid('description') }" type="text" id="description-field"
+                    class="form-control"
+                    placeholder="Enter description : The Houston Food Bank will provide 18 meals from this donation. Tax and gratuity not included."
+                    formControlName="description"></textarea>
+                <arv-validation-messages for="description">
+                </arv-validation-messages>
+            </div>
+            <div class="mb-3 form-group">
+                <label class="form-label">Upload PDF <small style="color : rgb(179, 62, 62);">
+                        *</small></label>
+                <input class="form-control" [ngClass]="{'is-invalid': isInvalid('file')}" id="image"
+                    formControlName="file" type="file" (change)="onChange($event)" />
+                <arv-validation-messages for="file"></arv-validation-messages>
+
+            </div>
+        </div>
+
+    </div>
+</div>

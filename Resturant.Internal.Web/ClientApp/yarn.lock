@@ -141,6 +141,15 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/cdk@14.1.3":
+  version "14.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-14.1.3.tgz#eed05c35d2aa3e2f4f8aff787fdfb3fd10a7119e"
+  integrity sha512-NCdBkgnBgZvA4wZ6wXu/T3l4CgmWOs3M5NFKqQ/G2DCVfIbwaTI3G5cSNk6M63geeGwWDaMkk2Uxjgy4qyvaww==
+  dependencies:
+    tslib "^2.3.0"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@^14.0.6":
   version "14.0.6"
   resolved "https://registry.npmjs.org/@angular/cli/-/cli-14.0.6.tgz"
@@ -219,6 +228,20 @@
     "@babel/core" "7.18.6"
     glob "8.0.3"
     yargs "^17.2.1"
+
+"@angular/material-moment-adapter@14.1.3":
+  version "14.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-14.1.3.tgz#effd5b1bc9b440e2cafa6115f73e5e7c4017e4b4"
+  integrity sha512-2zmkCR2oiCdTTaTSL4o6rNdDNPrzEjBbOwYq1/BTQEhX8hCM1K927P4hPk3H5+9w10g/N8DFnTol62muSuEDEA==
+  dependencies:
+    tslib "^2.3.0"
+
+"@angular/material@14.1.3":
+  version "14.1.3"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-14.1.3.tgz#c16c638079ca7a1c8d5c2adf21ca2f18ca5cb112"
+  integrity sha512-vGznrsO1fLvXZ33Z/A+4/EUHu170V5+jMvL3/K5EJypi2Xms4neHWec+NH1Ear7dFr8buhDBCIGTO1vAPJEleQ==
+  dependencies:
+    tslib "^2.3.0"
 
 "@angular/platform-browser-dynamic@^14.0.6":
   version "14.0.6"
@@ -1701,14 +1724,6 @@
   integrity sha512-p27c+mYVdHiJMYrj5hwClVJxLdiZxafAqlbw1sdJh2xJ1rGOe+H/kCf5YDRbhlHqRN+34Gr0RQqIUeD1I2V8hg==
   dependencies:
     tslib "^2.3.0"
-
-"@ng-plus/signature-pad@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.npmjs.org/@ng-plus/signature-pad/-/signature-pad-0.0.5.tgz#97b804a6dc0da0099659df67b3a332dd9f7c46fb"
-  integrity sha512-iEImGpeDKhgcyZpx8RVxs94EnshblopbC7KU4H9upSgl8ahyxds1IZWPog0SW72rMtXlmm4GOc412Xxf96/7HA==
-  dependencies:
-    signature_pad "3.0.0-beta.2"
-    tslib "^1.9.0"
 
 "@ng-select/ng-select@^8.1.1":
   version "8.1.1"
@@ -5720,6 +5735,11 @@ parse5-sax-parser@^6.0.1:
   dependencies:
     parse5 "^6.0.1"
 
+parse5@^5.0.0:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
+  integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
+
 parse5@^6.0.1:
   version "6.0.1"
   resolved "https://registry.npmjs.org/parse5/-/parse5-6.0.1.tgz"
@@ -6641,11 +6661,6 @@ signal-exit@^3.0.2, signal-exit@^3.0.3, signal-exit@^3.0.7:
   version "3.0.7"
   resolved "https://registry.npmjs.org/signal-exit/-/signal-exit-3.0.7.tgz"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
-
-signature_pad@3.0.0-beta.2:
-  version "3.0.0-beta.2"
-  resolved "https://registry.npmjs.org/signature_pad/-/signature_pad-3.0.0-beta.2.tgz#ba20e0e014767f62f74a4bd3bf9c2a2f59c2485f"
-  integrity sha512-KmxmVFK2ECJ2mTiu86VVZnvONjISXRRxdOe3qBNHZEAL+NPKNvpsdSOfRCimSUs88udVgIeQlOvibpvsDSewEw==
 
 simplebar-angular@^2.3.6:
   version "2.3.6"

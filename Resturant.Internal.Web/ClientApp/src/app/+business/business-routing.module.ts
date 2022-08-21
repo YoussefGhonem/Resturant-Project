@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PressComponent } from './press/press.component';
 import { PrivateDiningComponent } from './componenets/private-dining/private-dining.component';
+import { MenuComponent } from './componenets/menu/menu.component';
+import { CreateMenuComponent } from './componenets/menu/create-menu/create-menu.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,14 @@ const routes: Routes = [
   {
     path: "private-dining",
     component: PrivateDiningComponent,
+  },
+  {
+    path: "manu",
+    component: MenuComponent,
+  },
+  {
+    path: "manu/create",
+    component: CreateMenuComponent,
   }
 ];
 

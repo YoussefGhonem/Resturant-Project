@@ -1,0 +1,53 @@
+<div class="flex flex-col flex-auto min-w-0">
+    <div class="flex-auto p-6 sm:p-10" style="padding: 0% !important;margin: auto;width: 1296px">
+        <form (ngSubmit)="submit()" [formGroup]="form">
+            <mat-horizontal-stepper [linear]="true" #horizontalStepper>
+                <mat-step #horizontalStepperStep1>
+                    <ng-template matStepLabel>Create New Manu Category</ng-template>
+                    <div class="step-body">
+                        <create-category [form]="form"></create-category>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-primary add-btn" data-bs-toggle="modal" id="create-btn" type="button"
+                            matStepperNext>
+                            Next
+                        </button>
+                    </div>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Add Meals into {{form.controls['name'].value}}</ng-template>
+
+                    <div class="step-body">
+                        <create-subcategory [form]="form"></create-subcategory>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-info add-btn ml-3" type="button" matStepperPrevious> Back
+                        </button>
+
+                        <button type="button" style="margin-left: 12px;" class="btn btn-primary add-btn"
+                            matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Summary</ng-template>
+                    <div class="flex  justify-center">
+                        <img style=" width: 320px;" src="assets/images/svg/empty.svg" alt="">
+                    </div>
+
+                    <div class="step-body">
+                        <!-- First -->
+
+                    </div>
+
+                </mat-step>
+            </mat-horizontal-stepper>
+
+        </form>
+
+
+    </div>
+
+</div>
