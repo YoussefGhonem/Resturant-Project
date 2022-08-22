@@ -6,7 +6,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { environment } from 'environments/environment';
 import { NotificationService } from './notification.service';
 import { Observable } from "rxjs";
-import { LocalStorageKeys } from "@shared/default-values";
+import { LocalStorageKeys } from "@shared/Default-Values";
 
 @Injectable({
   providedIn: 'root'
@@ -41,13 +41,23 @@ export class HttpService {
   POST(url: string, body: any = {}, queryParameters?: object): Observable<any> {
     this.spinner.show();
     const httpParams: HttpParams = this.parameterizedUrl(queryParameters);
-    return this.http.post(this.getFullUrl(url), body, { observe: 'response', params: httpParams })
+    return this.http.post(this.getFullUrl(url),body, { observe: 'response', params: httpParams })
       .pipe(
         map(res => res.body),
         tap(res => this.spinner.hide())
       );
   }
 
+  //Post Login
+  POSTLogin(url: string, body: any = {}, queryParameters?: object): Observable<any> {
+    this.spinner.show();
+    const httpParams: HttpParams = this.parameterizedUrl(queryParameters);
+    return this.http.post(this.getFullUrl(url),body, {responseType: 'text'})
+      .pipe(
+        map(res => {console.log(res)}),
+        tap(res => this.spinner.hide())
+      );
+  }
   // PUT request
   PUT(url: string, body: any = {}, queryParameters?: object): Observable<any> {
     this.spinner.show();
@@ -122,8 +132,7 @@ export class HttpService {
   //#region Helper Methods
 
   getFullUrl(uri: string): string {
-
-    return `${environment.config?.apiConfig?.apiUrl}/api/${uri}`;
+    return `https://localhost:7018/api/${uri}`;
 
   }
 

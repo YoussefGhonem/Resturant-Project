@@ -10,10 +10,10 @@ import { ResetPasswordComponent } from "./Components/reset-password/reset-passwo
 
 const routes: Routes = [
  
-  {
-    path: "Login",
-    component: LoginComponent
-  },
+  // {
+  //   path: "Login",
+  //   component: LoginComponent
+  // },
   {
     path:"ForgetPassword",
     component:ForgetPasswordComponent

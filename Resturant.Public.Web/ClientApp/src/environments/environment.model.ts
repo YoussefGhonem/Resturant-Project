@@ -12,3 +12,4 @@ export interface IApiConfig {
   apiUrl?: string;
   apiVersion: 1;
 }
+

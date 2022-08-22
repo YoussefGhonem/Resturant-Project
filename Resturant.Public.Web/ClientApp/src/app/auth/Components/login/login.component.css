@@ -90,8 +90,8 @@ button:hover{
 .Custom_style{
     display: flex;
     justify-content: center;
-    padding: 20vh 0px 25vh;
-    height: 100vh;
+    padding: 6vh 0px 12vh;
+    height: 64vh;
 }
 @media screen and (max-width: 1000px)  {
     .imge{
@@ -109,4 +109,10 @@ button:hover{
 }
 .Main_content{
 background-color: #F1F1F1;
+ border-radius: 34px;
+ /* border-top-right-radius: 16px;
+ border: solid 2px #cda45e;  */
+}
+.modal-content{
+	border-radius: 51px !important;
 }

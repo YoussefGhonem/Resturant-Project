@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import swal, { SweetAlertOptions } from 'sweetalert2';
-import { sweetAlertOptions } from "@shared/default-values/notification-sweetalert-options";
+import { sweetAlertOptions } from "@shared/Default-Values/notification-sweetalert-options";
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {

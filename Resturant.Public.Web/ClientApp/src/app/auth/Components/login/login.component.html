@@ -1,8 +1,8 @@
 <div class="Main_content">
   <div class="container Custom_style">
-    <div class="imge" style="width: 31%;">
+    <!-- <div class="imge" style="width: 31%;">
       <img class="Image_style" src="../../../../assets/Images/1.jpg">
-    </div>
+    </div> -->
     <div class="main">
       <input type="checkbox" id="chk" aria-hidden="true">
 
@@ -15,11 +15,11 @@
           <input formControlName="password"
             [ngClass]="{'is-invalid': LoginForm.get('password').errors && LoginForm.get('password').touched}"
             type="password" name="pswd" placeholder="Password" required>
-          <button>Login</button>
+          <button (click)="Login()">Login</button>
         </form>
       </div>
       <div class="login">
-        <form [formGroup]="RegisterForm">
+        <form [formGroup]="RegisterForm" (ngSubmit)="Register()">
           <label for="chk" aria-hidden="true">Sign up</label>
           <input formControlName="firstname"
             [ngClass]="{'is-invalid': RegisterForm.get('firstname').errors && RegisterForm.get('firstname').touched}"

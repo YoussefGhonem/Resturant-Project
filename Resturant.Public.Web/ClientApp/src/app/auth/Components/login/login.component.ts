@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../Models/User';
 import { AuthService } from '../../Service/auth.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,8 @@ export class LoginComponent implements OnInit {
   RegisterForm: FormGroup;
   userForLogin: User;
   userForRegister: User;
-  constructor(private FbForLogin: FormBuilder, private FbForRegister: FormBuilder, private AuthService: AuthService) { }
+  constructor(private FbForLogin: FormBuilder, private FbForRegister: FormBuilder, private AuthService: AuthService,private activeModal: NgbActiveModal,
+    private httpclint:HttpClient) { }
 
   ngOnInit() {
     this.CreateLoginForm();
@@ -39,30 +42,33 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  // // Login Function
-  // Login(){
-  //   if(this.LoginForm.valid){
-  //     this.userForLogin = Object.assign({}, );
-  //       this.AuthService.Login(this.LoginForm.value).subscribe(
-  //         {
-  //           next: (result:any)=>{console.log("Login Succes",result);},
-  //           error:(error:any)=>{console.log("Login Error",error);}
-  //         }
-  //      )
-  //   }
-  // }
+  //Login Function
+  Login(){
+    if(this.LoginForm.valid){
+      this.userForLogin = Object.assign({}, );
+     const user= this.LoginForm.getRawValue();
+       this.AuthService.login(this.LoginForm.value);
+      // console.log({"email":user.email,"password":user.password});
+      // this.httpclint.post("https://localhost:7018/api/account/login",{"email":user.email,"password":user.password},{responseType: 'json'}).subscribe(
+      //   {next:(e)=>{console.log("sucess",e)},
+      //   error:()=>{console.log("error")}}
+      // )
+    }
+    return;
+  }
 
-  // // Register Function
-  // Register(){
-  //   if(this.RegisterForm.valid){
-  //     this.userForRegister = Object.assign({}, );
-  //       this.AuthService.Login(this.RegisterForm.value).subscribe(
-  //         {
-  //           next: (result:any)=>{console.log("Register Succes",result);},
-  //           error:(error:any)=>{console.log("Register Error",error);}
-  //         }
-  //      )
-  //   }
-  // }
+  // Register Function
+  Register(){
+    if(this.RegisterForm.valid){
+      this.userForRegister = Object.assign({}, );
+      console.log(this.RegisterForm.value);
+        this.AuthService.Register(this.RegisterForm.value);
+    }
+  }
+
+
+  closeModal() {
+    this.activeModal.close('Modal Closed');
+  }
 
 }

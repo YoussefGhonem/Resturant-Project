@@ -1,12 +1,14 @@
-import { ToastService } from './../../app/+dashboard/components/dashboard/toast-service';
+// import { ToastService } from './../../app/+dashboard/components/dashboard/toast-service';
 import { Component, Injector, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpService } from '@shared/services';
 import { NotificationService } from '@shared/services';
-import { User } from "app/+auth/models";
+// import { User } from "app/+auth/models";
 import { takeUntil } from "rxjs/operators";
-import { AuthService } from "app/+auth/service";
+import { AuthService } from 'app/auth/Service/auth.service';
+import { User } from 'app/auth/Models/User';
+// import { AuthService } from "app/auth/service";
 
 // Lib
 export class ServiceLocator {
