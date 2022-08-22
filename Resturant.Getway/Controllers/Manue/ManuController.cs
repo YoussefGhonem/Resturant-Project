@@ -24,7 +24,7 @@ namespace Resturant.Getway.Controllers.Manue
             return _response;
         }
 
-        [HttpGet]
+        [HttpGet("categories")]
         public ActionResult<List<CategoryDetailsDto>> GetCategoriesManu()
         {
             return Ok(_iManueService.GetCategoriesManu(ServerRootPath));
@@ -36,28 +36,28 @@ namespace Resturant.Getway.Controllers.Manue
             return Ok(_iManueService.GetAllSubCategories(filters));
         }
 
-        [HttpDelete("DeleteCategory/{Id}")]
+        [HttpDelete("category/{Id}")]
         public async Task<IResponseDTO> DeleteCategory(Guid Id)
         {
             _response = await _iManueService.DeleteCategoryManu(Id);
             return _response;
         }
-        [HttpPut("UpdateCategory/{Id}")]
-        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id,[FromForm] CreateAndUpdateManueDto UpdateManueDto)
+        [HttpPut("category/{Id}")]
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id, [FromForm] CreateAndUpdateManueDto UpdateManueDto)
         {
-            _response = await _iManueService.UpdateCategoryManu(Id,UpdateManueDto);
+            _response = await _iManueService.UpdateCategoryManu(Id, UpdateManueDto);
             return _response;
         }
 
 
-        [HttpDelete("DeleteSupCategory/{Id}")]
+        [HttpDelete("sub-category/{Id}")]
         public async Task<IResponseDTO> DeleteSupCategory(Guid Id)
         {
             _response = await _iManueService.DelelteSupCategorys(Id);
             return _response;
         }
-        [HttpPut("UpdateSupCategory/{Id}")]
-        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id,[FromForm] CreateAndUpdateSubcategory subCategoryDto)
+        [HttpPut("sub-category/{Id}")]
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id, [FromForm] CreateAndUpdateSubcategory subCategoryDto)
         {
             _response = await _iManueService.UpdateSupCAtegors(Id, subCategoryDto);
 

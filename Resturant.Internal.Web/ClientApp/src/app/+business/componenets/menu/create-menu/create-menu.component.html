@@ -1,6 +1,6 @@
 <div class="flex flex-col flex-auto min-w-0">
     <div class="flex-auto p-6 sm:p-10" style="padding: 0% !important;margin: auto;width: 1296px">
-        <form (ngSubmit)="submit()" [formGroup]="form">
+        <form [formGroup]="form">
             <mat-horizontal-stepper [linear]="true" #horizontalStepper>
                 <mat-step #horizontalStepperStep1>
                     <ng-template matStepLabel>Create New Manu Category</ng-template>
@@ -21,26 +21,22 @@
                         <create-subcategory [form]="form"></create-subcategory>
                     </div>
 
-
-                    <div class="d-flex justify-content-end">
-                        <button class="btn btn-info add-btn ml-3" type="button" matStepperPrevious> Back
-                        </button>
-
-                        <button type="button" style="margin-left: 12px;" class="btn btn-primary add-btn"
-                            matStepperNext>Next</button>
-                    </div>
                 </mat-step>
-
                 <mat-step>
                     <ng-template matStepLabel>Summary</ng-template>
-                    <div class="flex  justify-center">
-                        <img style=" width: 320px;" src="assets/images/svg/empty.svg" alt="">
+                    <div class="text-center pt-4 pb-2">
+
+                        <div class="mb-4">
+                            <lord-icon src="https://cdn.lordicon.com/lupuorrc.json" trigger="loop"
+                                colors="primary:#0ab39c,secondary:#405189" style="width:120px;height:120px"></lord-icon>
+                        </div>
+                        <h5>Your Order is Completed !</h5>
+
+                        <button type="button" (click)="createNew()" [disabled]="form.invalid" style="margin-left: 12px;"
+                            class="btn btn-primary add-btn" matStepperNext>Cread New
+                        </button>
                     </div>
 
-                    <div class="step-body">
-                        <!-- First -->
-
-                    </div>
 
                 </mat-step>
             </mat-horizontal-stepper>

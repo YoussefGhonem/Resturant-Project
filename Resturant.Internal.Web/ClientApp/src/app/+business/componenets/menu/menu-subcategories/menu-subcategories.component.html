@@ -16,15 +16,15 @@
     </div>
     <div class="card-body">
         <div class="profile-timeline order-status">
-            <ngb-accordion #acc="ngbAccordion" activeIds="static-1" [closeOthers]="true">
-                <ngb-panel id="static-1" *ngFor="let item of subcategory.mealNames">
+            <ngb-accordion #acc="ngbAccordion" activeIds="static-0" [closeOthers]="true">
+                <ngb-panel id="static-{{i}}" *ngFor="let item of subcategory.mealNames;let i=index">
                     <ng-template ngbPanelTitle>
                         <a class="accordion-button p-2 shadow-none" data-bs-toggle="collapse" href="javascript:void(0);"
                             aria-expanded="true" aria-controls="collapseOne">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 avatar-xs">
-                                    <div class="avatar-title bg-success rounded-circle">
-                                        <i class="ri-user-follow-line"></i>
+                                    <div class="avatar-title bg-primary rounded-circle">
+                                        <i class="ri-restaurant-fill"></i>
                                     </div>
                                 </div>
                                 <div class="flex-grow-1 ms-3">

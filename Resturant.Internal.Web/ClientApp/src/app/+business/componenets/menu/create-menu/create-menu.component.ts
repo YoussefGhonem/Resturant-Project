@@ -1,5 +1,6 @@
 import { Component, Injector, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@shared/base/base.component';
 import { Validators } from 'angular-reactive-validation';
 import { BusinessController } from 'app/+business/controllers/BusinessController';
@@ -12,22 +13,15 @@ import { BusinessController } from 'app/+business/controllers/BusinessController
 export class CreateMenuComponent extends BaseComponent implements OnInit {
   form: FormGroup;
 
-  constructor(public override injector: Injector,
+  constructor(public override injector: Injector, private router: Router,
     private formBuilder: FormBuilder) {
     super(injector);
 
   }
-
-
   ngOnInit(): void {
     this.initForm();
 
   }
-
-  get subCatogries() {
-    return this.form.controls["subCatogries"] as FormArray;
-  }
-
 
   private initForm(): void {
     this.form = this.formBuilder.group({
@@ -35,34 +29,8 @@ export class CreateMenuComponent extends BaseComponent implements OnInit {
       workDayes: new FormControl(null, { validators: [Validators.required('this is required')] }),
       file: new FormControl(null, { validators: [Validators.required('this is required')] }),
       description: new FormControl(null),
-
-      subCatogries: this.formBuilder.group({
-        name: new FormControl(null, { validators: [Validators.required('this is required')] }),
-        description: new FormControl(null, { validators: [Validators.required('this is required')] }),
-
-        mealNames: this.formBuilder.group({
-          name: new FormControl(null, { validators: [Validators.required('this is required')] }),
-          description: new FormControl(null, { validators: [Validators.required('this is required')] }),
-          price: new FormControl(null, { validators: [Validators.required('this is required')] }),
-        }),
-      }),
+      subCatogries: [],
     });
-  }
-
-  addSubCatogry(item?: any) {
-    const subCatogryForm = this.formBuilder.group({
-      mealNames: this.formBuilder.group({
-        name: new FormControl(item?.name, { validators: [Validators.required('this is required')] }),
-        description: new FormControl(item?.description, { validators: [Validators.required('this is required')] }),
-        price: new FormControl(item.price, { validators: [Validators.required('this is required')] }),
-      }),
-    });
-
-    this.subCatogries.push(subCatogryForm);
-  }
-
-  deleteVessel(index: number) {
-    this.subCatogries.removeAt(index);
   }
 
   isInvalid(controllerName: string): boolean {
@@ -75,11 +43,11 @@ export class CreateMenuComponent extends BaseComponent implements OnInit {
     this.form.controls['file'].patchValue(file);
   }
 
-  submit(): any {
-    let body = this.form.getRawValue();
-    this.httpService.POST(BusinessController.CreateManu, this.httpService.objectToFormData(body))
-      .subscribe(() => {
-        this.notificationService.success("Success", "Changes updated successfully");
-      });
+  createNew() {
+    let currentUrl = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace Resturant.DTO.Business.Manue
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Resturant.DTO.Business.Manue
 {
     public class CreateAndUpdateManueDto
     {
