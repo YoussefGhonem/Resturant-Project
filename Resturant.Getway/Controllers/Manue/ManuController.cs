@@ -39,7 +39,7 @@ namespace Resturant.Getway.Controllers.Manue
         [HttpDelete("DeleteCategory/{Id}")]
         public async Task<IResponseDTO> DeleteCategory(Guid Id)
         {
-            _response = await _iManueService.DeleteCategoryManu(id);
+            _response = await _iManueService.DeleteCategoryManu(Id);
             return _response;
         }
         [HttpPut("UpdateCategory/{Id}")]
