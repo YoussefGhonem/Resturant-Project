@@ -10,6 +10,8 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AppRoutingModule } from './app-routing.module';
 import {  HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgxDynamicCarouselModule  } from "ngx-dynamic-carousel";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,10 @@ import {  HttpClientModule } from '@angular/common/http';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NgxDynamicCarouselModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
