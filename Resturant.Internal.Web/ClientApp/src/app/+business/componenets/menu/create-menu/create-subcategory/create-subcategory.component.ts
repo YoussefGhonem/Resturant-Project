@@ -1,22 +1,30 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BaseComponent } from '@shared/base/base.component';
 import { Validators } from 'angular-reactive-validation';
+import { BusinessController } from 'app/+business/controllers/BusinessController';
 import { get } from 'jquery';
+import { forEach } from 'lodash';
 
 @Component({
   selector: 'create-subcategory',
   templateUrl: './create-subcategory.component.html',
   styleUrls: ['./create-subcategory.component.scss']
 })
-export class CreateSubcategoryComponent implements OnInit {
+export class CreateSubcategoryComponent extends BaseComponent implements OnInit {
   data = [];
   @Input('form') form: FormGroup;
   subCategoryForm: FormGroup;
+  basicform: FormGroup;
   pageNumber = 1;
   pageSize = 5;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(public override injector: Injector, private router: Router,
+    private formBuilder: FormBuilder) {
+    super(injector);
 
+  }
   ngOnInit(): void {
     this.initForm()
   }
@@ -27,14 +35,14 @@ export class CreateSubcategoryComponent implements OnInit {
       description: new FormControl(null, { validators: [Validators.required('this is required')] }),
       price: new FormControl(null, { validators: [Validators.required('this is required')] }),
     });
-  }
-
-  get subCatogries() {
-    return this.form.controls["subCatogries"] as FormArray;
+    this.basicform = this.formBuilder.group({
+      name: new FormControl(null, { validators: [Validators.required('this is required')] }),
+      description: new FormControl(null, { validators: [Validators.required('this is required')] }),
+    });
   }
 
   isInvalid(controllerName: string): boolean {
-    return this.form.get(controllerName).errors && this.form.touched;
+    return this.basicform.get(controllerName).errors && this.form.touched;
   }
 
   isInvalidsubCatogries(controllerName: string): boolean {
@@ -56,6 +64,25 @@ export class CreateSubcategoryComponent implements OnInit {
 
   delete(index: any) {
     this.data.splice(index, 1);
+  }
+
+  patchForm() {
+    let name = this.basicform.getRawValue().name
+    let description = this.basicform.getRawValue().description
+    this.form.patchValue({ subCatogries: { name: name, description: description, mealNames: this.data } });
+
+    console.log("this.form.controls['subCatogries'].get('mealNames')", this.form);
+    this.submit()
+  }
+
+  submit(): any {
+    let body = this.form.getRawValue();
+    console.log("body=>>>", body);
+
+    this.httpService.POST(BusinessController.CreateMenu, this.httpService.objectToFormData(body))
+      .subscribe(() => {
+        this.notificationService.success("Success", "Changes updated successfully");
+      });
   }
 
 }

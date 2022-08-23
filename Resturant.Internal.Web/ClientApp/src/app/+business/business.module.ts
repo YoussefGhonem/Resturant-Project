@@ -1,5 +1,5 @@
 // Template Modules
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -83,6 +83,10 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogModule } from '@angular/cdk/dialog';
+import { CrateSummaryComponent } from './componenets/menu/create-menu/crate-summary/crate-summary.component';
+import lottie from 'lottie-web';
+import { defineLordIconElement } from "lord-icon-element";
+
 @NgModule({
   declarations: [
     PressComponent,
@@ -94,7 +98,8 @@ import { DialogModule } from '@angular/cdk/dialog';
     CreateMenuComponent,
     MenuSubcategoriesComponent,
     CreateCategoryComponent,
-    CreateSubcategoryComponent
+    CreateSubcategoryComponent,
+    CrateSummaryComponent
   ],
   imports: [
     BusinessRoutingModule,
@@ -173,8 +178,13 @@ import { DialogModule } from '@angular/cdk/dialog';
     ScrollingModule,
     DialogModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     NgbActiveModal
   ],
 })
-export class BusinessModule { }
+export class BusinessModule {
+  constructor() {
+    defineLordIconElement(lottie.loadAnimation);
+  }
+}

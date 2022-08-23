@@ -5,6 +5,7 @@ import { BaseComponent } from '@shared/base/base.component';
 import { SettingsController } from 'app/+users/controllers';
 import { ngbModalOptions } from '@shared/default-values';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BusinessController } from 'app/+business/controllers/BusinessController';
 
 @Component({
   selector: 'app-menu',
@@ -28,6 +29,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
       { label: 'Menu', active: true }
     ];
     this.initSearchForm()
+    this.loadCategories()
     this.loadSubCategories()
   }
 
@@ -36,7 +38,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
       // Pagination
       pageNumber: new FormControl(1),
       pageSize: new FormControl(10),
-      categoryId: new FormControl(null),
+      categoryId: new FormControl(),
     });
 
     this.form.valueChanges
@@ -49,16 +51,15 @@ export class MenuComponent extends BaseComponent implements OnInit {
 
   pageChange(pageNumber: number) {
     this.form.controls['pageNumber'].patchValue(pageNumber, { emitEvent: false });
-    this.loadCategories();
+    this.loadSubCategories();
   }
+
   onCategoryChange(id: any) {
     this.form?.controls['categoryId'].patchValue(id);
   }
 
   loadCategories() {
-    let filters = this.form.getRawValue();
-    console.log("filters", filters);
-    this.httpService.GET(SettingsController.Press, filters)
+    this.httpService.GET(BusinessController.Categories)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.categories = res;
@@ -69,7 +70,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
   loadSubCategories() {
     let filters = this.form.getRawValue();
     console.log("filters", filters);
-    this.httpService.GET(SettingsController.Press, filters)
+    this.httpService.GET(BusinessController.SubCategories, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.subCategories = res.data;
@@ -78,16 +79,4 @@ export class MenuComponent extends BaseComponent implements OnInit {
       });
   }
 
-  create() {
-    // const modalRef = this.modalService.open(AddEditPressComponent, {
-    //   ...ngbModalOptions,
-    //   windowClass: 'modal modal-success',
-    //   size: 'lg'
-    // });
-    // modalRef
-    //   .result
-    //   .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadData())
-    //   .catch(() => {
-    //   });
-  }
 }

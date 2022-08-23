@@ -1,27 +1,25 @@
 <div class="modal-body">
-    <div class="step-body" [formGroup]="form">
-        <div formArrayName="subCatogries">
-            <div class="row gy-4 mb-3">
-                <div class="col-md-6 form-group">
-                    <label for="amount-field" class="form-label">Title<small style="color : rgb(179, 62, 62);">
-                            *</small></label>
-                    <input [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" id="customername-field"
-                        class="form-control"
-                        placeholder="Name of Category like : On the Sweeter Side , Something Bubbly to Start .."
-                        formControlName="name" />
-                    <arv-validation-messages for="name">
-                    </arv-validation-messages>
-                </div>
+    <div class="step-body" [formGroup]="basicform">
+        <div class="row gy-4 mb-3">
+            <div class="col-md-6 form-group">
+                <label for="amount-field" class="form-label">Title<small style="color : rgb(179, 62, 62);">
+                        *</small></label>
+                <input [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" id="customername-field"
+                    class="form-control"
+                    placeholder="Name of Category like : On the Sweeter Side , Something Bubbly to Start .."
+                    formControlName="name" />
+                <arv-validation-messages for="name">
+                </arv-validation-messages>
+            </div>
 
-                <div class="col-md-6 form-group">
-                    <label for="description-field" class="form-label">Description
-                    </label>
-                    <textarea [ngClass]="{ 'is-invalid': isInvalid('description') }" type="text" id="description-field"
-                        class="form-control" placeholder="Enter description : any description you want."
-                        formControlName="description"></textarea>
-                    <arv-validation-messages for="description">
-                    </arv-validation-messages>
-                </div>
+            <div class="col-md-6 form-group">
+                <label for="description-field" class="form-label">Description
+                </label>
+                <textarea [ngClass]="{ 'is-invalid': isInvalid('description') }" type="text" id="description-field"
+                    class="form-control" placeholder="Enter description : any description you want."
+                    formControlName="description"></textarea>
+                <arv-validation-messages for="description">
+                </arv-validation-messages>
             </div>
         </div>
     </div>
@@ -63,6 +61,19 @@
                     </button>
                 </div>
             </div>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-info add-btn ml-3" type="button" matStepperPrevious> Back
+                </button>
+
+                <button type="button" (click)="patchForm()" [disabled]="form.invalid" style="margin-left: 12px;"
+                    class="btn btn-primary add-btn" matStepperNext>Save
+                    Changes</button>
+            </div>
+            <div *ngIf="form.invalid" class="alert alert-danger alert-top-border alert-dismissible fade show"
+                role="alert">
+                <i class="ri-airplay-line me-3 align-middle fs-16 text-danger"></i><strong>Hint</strong>
+                - Please Entered all field required to final step
+            </div>
             <ng-container *ngIf="data?.length > 0">
                 <div class="mr-1 ml-1">
                     <div class="table-responsive ">
@@ -86,10 +97,7 @@
                                             href="javascript:void(0);" container="body" placement="top"
                                             (click)="delete(i)" ngbTooltip="Delete">
                                             <i class="ri-delete-bin-5-line  ri-lg"></i>
-
-
                                         </a>
-
                                     </td>
                                 </tr>
                             </tbody>
@@ -103,6 +111,7 @@
                         </ngb-pagination>
                     </div>
                 </div>
+
             </ng-container>
         </div>
     </div>

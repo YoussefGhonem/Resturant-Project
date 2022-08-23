@@ -34,15 +34,24 @@ namespace Resturant.Services.Manue
                 var path = $"\\Uploads\\Manu\\Manu_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
                 var attachmentPath = $"{path}\\{options.File?.FileName}";
 
-                var mapping = options.Adapt<ManuCategory>();
+                var mapping = options.SubCatogries.Adapt<Subcategory>();
+
+                var manuCategory = new ManuCategory()
+                {
+                    Name = options.Name,
+                    Description = options.Description,
+                    WorkDayes = options.WorkDayes,
+                };
+                manuCategory.SubCatogries.Add(mapping);
+
 
                 if (options.File != null)
                 {
-                    mapping.CategoryFileUrl = attachmentPath;
-                    mapping.CategoryFileName = options.File?.FileName;
+                    manuCategory.CategoryFileUrl = attachmentPath;
+                    manuCategory.CategoryFileName = options.File?.FileName;
                 }
 
-                await _context.ManuCategories.AddAsync(mapping);
+                await _context.ManuCategories.AddAsync(manuCategory);
                 await _context.SaveChangesAsync();
 
                 _response.IsPassed = true;
@@ -90,9 +99,8 @@ namespace Resturant.Services.Manue
         {
             if (filterDto.CategoryId == null)
             {
-                var paginationResult = _context.ManuCategories.Where(x => !x.IsDeleted)
-                    .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted))
-                    .AsNoTracking()
+                var paginationResult = _context.ManuCategories.AsNoTracking().Where(x => !x.IsDeleted)
+                    .Include(x => x.SubCatogries!.Where(x => x.IsDeleted==false)).ThenInclude(x=>x.MealNames.Where(x=>!x.IsDeleted))
                     .Paginate(filterDto.PageSize, filterDto.PageNumber);
 
                 var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
@@ -101,10 +109,9 @@ namespace Resturant.Services.Manue
             }
             else
             {
-                var paginationResult = _context.ManuCategories
+                var paginationResult = _context.ManuCategories.AsNoTracking()
                     .Where(x => x.Id == filterDto.CategoryId && !x.IsDeleted)
-                    .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted))
-                    .AsNoTracking()
+                    .Include(x => x.SubCatogries!.Where(x => !x.IsDeleted)).ThenInclude(x => x.MealNames.Where(x => !x.IsDeleted))
                     .Paginate(filterDto.PageSize, filterDto.PageNumber);
 
                 var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
@@ -118,7 +125,7 @@ namespace Resturant.Services.Manue
         {
             try
             {
-                var category = await _context.ManuCategories.Where(m=>m.Id == Id && !m.IsDeleted).Include(m=>m.SubCatogries!.Where(s=>s.IsDeleted)).ToListAsync();
+                var category = await _context.ManuCategories.Where(m => m.Id == Id && !m.IsDeleted).Include(m => m.SubCatogries!.Where(s => s.IsDeleted)).ToListAsync();
                 if (category == null)
                 {
                     _response.IsPassed = false;
@@ -137,7 +144,7 @@ namespace Resturant.Services.Manue
                                 mealNAmes.IsDeleted = true;
                                 mealNAmes.UpdatedOn = DateTime.Now;
                                 //_context.MealNames.Attach(mealNAmes);
-                            }                          
+                            }
                         }
                         sup.IsDeleted = true;
                         sup.UpdatedOn = DateTime.Now;
@@ -146,7 +153,7 @@ namespace Resturant.Services.Manue
                     maincategory.IsDeleted = true;
                     maincategory.UpdatedOn = DateTime.Now;
                     _context.ManuCategories.Attach(maincategory);
-                }               
+                }
                 // save to the database
                 await _context.SaveChangesAsync();
                 _response.IsPassed = true;
@@ -171,13 +178,13 @@ namespace Resturant.Services.Manue
         {
             try
             {
-                var OneCategory =await _context.ManuCategories.FindAsync(Id);
+                var OneCategory = await _context.ManuCategories.FindAsync(Id);
                 if (OneCategory == null)
                 {
                     _response.IsPassed = false;
                     _response.Message = "Invalid object id";
                     return _response;
-                }             
+                }
                 OneCategory.Name = UpdateManueDto.Name;
                 OneCategory.Description = UpdateManueDto.Description;
                 OneCategory.WorkDayes = UpdateManueDto.WorkDayes;
@@ -192,7 +199,7 @@ namespace Resturant.Services.Manue
                     OneCategory.CategoryFileName = UpdateManueDto.File?.FileName;
                 }
 
-                 _context.ManuCategories.Attach(OneCategory);
+                _context.ManuCategories.Attach(OneCategory);
                 await _context.SaveChangesAsync();
 
                 _response.IsPassed = true;
@@ -222,7 +229,7 @@ namespace Resturant.Services.Manue
         {
             try
             {
-                var supcategory = await _context.SubCatogries.Where(m => m.Id == Id && !m.IsDeleted).Include(m=>m.MealNames!.Where(m=>m.IsDeleted== false)).ToListAsync();
+                var supcategory = await _context.SubCatogries.Where(m => m.Id == Id && !m.IsDeleted).Include(m => m.MealNames!.Where(m => m.IsDeleted == false)).ToListAsync();
                 if (supcategory == null)
                 {
                     _response.IsPassed = false;
@@ -231,16 +238,16 @@ namespace Resturant.Services.Manue
                 }
                 // Set Data
                 foreach (var sup in supcategory)
-                {                 
-                        foreach (var mealNAmes in sup.MealNames!)
+                {
+                    foreach (var mealNAmes in sup.MealNames!)
+                    {
+                        if (mealNAmes.IsDeleted == false)
                         {
-                            if (mealNAmes.IsDeleted == false)
-                            {
-                                mealNAmes.IsDeleted = true;
-                                mealNAmes.UpdatedOn = DateTime.Now;
-                                //_context.MealNames.Attach(mealNAmes);
-                            }
+                            mealNAmes.IsDeleted = true;
+                            mealNAmes.UpdatedOn = DateTime.Now;
+                            //_context.MealNames.Attach(mealNAmes);
                         }
+                    }
                     //_context.SubCatogries.Attach(sup);
                     sup.IsDeleted = true;
                     sup.UpdatedOn = DateTime.Now;
@@ -266,7 +273,7 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : update for Sub category 
-        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id,CreateAndUpdateSubcategory subCategoryDto)
+        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id, CreateAndUpdateSubcategory subCategoryDto)
         {
             try
             {

@@ -22,22 +22,27 @@
                         <div class="text-center">
                             <ul class="list-inline categories-filter animation-nav" id="filter">
 
+                                <li class="list-inline-item"><a class="categories" data-filter=".development"
+                                        (click)="onCategoryChange(null)"
+                                        [ngClass]="{'active': form.controls['categoryId'].value === null }">All</a>
+                                </li>
                                 <li *ngFor="let item of categories" class="list-inline-item"><a class="categories"
                                         data-filter=".development" (click)="onCategoryChange(item.id)"
-                                        [ngClass]="{'active': item.id === form.controls['categoryId'].value}">{{item |
+                                        [ngClass]="{'active': item.id === form.controls['categoryId'].value}">{{item.name
+                                        |
                                         humanize}}</a>
                                 </li>
                             </ul>
                         </div>
 
                         <div class="row gallery-wrapper" *ngIf="subCategories?.length > 0 ">
-                            <div class="element-item col-xxl-3 col-xl-4 col-sm-6 project designing development"
+                            <div class="element-item  project designing development"
                                 data-category="designing development">
                                 <div class="card-body pt-0 mt-3">
                                     <div class="row">
-                                        <div class="col-6" *ngFor="let subCategory of subCategories;let i=index">
-
+                                        <div class="col-4" *ngFor="let subCategory of subCategories;let i=index">
                                             <menu-subcategories [subcategory]="subCategory"></menu-subcategories>
+
 
                                         </div>
                                         <!--end card-->
