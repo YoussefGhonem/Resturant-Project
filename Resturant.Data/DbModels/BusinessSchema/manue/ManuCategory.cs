@@ -6,6 +6,10 @@ namespace Resturant.Data.DbModels.BusinessSchema.manue
     [Table("ManuCategories", Schema = "Business")]
     public class ManuCategory : BaseEntity
     {
+        public ManuCategory()
+        {
+            SubCatogries = new HashSet<Subcategory>();
+        }
         public new Guid Id { get; set; }
         public string? Name { get; set; }
         public string? WorkDayes { get; set; }
