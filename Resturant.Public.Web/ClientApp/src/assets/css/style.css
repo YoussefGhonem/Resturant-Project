@@ -466,7 +466,7 @@ h6 {
 #hero {
     width: 100%;
     height: 100vh;
-    background: url("../img/hero-bg.jpg") top center;
+    /* background: url("../img/hero-bg.jpg") top center; */
     background-size: cover;
     position: relative;
     padding: 0;
@@ -774,7 +774,7 @@ section {
 --------------------------------------------------------------*/
 
 .about {
-    background: url("../img/about-bg.jpg") center center;
+    /* background: url("../img/about-bg.jpg") center center; */
     background-size: cover;
     position: relative;
     padding: 80px 0;
@@ -1085,7 +1085,7 @@ section {
 --------------------------------------------------------------*/
 
 .events {
-    background: url(../img/events-bg.jpg) center center no-repeat;
+    /* background: url(../img/events-bg.jpg) center center no-repeat; */
     background-size: cover;
     position: relative;
 }
