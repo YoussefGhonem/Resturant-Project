@@ -5,10 +5,14 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { CommonModule } from "@angular/common";
+import { AboutComponent } from './Component/about/about.component';
+import { CommunityComponent } from './Component/community/community.component';
 
 @NgModule({
     declarations: [
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    CommunityComponent
   ],
   imports: [
     CommonModule,   

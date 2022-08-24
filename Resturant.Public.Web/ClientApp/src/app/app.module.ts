@@ -12,13 +12,15 @@ import { AppRoutingModule } from './app-routing.module';
 import {  HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxDynamicCarouselModule  } from "ngx-dynamic-carousel";
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     CounterComponent,
-    FetchDataComponent
+    FetchDataComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

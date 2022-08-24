@@ -11,6 +11,5 @@ namespace Resturant.DTO.Business.AboutAndCommuniry
         public string? name { get; set; }
         public string? Desciption { get; set; }
         public string? ImageUrl { get; set; }
-        public bool? IsMain { get; set; }
     }
 }

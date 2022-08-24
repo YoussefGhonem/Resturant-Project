@@ -17,6 +17,7 @@ using Resturant.Services.Settings;
 using Resturant.Services.UploadFiles;
 using Resturant.Services.Cover;
 using Resturant.Services.Happining;
+using Resturant.Services.WhyUs;
 
 namespace Resturant.Services
 {
@@ -41,6 +42,7 @@ namespace Resturant.Services
             services.AddScoped<IContactUs, ContactUsService>();
             services.AddScoped<ICover, CoverService>();
             services.AddScoped<IHappining, HappiningService>();
+            services.AddScoped<IWhyUs, WhyUsService>();
             return services;
         }
     }

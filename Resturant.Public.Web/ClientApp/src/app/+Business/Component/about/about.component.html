@@ -1,0 +1,51 @@
+<section id="hero"  class="d-flex align-items-center hero2" style="background: url('{{Settingdata.aboutAttachmentPath}}'); background-size: cover;background-repeat: no-repeat !important;" >
+    <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+        <div class="row text-align-center" style="text-align: center;">
+                <h1>Welcome to <span>Adobe Resturant</span></h1>
+                <h1>About</h1>    
+        </div>
+    </div>
+</section>
+
+<!-- //paragraph section -->
+<section style="padding:30px 0px;background-color: #EFC;">
+    <div class="d-flex justify-content-center">
+      <h5 style="width: 67%; text-align: center;font-weight: 300;">
+       {{Settingdata.aboutUs}}
+      </h5>
+    </div>
+</section>
+
+
+<!-- //Teams -->
+        <!-- ======= Chefs Section ======= -->
+        <section id="chefs" class="chefs"  style="background-color: #EFC;">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Chefs</h2>
+                    <p>Our Proffesional Chefs</p>
+                </div>
+                <div class="row" style="justify-content: space-around !important;">
+                    <div class="col-lg-4 col-md-6 pb-3" *ngFor="let item of TeamsData"  >
+                        <div class="member" data-aos="zoom-in" data-aos-delay="100" style="height: 100%;border: 2px solid #CDA45E;border-radius: 2%;">
+                            <img [src]="item.imageUrl" class="img-fluid" alt="" style="height: 100%;">
+                            <div class="member-info">
+                                <div class="member-info-content">
+                                    <h4>{{item.jopTitle}}</h4>
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div class="social">
+                                    <a href=""><i class="bi bi-twitter"></i></a>
+                                    <a href=""><i class="bi bi-facebook"></i></a>
+                                    <a href=""><i class="bi bi-instagram"></i></a>
+                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        </section>
+        <!-- End Chefs Section -->
+
+

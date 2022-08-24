@@ -12,10 +12,14 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 })
 export class HomeComponent extends BaseComponent implements OnInit {
   form!: FormGroup;
+  formGallery!: FormGroup;
   data: any[];
+  WhyUsData:any[];
+  Gallery:any[];
   total: number = 0;
+  totalGallery:number=0;
   event_list:any=true;
-  constructor(private _formBuilder: UntypedFormBuilder,public override injector: Injector) { 
+  constructor(private _formBuilder: UntypedFormBuilder,private _formBuilderGallery: UntypedFormBuilder,public override injector: Injector) { 
     super(injector);
   }
 
@@ -32,13 +36,23 @@ export class HomeComponent extends BaseComponent implements OnInit {
       pageNumber: new FormControl(1),
       pageSize: new FormControl(10),
   });
+  this.formGallery = this._formBuilderGallery.group({
+    // Pagination
+    pageNumber: new FormControl(1),
+    pageSize: new FormControl(8),
+});
   this.form.valueChanges
   .pipe(debounceTime(500))
   .subscribe(res => {
     this.form?.controls['pageNumber'].patchValue(1, { emitEvent: false });
     this.loadData();
   });
-
+  this.formGallery.valueChanges
+  .pipe(debounceTime(500))
+  .subscribe(res => {
+    this.form?.controls['pageNumber'].patchValue(1, { emitEvent: false });
+    this.loadData();
+  });
   }
   pageChange(pageNumber: number) {
     this.form.controls['pageNumber'].patchValue(pageNumber, { emitEvent: false });
@@ -47,6 +61,7 @@ export class HomeComponent extends BaseComponent implements OnInit {
 
   loadData() {
     let filters = this.form.getRawValue();
+    let filterGalery=this.formGallery.getRawValue();
     console.log("filters", filters);
     this.httpService.GET(BusinessController.GetSeeting, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -55,6 +70,19 @@ export class HomeComponent extends BaseComponent implements OnInit {
         this.total = this.total;
         console.log(this.data);
       });
+    this.httpService.GET(BusinessController.GetWhyUs).pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(res => {
+      this.WhyUsData = res;
+      console.log(res);
+    });
+    this.httpService.GET(BusinessController.GetGallery,filterGalery).pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(res => {
+      this.Gallery = res.data;
+      this.totalGallery = this.total;
+      console.log(this.Gallery);
+    });
+
   }
+
 
 }

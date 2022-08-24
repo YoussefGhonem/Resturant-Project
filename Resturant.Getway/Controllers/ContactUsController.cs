@@ -30,7 +30,7 @@ namespace Resturant.Getway.Controllers
             return await _services.CreateContactUs(createContactUsDto);
         }
         [HttpDelete("{id}")]
-        public async Task<IResponseDTO> DeletContactUsRequest(Guid id)
+        public async Task<IResponseDTO> DeletContactUsRequest([FromRoute] Guid id)
         {
             return await _services.DeletContactUs(id);
         }
