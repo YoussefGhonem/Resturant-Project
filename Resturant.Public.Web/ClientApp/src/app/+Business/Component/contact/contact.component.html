@@ -1,0 +1,64 @@
+<section style="padding-top:150px">
+    <div style="display: flex;
+    flex-direction: column;
+    align-items: center;">
+        <h2 style="color:#cda45e ;">
+            Contact Us
+        </h2>
+        <h6 style="text-align: center;">
+            Send us a message and we’ll get back to you as soon as possible. You can also reach us at NNN-NNN-NNNN or at info@Aboberesturnat.com. 
+            <br>
+            For all press opportunities, please contact: megan@Aboberesturnat.com. 
+            <br>
+            Looking forward to hearing from you.
+        </h6>
+    </div>
+    <div class="container pt-5">
+        <form [formGroup]="ContactForm" (ngSubmit)="submit()" class="php-email-form">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input type="text" formControlName="name"  name="name" class="form-control" id="name" placeholder="Your Name" required>
+                    <div *ngIf="ContactForm.get('name').touched && ContactForm.get('name').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="ContactForm.get('name').hasError('required')">Name is required.</div>
+                        <div *ngIf="ContactForm.get('name').hasError('minlength')">Name should be 2 character.</div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <input type="email" formControlName="email" class="form-control" name="email" id="Email" placeholder="Your Email" required>
+                    <div *ngIf="ContactForm.get('email').touched && ContactForm.get('email').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="ContactForm.get('email').hasError('required')">Email Is required.</div>
+                        <div *ngIf="ContactForm.get('email').hasError('email')">Email Shoud be an Email</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required>
+                <div *ngIf="ContactForm.get('phoneNumber').touched && ContactForm.get('phoneNumber').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="ContactForm.get('phoneNumber').hasError('required')">Phone Number is required.</div>
+                    <div *ngIf="ContactForm.get('phoneNumber').hasError('minlength')">Phone Number should be 3 character.</div>
+                </div>
+            </div>
+            <div class="form-group mt-3">            
+                <select  class="form-control" class="selectpicker" formControlName="touchAbout"  style="width: 100%; height: 46px;">
+                    <!-- <option value="default"  >What are you getting in touch about?</option> -->
+                    <option [ngValue]="1">General Inquiry</option>
+                    <option [ngValue]="2">Press Inquiry</option>
+                  </select>
+                <div *ngIf="ContactForm.get('touchAbout').touched && ContactForm.get('touchAbout').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="ContactForm.get('touchAbout').hasError('required')">touchAbout is required.</div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <textarea class="form-control" formControlName="massage" name="massage" rows="8" placeholder="Massage " required></textarea>
+                <div *ngIf="ContactForm.get('massage').touched && ContactForm.get('massage').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="ContactForm.get('massage').hasError('required')">Massage is required.</div>
+                    <div *ngIf="ContactForm.get('massage').hasError('minlength')">Massage should be 5 character.</div>
+                </div>
+            </div>
+
+            <div class="text-center pt-2">
+                <button class="btn_custom" type="submit">Apply</button>
+            </div>
+        </form>
+    </div>
+</section>

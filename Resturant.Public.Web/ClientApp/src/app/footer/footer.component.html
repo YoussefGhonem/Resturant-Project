@@ -33,17 +33,6 @@
                     </ul>
                 </div>
 
-                <!-- <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
-                    <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
-                    </ul>
-                </div> -->
-
                 <div class="col-lg-4 col-md-6 footer-newsletter">
                     <h4>Our Newsletter</h4>
                     <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
@@ -57,12 +46,15 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="copyright">
+    <div class="" style="    display: flex;
+    flex-direction: row-reverse;">
+        <!-- <div class="copyright">
             &copy; Copyright <strong><span>A-S</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            Designed by <a href="">A-S</a>
+        </div> -->
+        <div class="credits p-3">
+            <input [routerLink]="['/Busnisse/Gallery']" routerLinkActive="router-link-active"  class="btn_custom" type="button" value="Gallery">    
+            <input [routerLink]="['/Busnisse/Jop']" class="btn_custom" type="button" value="Jop">  
+            <input [routerLink]="['/Busnisse/Contact']" type="button" class="btn_custom" value="Contact">          
         </div>
     </div>
 </footer>
