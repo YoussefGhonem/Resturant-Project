@@ -30,36 +30,44 @@ namespace Resturant.Getway.Controllers.Manue
             return Ok(_iManueService.GetCategoriesManu(ServerRootPath));
         }
 
+        [HttpGet("categories/{id}")]
+        public async Task<ActionResult<CategoryManuDetailsDto>> GetCategoriesManuDetails(Guid id)
+        {
+            return Ok(await _iManueService.GetCategoriesManuDetails(id, ServerRootPath));
+        }
+
         [HttpGet("sub-categories")]
         public ActionResult<PaginationResult<SubCategoryDto>> GetAllSubCategories([FromQuery] SubCategoryFilters filters)
         {
             return Ok(_iManueService.GetAllSubCategories(filters));
         }
 
-        [HttpDelete("category/{Id}")]
-        public async Task<IResponseDTO> DeleteCategory(Guid Id)
+        [HttpDelete("category/{id}")]
+        public async Task<IResponseDTO> DeleteCategory(Guid id)
         {
-            _response = await _iManueService.DeleteCategoryManu(Id);
+            _response = await _iManueService.DeleteCategoryManu(id);
             return _response;
         }
-        [HttpPut("category/{Id}")]
-        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id, [FromForm] CreateAndUpdateManueDto UpdateManueDto)
+
+        [HttpPut("category/{id}")]
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid id, [FromForm] CreateAndUpdateManueDto UpdateManueDto)
         {
-            _response = await _iManueService.UpdateCategoryManu(Id, UpdateManueDto);
+            _response = await _iManueService.UpdateCategoryManu(id, UpdateManueDto);
             return _response;
         }
 
 
-        [HttpDelete("sub-category/{Id}")]
-        public async Task<IResponseDTO> DeleteSupCategory(Guid Id)
+        [HttpDelete("sub-category/{id}")]
+        public async Task<IResponseDTO> DeleteSupCategory(Guid id)
         {
-            _response = await _iManueService.DelelteSupCategorys(Id);
+            _response = await _iManueService.DelelteSupCategorys(id);
             return _response;
         }
-        [HttpPut("sub-category/{Id}")]
-        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid Id, [FromForm] CreateAndUpdateSubcategory subCategoryDto)
+
+        [HttpPut("sub-category/{id}")]
+        public async Task<IResponseDTO> UpdateSubCategory([FromRoute] Guid id, CreateAndUpdateSubcategory subCategoryDto)
         {
-            _response = await _iManueService.UpdateSupCAtegors(Id, subCategoryDto);
+            _response = await _iManueService.UpdateSubCategories(id, subCategoryDto);
 
             return _response;
         }

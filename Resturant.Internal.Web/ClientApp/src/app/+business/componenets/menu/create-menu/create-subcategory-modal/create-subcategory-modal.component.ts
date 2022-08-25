@@ -1,35 +1,39 @@
 import { Component, Injector, Input, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseComponent } from '@shared/base/base.component';
 import { Validators } from 'angular-reactive-validation';
 import { BusinessController } from 'app/+business/controllers/BusinessController';
-import { get } from 'jquery';
-import { forEach } from 'lodash';
 
 @Component({
-  selector: 'create-subcategory',
-  templateUrl: './create-subcategory.component.html',
-  styleUrls: ['./create-subcategory.component.scss']
+  selector: 'app-create-subcategory-modal',
+  templateUrl: './create-subcategory-modal.component.html',
+  styleUrls: ['./create-subcategory-modal.component.scss']
 })
-export class CreateSubcategoryComponent extends BaseComponent implements OnInit {
-  @Input('form') form: FormGroup;
+export class CreateSubcategoryModalComponent extends BaseComponent implements OnInit {
+
+  @Input('categoryDetails') categoryDetails?: any;
   subCategoryForm: FormGroup;
   basicform: FormGroup;
+  form: FormGroup;
   data = [];
   pageNumber = 1;
   pageSize = 5;
 
-  constructor(public override injector: Injector, private router: Router,
+  constructor(public override injector: Injector, public modalService: NgbActiveModal,
     private formBuilder: FormBuilder) {
     super(injector);
-
   }
+
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
   }
 
   private initForm(): void {
+    this.form = this.formBuilder.group({
+      subCatogries: [],
+    });
+
     this.subCategoryForm = this.formBuilder.group({
       name: new FormControl(null, { validators: [Validators.required('this is required')] }),
       description: new FormControl(null, { validators: [Validators.required('this is required')] }),
@@ -70,19 +74,19 @@ export class CreateSubcategoryComponent extends BaseComponent implements OnInit 
     let name = this.basicform.getRawValue().name
     let description = this.basicform.getRawValue().description
     this.form.patchValue({ subCatogries: { name: name, description: description, mealNames: this.data } });
-
-    console.log("this.form.controls['subCatogries'].get('mealNames')", this.form);
-    this.submit()
   }
 
   submit(): any {
+    this.patchForm()
     let body = this.form.getRawValue();
     console.log("body=>>>", body);
 
-    this.httpService.POST(BusinessController.CreateMenu, this.httpService.objectToFormData(body))
+    this.httpService.PUT(BusinessController.UpdateSubCategory(this.categoryDetails.id), body)
       .subscribe(() => {
+        this.modalService.close(true)
         this.notificationService.success("Success", "Changes updated successfully");
       });
   }
+
 
 }

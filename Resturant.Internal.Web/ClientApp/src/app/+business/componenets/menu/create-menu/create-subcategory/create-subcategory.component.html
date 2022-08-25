@@ -90,7 +90,13 @@
                                 <tr
                                     *ngFor="let x of data | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize ; let i = index">
                                     <td class="text-nowrap">{{x.name || '-'}}</td>
-                                    <td class="text-nowrap">{{x.description || '-'}}</td>
+                                    <td class="text-nowrap" style="    max-width: 20px;">
+                                        <span [ngbTooltip]="x.description">
+
+                                            {{x.description | truncate :30:'....'}}
+                                        </span>
+
+                                    </td>
                                     <td class="text-nowrap">{{x.price || '-'}}</td>
                                     <td class="text-nowrap">
                                         <a class="mr-1 text-danger d-flex justify-content-center"

@@ -83,9 +83,9 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogModule } from '@angular/cdk/dialog';
-import { CrateSummaryComponent } from './componenets/menu/create-menu/crate-summary/crate-summary.component';
 import lottie from 'lottie-web';
 import { defineLordIconElement } from "lord-icon-element";
+import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/create-subcategory-modal/create-subcategory-modal.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +99,7 @@ import { defineLordIconElement } from "lord-icon-element";
     MenuSubcategoriesComponent,
     CreateCategoryComponent,
     CreateSubcategoryComponent,
-    CrateSummaryComponent
+    CreateSubcategoryModalComponent,
   ],
   imports: [
     BusinessRoutingModule,
