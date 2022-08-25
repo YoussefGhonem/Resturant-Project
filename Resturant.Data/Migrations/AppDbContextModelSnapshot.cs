@@ -89,6 +89,35 @@ namespace Resturant.Data.Migrations
                     b.ToTable("Team", "Business");
                 });
 
+            modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.About.WhyUs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Answer")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Quetion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WhyUss", "Business");
+                });
+
             modelBuilder.Entity("Resturant.Data.DbModels.BusinessSchema.Appointment", b =>
                 {
                     b.Property<Guid>("Id")

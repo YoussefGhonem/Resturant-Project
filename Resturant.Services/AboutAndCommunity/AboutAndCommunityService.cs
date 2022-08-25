@@ -451,7 +451,7 @@ namespace Resturant.Services.AboutAndCommunity
         }
         public async Task<List<ReturnCommunityDto>> GetMainCommunity(string serverRootPath)
         {
-            var AllAbout = await _context.Communitys.Where(A=>A.IsDeleted == false).ToListAsync();
+            var AllAbout = await _context.Communitys.Where(A=>A.IsDeleted == false).OrderByDescending(c=>c.CreatedOn).ToListAsync();
             var AboutToReturn = AllAbout.Adapt<List<ReturnCommunityDto>>();
             foreach (var item in AboutToReturn)
             {
