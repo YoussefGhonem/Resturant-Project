@@ -1,0 +1,56 @@
+<section style="padding-top:150px">
+    <div style="display: flex;
+    flex-direction: column;
+    align-items: center;">
+        <h2 style="color:#cda45e ;">
+            Work With Us
+        </h2>
+        <h6>
+            We’d love to have you join our team! Please use the form below to apply. Feel free to send in your resume even if you don't see the position you're looking for listed. 
+        </h6>
+    </div>
+    <div class="container pt-5">
+        <form [formGroup]="JopForm" (ngSubmit)="submit()" class="php-email-form">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <input type="text" formControlName="Name"  name="Name" class="form-control" id="Name" placeholder="Your Name" required>
+                    <div *ngIf="JopForm.get('Name').touched && JopForm.get('Name').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="JopForm.get('Name').hasError('required')">Name is required.</div>
+                        <div *ngIf="JopForm.get('Name').hasError('minlength')">Name should be 2 character.</div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <input type="email" formControlName="Email" class="form-control" name="Email" id="Email" placeholder="Your Email" required>
+                    <div *ngIf="JopForm.get('Email').touched && JopForm.get('Email').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="JopForm.get('Email').hasError('required')">Email Is required.</div>
+                        <div *ngIf="JopForm.get('Email').hasError('Email')">Email Shoud be an Email</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <input type="text" formControlName="PhoneNumber" class="form-control" name="PhoneNumber" id="PhoneNumber" placeholder="Phone Number" required>
+                <div *ngIf="JopForm.get('PhoneNumber').touched && JopForm.get('PhoneNumber').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="JopForm.get('PhoneNumber').hasError('required')">Phone Number is required.</div>
+                    <div *ngIf="JopForm.get('PhoneNumber').hasError('minlength')">Phone Number should be 3 character.</div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <textarea class="form-control" formControlName="CoverLatter" name="CoverLatter" rows="8" placeholder="Cover Letter " required></textarea>
+                <div *ngIf="JopForm.get('CoverLatter').touched && JopForm.get('CoverLatter').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="JopForm.get('CoverLatter').hasError('required')">Cover Latter is required.</div>
+                    <div *ngIf="JopForm.get('CoverLatter').hasError('minlength')">Cover Latter should be 5 character.</div>
+                </div>
+            </div>
+            <div class="form-group mt-3">
+                <label class="button" for="upload">Upload File</label>
+                <input formControlName="Attachment" name="Attachment" (change)="onFileChange($event)" id="upload" type="file">
+                <div *ngIf="JopForm.get('Attachment').touched && JopForm.get('Attachment').invalid" class="alert alert-danger Nofication">
+                    <div *ngIf="JopForm.get('Attachment').hasError('required')">Attachment is required.</div>
+                </div>
+            </div>
+            <div class="text-center pt-2">
+                <button class="btn_custom" type="submit">Apply</button>
+            </div>
+        </form>
+    </div>
+</section>

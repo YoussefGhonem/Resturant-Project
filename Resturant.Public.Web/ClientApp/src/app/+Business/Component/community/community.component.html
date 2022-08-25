@@ -1,42 +1,23 @@
-<section>
-    <div *ngFor="let x of data">
-        <div class="row">
-            <div class="col-sm-6">
-              <!-- <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div> -->
-              <img [src]="x.imageUrl">
-            </div>
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Special title treatment</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-                <!-- <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
-                </div> -->
-                <img [src]="(x+1).imageUrl">
-              </div>
-          </div>
+<section style="background-color:#EFC;;">
+  <div  *ngFor="let x of data;let i=index">
+    <div *ngIf="i%2==0" class="row card_specifc" >
+      <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+        <img [src]="x.imageUrl">
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>{{x.name}}</h2>
+      <p>{{x.desciption}}</p>
+      </div>
     </div>
+    <div *ngIf="i%2!=0" class="row card_specifc">
+      <div class="col-lg-6 col-md-12 col-sm-12">
+        <h2>{{x.name}}</h2>
+      <p>{{x.desciption}}</p>
+      </div>
+      <div class="col-lg-6 col-md-12 col-sm-12 p-0">
+        <img [src]="x.imageUrl">
+      </div>
+    </div>
+  </div>
 </section>
+

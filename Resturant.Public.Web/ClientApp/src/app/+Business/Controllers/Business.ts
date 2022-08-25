@@ -5,5 +5,7 @@ export const BusinessController = {
     GetGallery:`Gallery`,
     Settings:`settings`,
     Teams:`Team`,
-    GetCommunity:`Community`
+    GetCommunity:`Community`,
+    PostJop:`Jop`,
+    PostContactUs:`ContactUs`
   }
