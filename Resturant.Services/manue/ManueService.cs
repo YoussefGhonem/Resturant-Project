@@ -190,7 +190,7 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : Update for category 
-        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateAndUpdateManueDto UpdateManueDto)
+        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, UpdateManueCategoryDto UpdateManueDto)
         {
             try
             {
@@ -201,6 +201,7 @@ namespace Resturant.Services.Manue
                     _response.Message = "Invalid object id";
                     return _response;
                 }
+
                 OneCategory.Name = UpdateManueDto.Name;
                 OneCategory.Description = UpdateManueDto.Description;
                 OneCategory.WorkDayes = UpdateManueDto.WorkDayes;

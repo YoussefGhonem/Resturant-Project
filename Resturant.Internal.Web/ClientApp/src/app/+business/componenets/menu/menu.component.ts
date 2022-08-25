@@ -1,3 +1,4 @@
+import { UpdateCategoryModalComponent } from './create-menu/update-category-modal/update-category-modal.component';
 import { CreateSubcategoryModalComponent } from './create-menu/create-subcategory-modal/create-subcategory-modal.component';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { Component, Injector, OnInit } from '@angular/core';
@@ -78,8 +79,9 @@ export class MenuComponent extends BaseComponent implements OnInit {
       .catch(() => {
       });
   }
+
   UpdeteCategory() {
-    const modalRef = this.modalService.open(CreateSubcategoryModalComponent, {
+    const modalRef = this.modalService.open(UpdateCategoryModalComponent, {
       ...ngbModalOptions,
       windowClass: 'modal modal-success',
       size: 'xl'
@@ -87,7 +89,7 @@ export class MenuComponent extends BaseComponent implements OnInit {
     modalRef.componentInstance.categoryDetails = this.categoryDetails
     modalRef
       .result
-      .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadSubCategories())
+      .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadCategories())
       .catch(() => {
       });
   }

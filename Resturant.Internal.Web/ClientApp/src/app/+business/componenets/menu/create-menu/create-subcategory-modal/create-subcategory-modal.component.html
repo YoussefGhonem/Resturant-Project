@@ -63,7 +63,8 @@
                 </div>
                 <div class="col-md-2 form-group">
                     <div class="d-flex justify-content-end mt-4">
-                        <button class="btn btn-danger add-btn" id="create-btn" type="button" (click)="addMore()">
+                        <button [disabled]="subCategoryForm.invalid" class="btn btn-danger add-btn" id="create-btn"
+                            type="button" (click)="addMore()">
                             Add More
                         </button>
                     </div>

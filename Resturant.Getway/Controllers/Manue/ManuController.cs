@@ -50,12 +50,11 @@ namespace Resturant.Getway.Controllers.Manue
         }
 
         [HttpPut("category/{id}")]
-        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid id, [FromForm] CreateAndUpdateManueDto UpdateManueDto)
+        public async Task<IResponseDTO> UpdateCategory([FromRoute] Guid id, [FromForm] UpdateManueCategoryDto UpdateManueDto)
         {
             _response = await _iManueService.UpdateCategoryManu(id, UpdateManueDto);
             return _response;
         }
-
 
         [HttpDelete("sub-category/{id}")]
         public async Task<IResponseDTO> DeleteSupCategory(Guid id)

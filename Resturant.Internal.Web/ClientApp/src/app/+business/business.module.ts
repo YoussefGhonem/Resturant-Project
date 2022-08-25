@@ -86,6 +86,7 @@ import { DialogModule } from '@angular/cdk/dialog';
 import lottie from 'lottie-web';
 import { defineLordIconElement } from "lord-icon-element";
 import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/create-subcategory-modal/create-subcategory-modal.component';
+import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/update-category-modal/update-category-modal.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/
     CreateCategoryComponent,
     CreateSubcategoryComponent,
     CreateSubcategoryModalComponent,
+    UpdateCategoryModalComponent,
   ],
   imports: [
     BusinessRoutingModule,
