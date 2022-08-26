@@ -45,7 +45,8 @@
             </div>
 
             <div class="col-md-10 form-group">
-                <label for="description-field" class="form-label">Description
+                <label for="description-field" class="form-label">Description<small style="color : rgb(179, 62, 62);">
+                        *</small>
                 </label>
                 <textarea [ngClass]="{ 'is-invalid': isInvalidsubCatogries('description') }" type="text"
                     id="description-field" class="form-control"
@@ -56,7 +57,8 @@
             </div>
             <div class="col-md-2 form-group">
                 <div class="d-flex justify-content-end mt-4">
-                    <button class="btn btn-danger add-btn" id="create-btn" type="button" (click)="addMore()">
+                    <button [disabled]="subCategoryForm.invalid" class="btn btn-danger add-btn" id="create-btn"
+                        type="button" (click)="addMore()">
                         Add More
                     </button>
                 </div>
@@ -90,7 +92,13 @@
                                 <tr
                                     *ngFor="let x of data | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize ; let i = index">
                                     <td class="text-nowrap">{{x.name || '-'}}</td>
-                                    <td class="text-nowrap">{{x.description || '-'}}</td>
+                                    <td class="text-nowrap" style="    max-width: 20px;">
+                                        <span [ngbTooltip]="x.description">
+
+                                            {{x.description | truncate :30:'....'}}
+                                        </span>
+
+                                    </td>
                                     <td class="text-nowrap">{{x.price || '-'}}</td>
                                     <td class="text-nowrap">
                                         <a class="mr-1 text-danger d-flex justify-content-center"

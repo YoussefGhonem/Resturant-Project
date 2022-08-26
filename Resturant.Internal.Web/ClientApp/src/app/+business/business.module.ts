@@ -83,9 +83,13 @@ import { MatTreeModule } from '@angular/material/tree';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { DialogModule } from '@angular/cdk/dialog';
-import { CrateSummaryComponent } from './componenets/menu/create-menu/crate-summary/crate-summary.component';
 import lottie from 'lottie-web';
 import { defineLordIconElement } from "lord-icon-element";
+import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/create-subcategory-modal/create-subcategory-modal.component';
+import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/update-category-modal/update-category-modal.component';
+import { HappeningsComponent } from './componenets/happenings/happenings.component';
+import { AddEditHappeningComponent } from './componenets/happenings/add-edit-happening/add-edit-happening.component';
+import { JobsComponent } from './componenets/jobs/jobs.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +103,11 @@ import { defineLordIconElement } from "lord-icon-element";
     MenuSubcategoriesComponent,
     CreateCategoryComponent,
     CreateSubcategoryComponent,
-    CrateSummaryComponent
+    CreateSubcategoryModalComponent,
+    UpdateCategoryModalComponent,
+    HappeningsComponent,
+    AddEditHappeningComponent,
+    JobsComponent,
   ],
   imports: [
     BusinessRoutingModule,

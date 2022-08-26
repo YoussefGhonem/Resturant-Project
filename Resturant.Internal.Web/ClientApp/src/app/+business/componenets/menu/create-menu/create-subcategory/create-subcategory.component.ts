@@ -13,10 +13,10 @@ import { forEach } from 'lodash';
   styleUrls: ['./create-subcategory.component.scss']
 })
 export class CreateSubcategoryComponent extends BaseComponent implements OnInit {
-  data = [];
   @Input('form') form: FormGroup;
   subCategoryForm: FormGroup;
   basicform: FormGroup;
+  data = [];
   pageNumber = 1;
   pageSize = 5;
 

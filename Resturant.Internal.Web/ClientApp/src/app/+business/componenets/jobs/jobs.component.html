@@ -1,0 +1,32 @@
+<div *ngIf="jobs?.length > 0 ;else emptyTemp">
+    <div class="col-xxl-4" *ngFor="let data of jobs">
+        <div class="card card-success">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-shrink-0">
+                        <img src="null" default-image alt="" class="avatar-sm rounded-circle">
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <p class="card-text"><span class="fw-medium">{{data.name}}</span> <span class="text-primary">
+                                {{data.email}} </span> - {{data.phoneNumber}}.</p>
+                        <p class="card-text" [ngbTooltip]="data.coverLatter"> {{data.coverLatter | truncate :30 :'...'}.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="text-center">
+                    <a (click)="downloadPdf(data.attachmentPath,data.attachmentName)" class="link-light">Connect Now <i
+                            class="ri-arrow-right-s-line align-middle lh-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </div><!-- end col -->
+</div>
+
+<ng-template #emptyTemp>
+    <div class="text-center my-3">
+        <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>

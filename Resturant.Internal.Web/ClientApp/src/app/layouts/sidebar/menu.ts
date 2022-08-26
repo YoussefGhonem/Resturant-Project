@@ -26,15 +26,15 @@ export const MENU: MenuItem[] = [
         parentId: 1
       },
       {
-        id: 'ECOMMERCE',
-        label: 'ECOMMERCE',
-        link: '/dashboard/ecommerce',
+        id: 'Happenings',
+        label: 'Happenings',
+        link: '/business/happenings',
         parentId: 1
       },
       {
-        id: 'CRYPTO',
-        label: 'CRYPTO',
-        link: '/dashboard/crypto',
+        id: 'Jobs',
+        label: 'Jobs',
+        link: '/business/jobs',
         parentId: 1
       },
       {

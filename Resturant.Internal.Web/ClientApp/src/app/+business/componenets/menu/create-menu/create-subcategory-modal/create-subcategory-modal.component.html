@@ -1,0 +1,140 @@
+<!-- Order Create Model -->
+<ng-container #content role="document">
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title" id="addModal"> Add Meal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+            (click)="modalService.close()"></button>
+    </div>
+    <div class="modal-body">
+        <div class="step-body" [formGroup]="basicform">
+            <div class="row gy-4 mb-3">
+                <div class="col-md-6 form-group">
+                    <label for="amount-field" class="form-label">Title<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" id="customername-field"
+                        class="form-control"
+                        placeholder="Name of Category like : On the Sweeter Side , Something Bubbly to Start .."
+                        formControlName="name" />
+                    <arv-validation-messages for="name">
+                    </arv-validation-messages>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label for="description-field" class="form-label">Description
+                    </label>
+                    <textarea [ngClass]="{ 'is-invalid': isInvalid('description') }" type="text" id="description-field"
+                        class="form-control" placeholder="Enter description : any description you want."
+                        formControlName="description"></textarea>
+                    <arv-validation-messages for="description">
+                    </arv-validation-messages>
+                </div>
+            </div>
+        </div>
+        <div [formGroup]="subCategoryForm">
+            <div class="row gy-4 mb-3">
+                <h2>Meals Section :</h2>
+                <div class="col-md-6 form-group">
+                    <label for="amount-field" class="form-label">Name<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input [ngClass]="{ 'is-invalid': isInvalidsubCatogries('name') }" type="text"
+                        id="customername-field" class="form-control"
+                        placeholder="Name: BREAKFAST BREAD PUDDING ,JAPANESE UBE PANCAKES.." formControlName="name" />
+                    <arv-validation-messages for="name">
+                    </arv-validation-messages>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="amount-field" class="form-label">Price<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input [ngClass]="{ 'is-invalid': isInvalidsubCatogries('price') }" type="text"
+                        id="customername-field" class="form-control" placeholder="price" formControlName="price" />
+                    <arv-validation-messages for="price">
+                    </arv-validation-messages>
+                </div>
+
+                <div class="col-md-10 form-group">
+                    <label for="description-field" class="form-label">Description
+                    </label>
+                    <textarea [ngClass]="{ 'is-invalid': isInvalidsubCatogries('description') }" type="text"
+                        id="description-field" class="form-control"
+                        placeholder="description : Purple sweet potatoes, plums , Custard stuffed milk bread, ."
+                        formControlName="description"></textarea>
+                    <arv-validation-messages for="description">
+                    </arv-validation-messages>
+                </div>
+                <div class="col-md-2 form-group">
+                    <div class="d-flex justify-content-end mt-4">
+                        <button [disabled]="subCategoryForm.invalid" class="btn btn-danger add-btn" id="create-btn"
+                            type="button" (click)="addMore()">
+                            Add More
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="form.invalid" class="alert alert-danger alert-top-border alert-dismissible fade show"
+                    role="alert">
+                    <i class="ri-airplay-line me-3 align-middle fs-16 text-danger"></i><strong>Hint</strong>
+                    - Please Entered all field required to final step
+                </div>
+                <ng-container *ngIf="data?.length > 0">
+                    <div class="mr-1 ml-1">
+                        <div class="table-responsive ">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-nowrap">Name</th>
+                                        <th class="text-nowrap">Description</th>
+                                        <th class="text-nowrap">Price</th>
+                                        <th class="text-nowrap">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let x of data | slice: (pageNumber-1) * pageSize : (pageNumber-1) * pageSize + pageSize ; let i = index">
+                                        <td class="text-nowrap">{{x.name || '-'}}</td>
+                                        <td class="text-nowrap" style="    max-width: 20px;">
+                                            <span [ngbTooltip]="x.description">
+
+                                                {{x.description | truncate :30:'....'}}
+                                            </span>
+
+                                        </td>
+                                        <td class="text-nowrap">{{x.price || '-'}}</td>
+                                        <td class="text-nowrap">
+                                            <a class="mr-1 text-danger d-flex justify-content-center"
+                                                href="javascript:void(0);" container="body" placement="top"
+                                                (click)="delete(i)" ngbTooltip="Delete">
+                                                <i class="ri-delete-bin-5-line  ri-lg"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="data?.length > 5" class="col-12">
+                        <div class="custom-pagination">
+                            <ngb-pagination [(page)]="pageNumber" [boundaryLinks]="true" [collectionSize]="data?.length"
+                                [ellipses]="false" [pageSize]="pageSize" [rotate]="true">
+                            </ngb-pagination>
+                        </div>
+                    </div>
+
+                </ng-container>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <div class="hstack gap-2 justify-content-end">
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modalService.close()">Close
+            </button>
+
+            <button (click)="submit()" [disabled]="data.length == 0 || basicform.invalid" type="button"
+                class="btn btn-success" id="add-btn">
+                Save Changes
+            </button>
+
+        </div>
+    </div>
+</ng-container>
+<!--End Modal -->

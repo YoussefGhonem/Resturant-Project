@@ -24,6 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Folder Include="wwwroot\Uploads\Manu\" />
 		<Folder Include="wwwroot\Uploads\PrivateDining\" />
 		<Folder Include="wwwroot\Uploads\Press\" />
 	</ItemGroup>

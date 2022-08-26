@@ -25,35 +25,34 @@ namespace Resturant.Services.Happining
             _response = response;
             _uploadFilesService = uploadFilesService;
         }
-        public async Task<IResponseDTO> CreateHappining(CreateAndUpdateHappiningDto createAndUpdateHappiningDto)
+        public async Task<IResponseDTO> CreateHappining(CreateAndUpdateHappiningDto options)
         {
             try
             {
-                if (!createAndUpdateHappiningDto.Images.Any())
+                if (options.Image == null)
                 {
                     _response.IsPassed = false;
                     _response.Data = null;
                     return _response;
                 };
 
-                foreach (var image in createAndUpdateHappiningDto.Images)
+
+                Random rnd = new Random();
+                var path = $"\\Uploads\\Happining\\Happining{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                var attachmentPath = $"{path}\\{options.Image?.FileName}";
+
+                var obj = new Data.DbModels.BusinessSchema.Happining()
                 {
-                    Random rnd = new Random();
-                    var path = $"\\Uploads\\Happining\\Happining{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
-                    var attachmentPath = $"{path}\\{image?.FileName}";
+                    ImageName = options.Image?.FileName,
+                    ImageUrl = attachmentPath,
+                    Description = options.Description,
+                    Title = options.Title
+                };
 
-                    var obj = new Data.DbModels.BusinessSchema.Happining()
-                    {
-                        ImageName = image?.FileName,
-                        ImageUrl = attachmentPath,
-                        Description = createAndUpdateHappiningDto.Description,
-                        Title = createAndUpdateHappiningDto.Title
-                    };
+                await _context.Happinings.AddAsync(obj);
+                await _context.SaveChangesAsync();
+                await _uploadFilesService.UploadFile(path, options.Image);
 
-                    await _context.Happinings.AddAsync(obj);
-                    await _context.SaveChangesAsync();
-                    await _uploadFilesService.UploadFile(path, image);
-                }
 
                 _response.IsPassed = true;
                 return _response;

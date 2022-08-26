@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@shared/base/base.component';
 import { Validators } from 'angular-reactive-validation';
-import { BusinessController } from 'app/+business/controllers/BusinessController';
 
 @Component({
   selector: 'app-create-menu',
@@ -20,16 +19,14 @@ export class CreateMenuComponent extends BaseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initForm();
-
   }
 
   private initForm(): void {
     this.form = this.formBuilder.group({
       name: new FormControl(null, { validators: [Validators.required('this is required')] }),
       workDayes: new FormControl(null, { validators: [Validators.required('this is required')] }),
-      file: new FormControl(null, { validators: [Validators.required('this is required')] }),
+      file: new FormControl(null),
       description: new FormControl(null),
-      subCatogries: [],
     });
   }
 

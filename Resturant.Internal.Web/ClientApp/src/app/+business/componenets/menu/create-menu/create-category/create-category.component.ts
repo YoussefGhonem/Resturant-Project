@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
+import { filesService } from '@shared/services/files.service';
 
 @Component({
   selector: 'create-category',
@@ -8,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CreateCategoryComponent implements OnInit {
   @Input('form') form: FormGroup;
-  constructor() { }
+  constructor(private filesService: filesService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +20,9 @@ export class CreateCategoryComponent implements OnInit {
 
   onChange(event) {
     const file = event.target.files[0] as File;
-    if (file == null) return;
+    if (file == null || !this.filesService.isValidPDFExtension(file)) {
+      return;
+    }
     this.form.controls['file'].patchValue(file);
   }
 }

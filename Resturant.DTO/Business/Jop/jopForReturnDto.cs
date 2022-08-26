@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Resturant.DTO.Business.Jop
+﻿namespace Resturant.DTO.Business.Jop
 {
     public class jopForReturnDto
     {
@@ -13,5 +7,6 @@ namespace Resturant.DTO.Business.Jop
         public string? PhoneNumber { get; set; }
         public string? CoverLatter { get; set; }
         public string? AttachmentPath { get; set; }
+        public string? AttachmentName { get; set; }
     }
 }

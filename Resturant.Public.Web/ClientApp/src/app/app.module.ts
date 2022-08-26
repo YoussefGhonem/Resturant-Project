@@ -9,10 +9,14 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { AppRoutingModule } from './app-routing.module';
-import {  HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxDynamicCarouselModule  } from "ngx-dynamic-carousel";
+import { NgxDynamicCarouselModule } from "ngx-dynamic-carousel";
 import { FooterComponent } from './footer/footer.component';
+import { NgxPermissionsModule } from "ngx-permissions";
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HeadersInterceptor } from "@shared/interceptors/headers.interceptor";
+import { ErrorInterceptor } from '@shared/interceptors/error.interceptor';
+import { JwtInterceptor } from './auth/helpers';
 
 @NgModule({
   declarations: [
@@ -30,9 +34,15 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxDynamicCarouselModule,
-    
+    NgxPermissionsModule.forRoot(),
+
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HeadersInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

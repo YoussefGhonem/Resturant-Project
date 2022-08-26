@@ -9,6 +9,7 @@ namespace Resturant.Data.DbModels.BusinessSchema.manue
         public Subcategory()
         {
             MealNames = new HashSet<MealName>();
+            CreatedOn = DateTime.Now;
 
         }
         public new Guid Id { get; set; }

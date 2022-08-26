@@ -1,40 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { BaseComponent } from './../../../../@shared/base/base.component';
+import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../Models/User';
 import { AuthService } from '../../Service/auth.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
+import { AuthController } from 'app/auth/Controllers/Auth';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  LoginForm: FormGroup;
-  RegisterForm: FormGroup;
+export class LoginComponent extends BaseComponent implements OnInit {
+  loginForm: FormGroup;
+  registerForm: FormGroup;
   userForLogin: User;
   userForRegister: User;
-  constructor(private FbForLogin: FormBuilder, private FbForRegister: FormBuilder, private AuthService: AuthService,private activeModal: NgbActiveModal,
-    private httpclint:HttpClient) { }
+
+  constructor(public override injector: Injector, public modalService: NgbActiveModal,
+    private formBuilder: FormBuilder) {
+    super(injector);
+  }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  initForm() {
     this.CreateLoginForm();
     this.CreateRegisterForm();
   }
 
   // create Login Form
   CreateLoginForm() {
-    this.LoginForm = this.FbForLogin.group({
+    this.loginForm = this.formBuilder.group({
       password: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]]
     })
   }
-
   // Create Register Form
 
   CreateRegisterForm() {
-    this.RegisterForm = this.FbForRegister.group({
+    this.registerForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.min(6)]],
       email: ['', [Validators.required, Validators.email]],
       firstname: ['', Validators.required],
@@ -43,32 +51,29 @@ export class LoginComponent implements OnInit {
   }
 
   //Login Function
-  Login(){
-    if(this.LoginForm.valid){
-      this.userForLogin = Object.assign({}, );
-     const user= this.LoginForm.getRawValue();
-       this.AuthService.login(this.LoginForm.value);
-      // console.log({"email":user.email,"password":user.password});
-      // this.httpclint.post("https://localhost:7018/api/account/login",{"email":user.email,"password":user.password},{responseType: 'json'}).subscribe(
-      //   {next:(e)=>{console.log("sucess",e)},
-      //   error:()=>{console.log("error")}}
-      // )
+  Login() {
+    if (this.loginForm.valid) {
+      let body = this.loginForm.getRawValue();
+      this.authService.login(body.email, body.password);
     }
     return;
   }
 
   // Register Function
-  Register(){
-    if(this.RegisterForm.valid){
-      this.userForRegister = Object.assign({}, );
-      console.log(this.RegisterForm.value);
-        this.AuthService.Register(this.RegisterForm.value);
+  Register() {
+    if (this.registerForm.valid) {
+      let body = this.registerForm.getRawValue();
+
+      this.httpService.PUT(AuthController.Register, body)
+        .subscribe(() => {
+          this.modalService.close(true)
+          this.notificationService.success("Success", "Changes updated successfully");
+        });
     }
   }
 
-
   closeModal() {
-    this.activeModal.close('Modal Closed');
+    this.modalService.close('Modal Closed');
   }
 
 }

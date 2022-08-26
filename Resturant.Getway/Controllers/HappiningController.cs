@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
-using Resturant.DTO.Business.Cover;
 using Resturant.DTO.Business.Happining;
-using Resturant.Services.ContectUs;
 using Resturant.Services.Happining;
 
 namespace Resturant.Getway.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/happenings")]
     [ApiController]
     public class HappiningController : BaseController
     {

@@ -1,17 +1,12 @@
-﻿using Dapper;
-using Mapster;
+﻿using Mapster;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Nest;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.SS.Formula.Functions;
 using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.Data;
 using Resturant.Data.DbModels.BusinessSchema.manue;
 using Resturant.DTO.Business.Manue;
-using Resturant.Getway.Controllers.Manue;
 using Resturant.Services.manue.Models;
+using Resturant.Services.UploadFiles;
 
 namespace Resturant.Services.Manue
 {
@@ -19,11 +14,13 @@ namespace Resturant.Services.Manue
     {
         private readonly AppDbContext _context;
         private readonly IResponseDTO _response;
+        private readonly IUploadFilesService _uploadFilesService;
 
-        public ManueService(AppDbContext context, IResponseDTO response)
+        public ManueService(AppDbContext context, IResponseDTO response, IUploadFilesService uploadFilesService)
         {
             _context = context;
             _response = response;
+            _uploadFilesService = uploadFilesService;
         }
 
         public async Task<IResponseDTO> CreateCategoryManu(CreateManuCategoryDto options)
@@ -35,23 +32,21 @@ namespace Resturant.Services.Manue
                 var attachmentPath = $"{path}\\{options.File?.FileName}";
 
                 var mapping = options.SubCatogries.Adapt<Subcategory>();
+                mapping.CreatedOn = DateTime.Now;
 
                 var manuCategory = new ManuCategory()
                 {
                     Name = options.Name,
                     Description = options.Description,
                     WorkDayes = options.WorkDayes,
+                    CategoryFileUrl = attachmentPath,
+                    CategoryFileName = options.File?.FileName
                 };
                 manuCategory.SubCatogries.Add(mapping);
 
 
-                if (options.File != null)
-                {
-                    manuCategory.CategoryFileUrl = attachmentPath;
-                    manuCategory.CategoryFileName = options.File?.FileName;
-                }
-
                 await _context.ManuCategories.AddAsync(manuCategory);
+                await _uploadFilesService.UploadFile(path, options.File);
                 await _context.SaveChangesAsync();
 
                 _response.IsPassed = true;
@@ -94,13 +89,34 @@ namespace Resturant.Services.Manue
             }
             return query.Adapt<List<CategoryDetailsDto>>();
         }
+        public async Task<CategoryManuDetailsDto> GetCategoriesManuDetails(Guid categoryId, string serverRootPath)
+        {
+            var query = await _context.ManuCategories.FirstOrDefaultAsync(x => x.Id == categoryId);
+
+            if (query.CategoryFileUrl != null)
+            {
+                if (query.CategoryFileUrl.StartsWith("\\"))
+                {
+                    if (!string.IsNullOrEmpty(query.CategoryFileUrl))
+                    {
+
+                        query.CategoryFileUrl = serverRootPath + query.CategoryFileUrl.Replace('\\', '/');
+                    }
+                }
+            }
+
+            var result = query.Adapt<CategoryManuDetailsDto>();
+            return result;
+
+
+        }
 
         public PaginationResult<SubCategoryDto> GetAllSubCategories(SubCategoryFilters filterDto)
         {
             if (filterDto.CategoryId == null)
             {
                 var paginationResult = _context.ManuCategories.AsNoTracking().Where(x => !x.IsDeleted)
-                    .Include(x => x.SubCatogries!.Where(x => x.IsDeleted==false)).ThenInclude(x=>x.MealNames.Where(x=>!x.IsDeleted))
+                    .Include(x => x.SubCatogries!.Where(x => x.IsDeleted == false)).ThenInclude(x => x.MealNames.Where(x => !x.IsDeleted))
                     .Paginate(filterDto.PageSize, filterDto.PageNumber);
 
                 var dataList = paginationResult.list.SelectMany(x => x.SubCatogries!).Adapt<List<SubCategoryDto>>();
@@ -174,7 +190,7 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : Update for category 
-        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, CreateAndUpdateManueDto UpdateManueDto)
+        public async Task<IResponseDTO> UpdateCategoryManu(Guid Id, UpdateManueCategoryDto UpdateManueDto)
         {
             try
             {
@@ -185,6 +201,7 @@ namespace Resturant.Services.Manue
                     _response.Message = "Invalid object id";
                     return _response;
                 }
+
                 OneCategory.Name = UpdateManueDto.Name;
                 OneCategory.Description = UpdateManueDto.Description;
                 OneCategory.WorkDayes = UpdateManueDto.WorkDayes;
@@ -273,22 +290,27 @@ namespace Resturant.Services.Manue
             return _response;
         }
         // TODO : update for Sub category 
-        public async Task<IResponseDTO> UpdateSupCAtegors(Guid Id, CreateAndUpdateSubcategory subCategoryDto)
+        public async Task<IResponseDTO> UpdateSubCategories(Guid Id, CreateAndUpdateSubcategory subCategoryDto)
         {
             try
             {
-                var OneCategory = await _context.SubCatogries.FindAsync(Id);
+                var OneCategory = await _context.ManuCategories
+                                                .Include(x => x.SubCatogries)
+                                                .ThenInclude(x => x.MealNames)
+                                                .FirstOrDefaultAsync(x => x.Id == Id);
                 if (OneCategory == null)
                 {
                     _response.IsPassed = false;
                     _response.Message = "Invalid object id";
                     return _response;
                 }
-                OneCategory.Name = subCategoryDto.Name;
-                OneCategory.Description = subCategoryDto.Description;
-                OneCategory.UpdatedOn = DateTime.Now;
+                var mapping = subCategoryDto.SubCatogries.Adapt<Subcategory>();
+                mapping.CreatedOn = DateTime.Now;
 
-                _context.SubCatogries.Attach(OneCategory);
+                OneCategory.SubCatogries.Add(mapping);
+
+                OneCategory.UpdatedOn = DateTime.Now;
+                _context.ManuCategories.Update(OneCategory);
                 await _context.SaveChangesAsync();
 
                 _response.IsPassed = true;
