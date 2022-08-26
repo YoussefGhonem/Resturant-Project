@@ -22,9 +22,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ErrorInterceptor } from "@shared/interceptors/error.interceptor";
 import { HeadersInterceptor } from "@shared/interceptors/headers.interceptor";
 import { JwtInterceptor } from "app/+auth/helpers";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxPermissionsModule } from "ngx-permissions";
-import { ToastsContainer } from './+dashboard/components/dashboard/toasts-container.component';
 
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
