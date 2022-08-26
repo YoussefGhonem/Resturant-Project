@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port 4200",
+    "start": "ng serve --port 4201",
     "build": "ng build",
     "build:ssr": "ng run Resturant.iternal.Web:server:dev",
     "test": "ng test",
