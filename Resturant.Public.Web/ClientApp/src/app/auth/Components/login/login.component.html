@@ -9,30 +9,41 @@
       <div class="signup">
         <form [formGroup]="loginForm">
           <label for="chk" aria-hidden="true">Login</label>
-          <input formControlName="email"
-            [ngClass]="{'is-invalid': loginForm.get('email').errors && loginForm.get('email').touched}" type="email"
-            name="email" placeholder="Email" required>
-          <input formControlName="password"
-            [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}"
-            type="password" name="pswd" placeholder="Password" required>
+          <input formControlName="email" type="email" name="email" placeholder="Email" required>
+          <div *ngIf="loginForm.get('email').touched && loginForm.get('email').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="loginForm.get('email').hasError('required')">Email is required.</div>
+              <div *ngIf="loginForm.get('email').hasError('email')">Email should be Email.</div>
+          </div>
+          <input formControlName="password" type="password" name="pswd" placeholder="Password" required>
+            <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="loginForm.get('password').hasError('required')">password is required.</div>
+          </div>
           <button (click)="Login()">Login</button>
         </form>
       </div>
       <div class="login">
         <form [formGroup]="registerForm" (ngSubmit)="Register()">
           <label for="chk" aria-hidden="true">Sign up</label>
-          <input formControlName="firstname"
-            [ngClass]="{'is-invalid': registerForm.get('firstname').errors && registerForm.get('firstname').touched}"
-            type="text" name="txt" placeholder="First Name" required="">
-          <input formControlName="lastname"
-            [ngClass]="{'is-invalid': registerForm.get('lastname').errors && registerForm.get('lastname').touched}"
-            type="text" name="txt" placeholder="Last Name" required="">
-          <input formControlName="email"
-            [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
-            type="email" name="email" placeholder="Email" required="">
-          <input formControlName="password"
-            [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"
-            type="password" name="pswd" placeholder="Password" required="">
+          <input formControlName="firstname" type="text" name="txt" placeholder="First Name" required="">
+            <div *ngIf="registerForm.get('firstname').touched && registerForm.get('firstname').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="registerForm.get('firstname').hasError('required')">firstname is required.</div>
+              <div *ngIf="registerForm.get('firstname').hasError('minlength')">firstname Should lessthen 2</div>
+            </div>
+          <input formControlName="lastname" type="text" name="txt" placeholder="Last Name" required="">
+            <div *ngIf="registerForm.get('lastname').touched && registerForm.get('lastname').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="registerForm.get('lastname').hasError('required')">lastname is required.</div>
+              <div *ngIf="registerForm.get('lastname').hasError('minlength')">lastname Should lessthen 2</div>
+            </div>
+          <input formControlName="email" type="email" name="email" placeholder="Email" required="">
+            <div *ngIf="registerForm.get('email').touched && registerForm.get('email').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="registerForm.get('email').hasError('required')">email is required.</div>
+              <div *ngIf="registerForm.get('email').hasError('email')">Email Should Email</div>
+            </div>
+          <input formControlName="password" type="password" name="pswd" placeholder="Password" required="">
+            <div *ngIf="registerForm.get('password').touched && registerForm.get('password').invalid" class="alert alert-danger Nofication">
+              <div *ngIf="registerForm.get('password').hasError('required')">password is required.</div>
+              <div *ngIf="registerForm.get('password').hasError('minlength')">password Should lessthen 6</div>
+            </div>
           <button>Sign up</button>
         </form>
       </div>

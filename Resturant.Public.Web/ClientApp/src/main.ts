@@ -1,20 +1,26 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { IConfigModel } from "environments/environment.model";
+import { environment } from "environments/environment";
+import { AppModule } from "app/app.module";
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
 
-export function getBaseUrl() {
-  return document.getElementsByTagName('base')[0].href;
-}
+fetch('assets/settings.json')
+    .then(response => response.json())
+    .then((config: IConfigModel) => {
 
-const providers = [
-  { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }
-];
+      if (config.production) {
+        enableProdMode();
+        if (window) { // to remove all console.log() in prod mode
+          window.console.log = function () {
+          };
+        }
+      }
 
-// if (environment.production) {
-//   enableProdMode();
-// }
+      environment.config = config; // update environment
 
-platformBrowserDynamic(providers).bootstrapModule(AppModule)
-  .catch(err => console.log(err));
+      const bootstrap = () => platformBrowserDynamic().bootstrapModule(AppModule);
+
+      bootstrap().catch(err => console.log(err));
+
+    });
