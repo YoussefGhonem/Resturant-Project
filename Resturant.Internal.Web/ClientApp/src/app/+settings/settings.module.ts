@@ -35,7 +35,7 @@ import { PrivateDiningImagesComponent } from './components/application-settings/
 import { AddPrivateDiningImagesComponent } from './components/application-settings/private-dining-images/add-private-dining-images/add-private-dining-images.component';
 import { LocationsComponent } from './components/application-settings/locations/locations.component';
 import { PopularQuestionsComponent } from './components/application-settings/popular-questions/popular-questions.component';
-import { AddEditPopularQuestionComponent } from './components/application-settings/add-edit-popular-question/add-edit-popular-question.component';
+import { AddEditPopularQuestionComponent } from './components/application-settings/popular-questions/add-edit-popular-question/add-edit-popular-question.component';
 // Components
 
 @NgModule({
