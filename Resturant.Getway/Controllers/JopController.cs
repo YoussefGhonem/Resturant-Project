@@ -1,16 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
-using Resturant.DTO.Business.Gallery;
 using Resturant.DTO.Business.Jop;
-using Resturant.DTO.Business.Press;
-using Resturant.Services.Gallery;
 using Resturant.Services.Jop;
 
 namespace Resturant.Getway.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/jobs")]
     [ApiController]
     public class JopController : BaseController
     {
