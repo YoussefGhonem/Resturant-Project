@@ -132,7 +132,8 @@ export class HttpService {
   //#region Helper Methods
 
   getFullUrl(uri: string): string {
-    return `https://localhost:7018/api/${uri}`;
+    // return `https://localhost:7018/api/${uri}`;
+     return `${environment.config?.apiConfig?.apiUrl}/api/${uri}`;
 
   }
 

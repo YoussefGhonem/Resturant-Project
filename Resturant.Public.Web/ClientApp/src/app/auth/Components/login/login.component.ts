@@ -67,7 +67,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
       this.httpService.PUT(AuthController.Register, body)
         .subscribe(() => {
           this.modalService.close(true)
-          this.notificationService.success("Success", "Changes updated successfully");
+          this.notificationService.success("Success", "ٌRegister successfully");
         });
     }
   }
