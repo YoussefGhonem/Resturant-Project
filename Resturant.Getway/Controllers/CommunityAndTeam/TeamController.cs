@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.DTO.Business.AboutAndCommuniry;
-using Resturant.DTO.Business.Manue;
 using Resturant.Services.AboutAndCommunity;
-using Resturant.Services.EventType;
-using Resturant.Services.PrivateDining;
 
 namespace Resturant.Getway.Controllers.CommunityAndAbout
 {
-    [Route("api/[controller]")]
+    [Route("api/teams")]
     [ApiController]
     public class TeamController : BaseController
     {
@@ -23,9 +20,9 @@ namespace Resturant.Getway.Controllers.CommunityAndAbout
         }
 
         [HttpGet]
-        public async Task<List<ReturnTeamForAboutDto>> GetAllTeamMamber()
+        public PaginationResult<ReturnTeamForAboutDto> GetAllTeamMamber([FromQuery] BaseFilterDto filterDto)
         {
-            var AllTeamMember = await _services.GetAllTeamMembersForOneAbout(ServerRootPath);
+            var AllTeamMember = _services.GetAllTeamMembersForOneAbout(filterDto, ServerRootPath);
             return AllTeamMember;
         }
 
@@ -39,7 +36,7 @@ namespace Resturant.Getway.Controllers.CommunityAndAbout
         [HttpPut("{id}")]
         public async Task<IResponseDTO> UpdateTeamMember([FromRoute] Guid id, [FromForm] CreateAndUpdateTeams createAndUpdateTeams)
         {
-            _response = await _services.UpdateTeamMember(id,createAndUpdateTeams);
+            _response = await _services.UpdateTeamMember(id, createAndUpdateTeams);
             return _response;
         }
         [HttpDelete("{id}")]

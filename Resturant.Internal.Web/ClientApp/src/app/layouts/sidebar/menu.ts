@@ -56,16 +56,18 @@ export const MENU: MenuItem[] = [
     ]
   },
   {
-    id: 2,
-    label: 'Settings',
-    isTitle: true,
-  },
-  {
     id: 3,
     label: 'Settings',
     icon: ' ri-settings-2-line',
     link: '/settings'
   },
+  {
+    id: 11,
+    label: 'Our-Teams',
+    icon: 'ri-team-fill',
+    link: '/business/our-teams'
+  },
+
   {
     id: 3,
     label: 'Manage Users',
@@ -78,10 +80,5 @@ export const MENU: MenuItem[] = [
     icon: ' ri-mail-send-line',
     link: '/business/contacts'
   },
-  {
-    id: 11,
-    label: 'Press',
-    icon: 'ri-team-fill',
-    link: '/settings/press-list'
-  },
+
 ];

@@ -1,4 +1,5 @@
-﻿using Resturant.Core.Interfaces;
+﻿using Resturant.Core.Common;
+using Resturant.Core.Interfaces;
 using Resturant.DTO.Business.AboutAndCommuniry;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Resturant.Services.AboutAndCommunity
         Task<IResponseDTO> CreateTeamMember(CreateAndUpdateTeams createAndUpdateTeams);
         Task<IResponseDTO> UpdateTeamMember(Guid TeamId, CreateAndUpdateTeams createAndUpdateTeams);
         Task<IResponseDTO> DeleteTeamMember(Guid TeamId);
-        Task<List<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout(string pathRoter);
+        PaginationResult<ReturnTeamForAboutDto> GetAllTeamMembersForOneAbout(BaseFilterDto filterDto, string pathRoter);
 
         //Finish Team Impemntation
 

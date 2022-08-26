@@ -20,6 +20,8 @@ export const BusinessController = {
   UpdateHappening: 'happenings',
   // jobs
   Jobs: 'jobs',
-
+  // out Team
+  Teams: 'teams',
+  CreateTeam: 'teams',
 
 }

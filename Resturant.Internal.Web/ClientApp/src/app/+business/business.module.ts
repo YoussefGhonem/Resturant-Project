@@ -90,6 +90,8 @@ import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/upd
 import { HappeningsComponent } from './componenets/happenings/happenings.component';
 import { AddEditHappeningComponent } from './componenets/happenings/add-edit-happening/add-edit-happening.component';
 import { JobsComponent } from './componenets/jobs/jobs.component';
+import { TeamsComponent } from './componenets/teams/teams.component';
+import { AddEditPersonComponent } from './componenets/teams/add-edit-person/add-edit-person.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +110,8 @@ import { JobsComponent } from './componenets/jobs/jobs.component';
     HappeningsComponent,
     AddEditHappeningComponent,
     JobsComponent,
+    TeamsComponent,
+    AddEditPersonComponent,
   ],
   imports: [
     BusinessRoutingModule,

@@ -7,6 +7,7 @@ import { MenuComponent } from './componenets/menu/menu.component';
 import { CreateMenuComponent } from './componenets/menu/create-menu/create-menu.component';
 import { HappeningsComponent } from './componenets/happenings/happenings.component';
 import { JobsComponent } from './componenets/jobs/jobs.component';
+import { TeamsComponent } from './componenets/teams/teams.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path: "jobs",
     component: JobsComponent,
+  }
+  ,
+  {
+    path: "our-teams",
+    component: TeamsComponent,
   }
 ];
 

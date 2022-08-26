@@ -3,29 +3,32 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormControl, FormGroup, UntypedFormBuilder } from '@angular/forms';
 import { BaseComponent } from '@shared/base/base.component';
 import { BusinessController } from 'app/+business/controllers/BusinessController';
-import * as FileSaver from 'file-saver';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddEditPersonComponent } from './add-edit-person/add-edit-person.component';
+import { ngbModalOptions } from '@shared/default-values';
 
 @Component({
-  selector: 'app-jobs',
-  templateUrl: './jobs.component.html',
-  styleUrls: ['./jobs.component.scss']
+  selector: 'app-teams',
+  templateUrl: './teams.component.html',
+  styleUrls: ['./teams.component.scss']
 })
-export class JobsComponent extends BaseComponent implements OnInit {
-  jobs: any[]
+export class TeamsComponent extends BaseComponent implements OnInit {
+  persons: any[]
   breadCrumbItems!: Array<{}>;
   total: number = 0;
   form!: FormGroup;
 
-  constructor(
-    public override injector: Injector, private _formBuilder: UntypedFormBuilder) {
+  constructor(public activeModal: NgbActiveModal,
+    public modalService: NgbModal, public override injector: Injector, private _formBuilder: UntypedFormBuilder) {
     super(injector);
   }
+
   ngOnInit(): void {
     this.breadCrumbItems = [
       { label: 'Home' },
-      { label: 'Happenings', active: true }
+      { label: 'our Teams', active: true }
     ];
-    this.initSearchForm();
+    this.initSearchForm()
   }
 
   private initSearchForm(): void {
@@ -48,19 +51,32 @@ export class JobsComponent extends BaseComponent implements OnInit {
     this.loadData();
   }
 
-  loadData() {
-    let filters = this.form.getRawValue();
-    console.log("filters", filters);
-    this.httpService.GET(BusinessController.Jobs, filters)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(res => {
-        this.jobs = res.data;
-        this.total = this.total;
-        console.log(this.jobs);
-      });
-  }
-  downloadPdf(url: string, name: string) {
-    FileSaver.saveAs(url, name);
+  delete() {
+
   }
 
+  edit(item: any) {
+    const modalRef = this.modalService.open(AddEditPersonComponent, {
+      ...ngbModalOptions,
+      windowClass: 'modal modal-success',
+      size: 'xl'
+    });
+    modalRef.componentInstance.mode = 'update';
+    modalRef.componentInstance.data = item;
+    modalRef
+      .result
+      .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadData())
+      .catch(() => {
+      });
+  }
+
+  loadData() {
+    let filters = this.form.getRawValue();
+    this.httpService.GET(BusinessController.Teams, filters)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(res => {
+        this.persons = res.data;
+        this.total = this.total;
+      });
+  }
 }

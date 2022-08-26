@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Nest;
+using Resturant.Core.Common;
 using Resturant.Core.Interfaces;
 using Resturant.Data;
 using Resturant.Data.DbModels.BusinessSchema.About;
@@ -305,11 +306,14 @@ namespace Resturant.Services.AboutAndCommunity
             }
             return _response;
         }
-        public async Task<List<ReturnTeamForAboutDto>> GetAllTeamMembersForOneAbout(string serverRootPath)
+        public PaginationResult<ReturnTeamForAboutDto> GetAllTeamMembersForOneAbout(BaseFilterDto filterDto, string serverRootPath)
         {
-           var TeamsMember = await _context.Teams.Where(T=>T.IsDeleted == false).ToListAsync();
-           var TeamsForReturn = TeamsMember.Adapt<List<ReturnTeamForAboutDto>>();
-            foreach (var item in TeamsForReturn)
+            var paginationResult = _context.Teams.Where(T => T.IsDeleted == false)
+                 .Paginate(filterDto.PageSize, filterDto.PageNumber);
+            
+            var dataList = paginationResult.list.Adapt<List<ReturnTeamForAboutDto>>();
+
+            foreach (var item in dataList)
             {
                 if (item.ImageUrl != null)
                 {
@@ -322,7 +326,7 @@ namespace Resturant.Services.AboutAndCommunity
                     }
                 }
             }
-            return TeamsForReturn;
+            return new PaginationResult<ReturnTeamForAboutDto>(dataList, paginationResult.total);
         }
 
 

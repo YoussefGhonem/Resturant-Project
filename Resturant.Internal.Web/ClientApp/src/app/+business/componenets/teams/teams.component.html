@@ -1,0 +1,32 @@
+<div *ngIf="persons?.length > 0 ;else emptyTemp">
+    <div class="col-xl-4" *ngFor="let item of persons">
+        <div class="card">
+            <div class="card-body p-4 text-center">
+                <div class="mx-auto avatar-md mb-3">
+                    <img src="{{item.imageUrl}}" default-image alt="" class="img-fluid rounded-circle">
+                </div>
+                <h5 class="card-title mb-1">{{item.name }}</h5>
+                <p class="text-muted mb-0">{{item.jopTitle}}</p>
+            </div>
+            <div class="card-footer text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a (click)="delete()" class="lh-1 align-middle link-secondary"><i
+                                class="ri-delete-bin-fill"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a (click)="edit(item)" class="lh-1 align-middle link-success"><i class="ri-edit-line"></i></a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div><!-- end col -->
+</div>
+
+<ng-template #emptyTemp>
+    <div class="text-center my-3">
+        <img alt="" class="un-draw" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>
