@@ -89,6 +89,7 @@ import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/
 import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/update-category-modal/update-category-modal.component';
 import { HappeningsComponent } from './componenets/happenings/happenings.component';
 import { AddEditHappeningComponent } from './componenets/happenings/add-edit-happening/add-edit-happening.component';
+import { JobsComponent } from './componenets/jobs/jobs.component';
 
 @NgModule({
   declarations: [
@@ -106,6 +107,7 @@ import { AddEditHappeningComponent } from './componenets/happenings/add-edit-hap
     UpdateCategoryModalComponent,
     HappeningsComponent,
     AddEditHappeningComponent,
+    JobsComponent,
   ],
   imports: [
     BusinessRoutingModule,

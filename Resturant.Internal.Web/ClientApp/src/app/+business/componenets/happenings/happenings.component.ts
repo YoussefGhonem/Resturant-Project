@@ -22,6 +22,7 @@ export class HappeningsComponent extends BaseComponent implements OnInit {
     public modalService: NgbModal, public override injector: Injector, private _formBuilder: UntypedFormBuilder) {
     super(injector);
   }
+
   ngOnInit(): void {
     this.breadCrumbItems = [
       { label: 'Home' },
@@ -53,8 +54,7 @@ export class HappeningsComponent extends BaseComponent implements OnInit {
 
   loadData() {
     let filters = this.form.getRawValue();
-    console.log("filters", filters);
-    this.httpService.GET(BusinessController.happenings, filters)
+    this.httpService.GET(BusinessController.Happenings, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.happenings = res.data;

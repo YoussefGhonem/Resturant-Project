@@ -15,8 +15,11 @@ export const BusinessController = {
   UpdateSubCategory: (id: string) => `menu/sub-category/${id}`,
   UpdateCategory: (id: string) => `menu/category/${id}`,
   // happenings
-  happenings: 'happenings',
+  Happenings: 'happenings',
   CreateHappening: 'happenings',
   UpdateHappening: 'happenings',
+  // jobs
+  Jobs: 'jobs',
+
 
 }

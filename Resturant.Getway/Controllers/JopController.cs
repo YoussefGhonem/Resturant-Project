@@ -19,16 +19,19 @@ namespace Resturant.Getway.Controllers
         {
             _services = service;
         }
+
         [HttpGet]
         public PaginationResult<jopForReturnDto> GetAllJopRquest([FromQuery] BaseFilterDto filterDto)
         {
             return _services.GetAll(filterDto, ServerRootPath);
         }
+
         [HttpPost]
         public async Task<IResponseDTO> SubmitInJopForm([FromForm] CreateJopDto createJopDto)
         {     
             return await _services.SubmitInJopFormCreate(createJopDto);
         }
+
         [HttpDelete("{id}")]
         public async Task<IResponseDTO> DeletJopRequest(Guid id)
         {

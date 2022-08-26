@@ -6,6 +6,7 @@ import { PrivateDiningComponent } from './componenets/private-dining/private-din
 import { MenuComponent } from './componenets/menu/menu.component';
 import { CreateMenuComponent } from './componenets/menu/create-menu/create-menu.component';
 import { HappeningsComponent } from './componenets/happenings/happenings.component';
+import { JobsComponent } from './componenets/jobs/jobs.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "happenings",
     component: HappeningsComponent,
+  },
+  {
+    path: "jobs",
+    component: JobsComponent,
   }
 ];
 

@@ -32,9 +32,9 @@ export const MENU: MenuItem[] = [
         parentId: 1
       },
       {
-        id: 'CRYPTO',
-        label: 'CRYPTO',
-        link: '/dashboard/crypto',
+        id: 'Jobs',
+        label: 'Jobs',
+        link: '/business/jobs',
         parentId: 1
       },
       {
