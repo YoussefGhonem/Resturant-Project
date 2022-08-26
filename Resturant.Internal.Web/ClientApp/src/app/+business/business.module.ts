@@ -87,6 +87,8 @@ import lottie from 'lottie-web';
 import { defineLordIconElement } from "lord-icon-element";
 import { CreateSubcategoryModalComponent } from './componenets/menu/create-menu/create-subcategory-modal/create-subcategory-modal.component';
 import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/update-category-modal/update-category-modal.component';
+import { HappeningsComponent } from './componenets/happenings/happenings.component';
+import { AddEditHappeningComponent } from './componenets/happenings/add-edit-happening/add-edit-happening.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +104,8 @@ import { UpdateCategoryModalComponent } from './componenets/menu/create-menu/upd
     CreateSubcategoryComponent,
     CreateSubcategoryModalComponent,
     UpdateCategoryModalComponent,
+    HappeningsComponent,
+    AddEditHappeningComponent,
   ],
   imports: [
     BusinessRoutingModule,

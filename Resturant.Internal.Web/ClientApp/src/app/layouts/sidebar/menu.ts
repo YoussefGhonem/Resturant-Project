@@ -26,9 +26,9 @@ export const MENU: MenuItem[] = [
         parentId: 1
       },
       {
-        id: 'ECOMMERCE',
-        label: 'ECOMMERCE',
-        link: '/dashboard/ecommerce',
+        id: 'Happenings',
+        label: 'Happenings',
+        link: '/business/happenings',
         parentId: 1
       },
       {

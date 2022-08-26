@@ -1,0 +1,49 @@
+<app-breadcrumbs title="Happenings" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<div class="d-flex align-items-center ">
+    <h5 class="card-title mb-0 flex-grow-1"></h5>
+    <div class="flex-shrink-0 hstack gap-2">
+        <button (click)="create()" type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
+            data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
+            Create</button>
+    </div>
+</div>
+<div class="card product mt-3" *ngFor="let data of happenings">
+    <div class="card-body">
+        <div class="row gy-3">
+            <div class="col-sm-auto" style="max-width: 431px;">
+                <div class="bg-light rounded p-1">
+                    <img src="{{data.imageUrl}}" alt="" class="img-fluid d-block">
+                </div>
+            </div>
+            <div class="col-sm text-center">
+                <p [innerHtml]='data.description'></p>
+
+            </div>
+        </div>
+    </div>
+    <!-- card body -->
+    <div class="card-footer">
+        <div class="row align-items-center gy-3">
+            <div class="col-sm">
+                <div class="d-flex flex-wrap my-n1">
+                    <div style="cursor: pointer;">
+                        <a style="cursor: pointer;" href="javascript:void(0);" class="d-block text-body p-1 px-2"
+                            data-bs-toggle="modal" data-bs-target="#removeItemModal"><i
+                                class="ri-delete-bin-fill text-danger align-bottom me-1"></i> Remove</a>
+                    </div>
+                    <div style="cursor: pointer;">
+                        <a (click)="Update(data)" class="d-block text-body p-1 px-2" style="cursor: pointer;"><i
+                                class=" ri-edit-line text-success align-bottom me-1"></i> Update</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-auto">
+                <div class="d-flex align-items-center gap-2 text-muted">
+                    <div>{{data.createdOn | datetime}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end card footer -->
+</div>
+<!-- end card -->

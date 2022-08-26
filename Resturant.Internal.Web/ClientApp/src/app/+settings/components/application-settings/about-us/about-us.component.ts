@@ -12,10 +12,10 @@ import { SettingsValidator } from 'app/+settings/validators/setting.validator';
   styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent extends BaseComponent implements OnInit, OnChanges {
-  public UserEditor = ClassicEditor;
   form!: UntypedFormGroup;
   @Input('settings') settings: any;
 
+  public UserEditor = ClassicEditor;
   editorConfig = {
     removePlugins: ['CKFinderUploadAdapter', 'CKFinder', 'EasyImage', 'Image', 'ImageCaption', 'ImageStyle', 'ImageToolbar', 'ImageUpload'],
     removeButtons: ['Image']

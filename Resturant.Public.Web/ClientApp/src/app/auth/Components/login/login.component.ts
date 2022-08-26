@@ -26,6 +26,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   ngOnInit() {
     this.initForm();
   }
+
   initForm() {
     this.CreateLoginForm();
     this.CreateRegisterForm();
@@ -38,7 +39,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     })
   }
-
   // Create Register Form
 
   CreateRegisterForm() {

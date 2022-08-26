@@ -1,5 +1,4 @@
-import { UsersComponent } from './users/users.component';
-import { VendorsComponent } from './users/vendors/vendors.component';
+
 // Libs
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,19 +25,11 @@ import { SharedDirectivesModule } from "@shared/directives/shared-directives.mod
 import { SharedComponentsModule } from '@shared/components/shared-components.module';
 import { SharedPipesModule } from '@shared/pipes/pipes.module';
 import { UsersRoutingModule } from './users-routing.module';
-import { AllUsersComponent } from './users/all-users/all-users.component';
-import { CommiteeMembersComponent } from './users/commitee-members/commitee-members.component';
-import { LocalAdminsComponent } from './users/local-admins/local-admins.component';
-import { CreateUserComponent } from './users/create-user/create-user.component';
+
 
 @NgModule({
   declarations: [
-    UsersComponent,
-    VendorsComponent,
-    AllUsersComponent,
-    CommiteeMembersComponent,
-    LocalAdminsComponent,
-    CreateUserComponent
+
   ],
   imports: [
     CommonModule,
