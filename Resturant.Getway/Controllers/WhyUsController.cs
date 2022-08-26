@@ -36,10 +36,10 @@ namespace Resturant.Getway.Controllers
         {
             return await _services.DeleteWhyUs(id);
         }
-        [HttpPut("{Id}")]
-        public async Task<IResponseDTO> CreateWhyUs([FromBody] CreateAndUpdateWhyUsDto createAndUpdateWhyUsDto,[FromRoute]Guid Id)
+        [HttpPut("{id}")]
+        public async Task<IResponseDTO> CreateWhyUs([FromBody] CreateAndUpdateWhyUsDto createAndUpdateWhyUsDto,[FromRoute]Guid id)
         {
-            return await _services.UpdateWhyUs(createAndUpdateWhyUsDto,Id);
+            return await _services.UpdateWhyUs(createAndUpdateWhyUsDto, id);
         }
     }
 }

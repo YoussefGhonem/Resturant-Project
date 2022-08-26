@@ -1,8 +1,24 @@
-<div class="d-flex flex-row-reverse hstack gap-2">
-    <button type="button" (click)="create()" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
-        data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
-        Create</button>
+<div class="row">
+    <div class="col-9">
+
+        <div class="alert alert-light alert-dismissible alert-solid alert-label-icon fade show" role="alert">
+            <i class="ri-information-line label-icon"></i><strong>Hint </strong> - This images will show in Private
+            Dining Page
+            for User.
+
+        </div>
+
+    </div>
+    <div class="col-3">
+        <div class="d-flex justify-content-end">
+
+            <button (click)="create()" type="button" class="btn btn-success add-btn" data-bs-toggle="modal"
+                id="create-btn" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
+                Create</button>
+        </div>
+    </div>
 </div>
+
 <div class="row" *ngIf="images?.length > 0 ;else emptyTemp">
     <div class="col-lg-12">
         <div class="card-body">
@@ -14,14 +30,10 @@
                             <div class="gallery-box card">
                                 <div class="gallery-container">
                                     <a class="image-popup" title="">
-                                        <img class="gallery-img img-fluid mx-auto" default-image src="{{data.imageUrl}}"
-                                            alt="" />
-                                        <div class="gallery-overlay" (click)="open(i)">
-                                            <h5 class="overlay-caption">{{data.name}}</h5>
-                                        </div>
+                                        <img class="gallery-img img-fluid mx-auto" default-image
+                                            src="{{data.attachmentPath}}" alt="" />
                                     </a>
                                 </div>
-
                                 <div class="box-content">
                                     <div class="d-flex align-items-center mt-1">
                                         <div class="flex-grow-1 text-muted"> <a href="javascript:void(0);"

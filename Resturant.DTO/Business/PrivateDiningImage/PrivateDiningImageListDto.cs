@@ -6,5 +6,6 @@
         // file info
         public string? AttachmentName { get; set; }
         public string? AttachmentPath { get; set; }
+        public DateTime? CreatedOn { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using Resturant.Core.Enums;
-using Resturant.Data.DbModels.BusinessSchema;
 
 namespace Resturant.DTO.Business.Location
 {

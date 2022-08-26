@@ -31,6 +31,8 @@ import { ReactiveValidationModule } from 'angular-reactive-validation';
 import { GalleryComponent } from './components/application-settings/gallery/gallery.component';
 import { LightboxModule } from 'ngx-lightbox';
 import { AddGalleryComponent } from './components/application-settings/gallery/add-gallery/add-gallery.component';
+import { PrivateDiningImagesComponent } from './components/application-settings/private-dining-images/private-dining-images.component';
+import { AddPrivateDiningImagesComponent } from './components/application-settings/private-dining-images/add-private-dining-images/add-private-dining-images.component';
 // Components
 
 @NgModule({
@@ -39,7 +41,9 @@ import { AddGalleryComponent } from './components/application-settings/gallery/a
     AboutUsComponent,
     PrivateDiningComponent,
     GalleryComponent,
-    AddGalleryComponent
+    AddGalleryComponent,
+    PrivateDiningImagesComponent,
+    AddPrivateDiningImagesComponent
   ],
   imports: [
     SettingsRoutingModule,

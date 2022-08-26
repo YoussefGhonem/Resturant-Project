@@ -18,22 +18,24 @@
             </arv-validation-messages>
         </div>
     </div>
-
-    <div class="mb-3 form-group">
-        <label for="customername-field" class="form-label">Work With Us 'Description'</label>
-        <ckeditor [editor]="UserEditor" [config]="editorConfig"
-            [ngClass]="{'is-invalid': isInvalid('workWithUsDescription')}" id="workWithUsDescription"
-            formControlName="workWithUsDescription" data="">
-        </ckeditor>
-        <arv-validation-messages for="workWithUsDescription">
-        </arv-validation-messages>
-    </div>
     <div class="mb-3 form-group">
         <label class="form-label"> About Us 'Description'</label>
         <ckeditor [editor]="UserEditor" [config]="editorConfig" [ngClass]="{'is-invalid': isInvalid('aboutUs')}"
             id="aboutUs" formControlName="aboutUs" data="">
         </ckeditor>
         <arv-validation-messages for="aboutUs"></arv-validation-messages>
+    </div>
+
+    <div class="mb-3 form-group">
+        <label for="customername-field" class="form-label">Work With Us 'Description' <i
+                class="ri-information-line label-icon text-primary"
+                [ngbTooltip]="'This Description will show in Job page.'"></i></label>
+        <ckeditor [editor]="UserEditor" [config]="editorConfig"
+            [ngClass]="{'is-invalid': isInvalid('workWithUsDescription')}" id="workWithUsDescription"
+            formControlName="workWithUsDescription" data="">
+        </ckeditor>
+        <arv-validation-messages for="workWithUsDescription">
+        </arv-validation-messages>
     </div>
     <div class="text-end mb-3">
         <button [disabled]="form.invalid" type="submit" class="btn btn-success w-sm">Save Changes</button>

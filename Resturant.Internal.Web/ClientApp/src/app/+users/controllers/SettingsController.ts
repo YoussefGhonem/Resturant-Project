@@ -7,4 +7,8 @@ export const SettingsController = {
   // Gallery
   Galleries: 'gallery',
   CreateGallery: 'gallery',
+  // private images
+  AddPrivateDiningImages: 'private-dining-images',
+  PrivateDiningImages: 'private-dining-images',
+
 }

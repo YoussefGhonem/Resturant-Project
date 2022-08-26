@@ -15,7 +15,7 @@ export const MENU: MenuItem[] = [
       },
       {
         id: 'PrivateDining',
-        label: 'Private Dining',
+        label: 'Private Dining (Events)',
         link: '/business/private-dining',
         parentId: 1
       },
