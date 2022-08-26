@@ -3,8 +3,8 @@ import { Component, Injector, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BaseComponent } from '@shared/base/base.component';
-import { PressController } from 'app/+settings/controllers/PressController';
 import { Validators } from 'angular-reactive-validation';
+import { PressController } from 'app/+business/controllers/PressController';
 
 @Component({
   selector: 'app-add-edit-press',

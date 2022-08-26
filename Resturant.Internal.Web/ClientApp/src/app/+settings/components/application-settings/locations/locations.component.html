@@ -1,0 +1,33 @@
+<form [formGroup]="form" (submit)="submit()">
+    <div class="row">
+
+        <div class="mb-3 form-group col-6">
+            <label for="customername-field1" class="form-label">Adress</label>
+            <input [ngClass]="{ 'is-invalid': isInvalid('adress') }" type="text" id="customername-field1"
+                class="form-control" placeholder="Enter Address" formControlName="adress" />
+            <arv-validation-messages for="adress">
+            </arv-validation-messages>
+        </div>
+        <div class="mb-3 form-group col-6">
+            <label for="customername-field1" class="form-label">Google Map Link</label>
+            <input [ngClass]="{ 'is-invalid': isInvalid('googleMapLink') }" type="text" id="customername-field1"
+                class="form-control" placeholder="Enter Work Days" formControlName="googleMapLink" />
+            <arv-validation-messages for="googleMapLink">
+            </arv-validation-messages>
+        </div>
+
+
+    </div>
+    <div class="mb-3 form-group">
+        <label class="form-label"> Work Days</label>
+        <ckeditor [editor]="UserEditor" [config]="editorConfig" [ngClass]="{'is-invalid': isInvalid('workDays')}"
+            id="workDays" formControlName="workDays" data="">
+        </ckeditor>
+        <arv-validation-messages for="workDays"></arv-validation-messages>
+    </div>
+
+
+    <div class="text-end mb-3">
+        <button [disabled]="form.invalid" type="submit" class="btn btn-success w-sm">Save Changes</button>
+    </div>
+</form>

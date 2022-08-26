@@ -33,6 +33,7 @@ import { LightboxModule } from 'ngx-lightbox';
 import { AddGalleryComponent } from './components/application-settings/gallery/add-gallery/add-gallery.component';
 import { PrivateDiningImagesComponent } from './components/application-settings/private-dining-images/private-dining-images.component';
 import { AddPrivateDiningImagesComponent } from './components/application-settings/private-dining-images/add-private-dining-images/add-private-dining-images.component';
+import { LocationsComponent } from './components/application-settings/locations/locations.component';
 // Components
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AddPrivateDiningImagesComponent } from './components/application-settin
     GalleryComponent,
     AddGalleryComponent,
     PrivateDiningImagesComponent,
-    AddPrivateDiningImagesComponent
+    AddPrivateDiningImagesComponent,
+    LocationsComponent
   ],
   imports: [
     SettingsRoutingModule,

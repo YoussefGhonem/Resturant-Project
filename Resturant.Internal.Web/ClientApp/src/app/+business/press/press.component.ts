@@ -6,6 +6,7 @@ import { SettingsController } from 'app/+users/controllers';
 import { AddEditPressComponent } from './add-edit-press/add-edit-press.component';
 import { ngbModalOptions } from '@shared/default-values';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { PressController } from '../controllers/PressController';
 
 @Component({
   selector: 'app-press',
@@ -54,7 +55,7 @@ export class PressComponent extends BaseComponent implements OnInit {
   loadData() {
     let filters = this.form.getRawValue();
     console.log("filters", filters);
-    this.httpService.GET(SettingsController.Press, filters)
+    this.httpService.GET(PressController.GetAll, filters)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.data = res.data;

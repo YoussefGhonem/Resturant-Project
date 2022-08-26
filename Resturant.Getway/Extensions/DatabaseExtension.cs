@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Resturant.Data;
 using Resturant.Data.DataContext;
-using Resturant.Data.DbModels.SecuritySchema;
 
 namespace Resturant.Getway.Extensions;
 

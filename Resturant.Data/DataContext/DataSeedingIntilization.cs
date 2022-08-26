@@ -24,6 +24,7 @@ namespace Resturant.Data.DataContext
 
             // call functions
             SeedApplicationRoles();
+            SeedLocation();
             SeedSettings();
             await SeedApplicationAdministrative();
             // save to the database
@@ -41,9 +42,22 @@ namespace Resturant.Data.DataContext
                 EmailService = "this email will be show in customer to contact with your organization.",
                 NumberService = "000-00-0000",
                 WorkWithUsDescription = "this description will show when customer want to apply in a job.",
-                PrivateDiningDescription= "this description will show in Private Dining Page."
+                PrivateDiningDescription = "this description will show in Private Dining Page."
             };
             _appDbContext.Settings.Add(settings);
+        }
+        private static void SeedLocation()
+        {
+            var obj = _appDbContext.SiteLocations.FirstOrDefault();
+            if (obj != null) return;
+
+            var settings = new SiteLocation()
+            {
+                WorkDays = "Friday – Sunday: 10:00 am – 2:30 pm",
+                Adress = "520 Westheimer Road,Houston,Texas 77006.",
+                GoogleMapLink = "https://g.page/TravelersTable?share",
+            };
+            _appDbContext.SiteLocations.Add(settings);
         }
         private static void SeedApplicationRoles()
         {

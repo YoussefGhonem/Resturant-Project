@@ -1,5 +1,5 @@
 import { takeUntil } from 'rxjs/operators';
-import { SettingsController } from '../../../+users/controllers/SettingsController';
+import { SettingsController } from '../../controllers/SettingsController';
 import { BaseComponent } from '@shared/base/base.component';
 import { Component, Injector } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';

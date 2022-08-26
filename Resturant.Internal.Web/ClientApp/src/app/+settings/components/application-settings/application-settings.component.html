@@ -38,6 +38,14 @@
             <app-gallery></app-gallery>
           </ng-template>
         </li>
+        <li [ngbNavItem]="5">
+          <a ngbNavLink>
+            <i class="ri-account-box-fill me-1 align-bottom"></i> Hours & Location
+          </a>
+          <ng-template ngbNavContent>
+            <locations></locations>
+          </ng-template>
+        </li>
       </ul>
 
       <!-- Tab panes -->
