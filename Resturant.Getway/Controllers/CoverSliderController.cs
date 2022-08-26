@@ -9,7 +9,7 @@ using Resturant.Services.Cover;
 
 namespace Resturant.Getway.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cover-slider")]
     [ApiController]
     public class CoverSliderController : BaseController
     {
@@ -31,10 +31,10 @@ namespace Resturant.Getway.Controllers
             return await _services.UploadImageCover(createAndUpdateCoverDto);
         }
 
-        [HttpDelete("{Id}")]
-        public async Task<IResponseDTO> DeleteImageCover([FromRoute] Guid Id)
+        [HttpDelete("{id}")]
+        public async Task<IResponseDTO> DeleteImageCover([FromRoute] Guid id)
         {
-            return await _services.DeleteImageCover(Id);
+            return await _services.DeleteImageCover(id);
         }
 
     }

@@ -27,17 +27,17 @@ namespace Resturant.Getway.Controllers
         }
         
         [HttpPost]
-        public async Task<IResponseDTO> CreateWhyUs([FromBody] List<CreateAndUpdateWhyUsDto> createAndUpdateWhyUsDto)
+        public async Task<IResponseDTO> Create([FromBody] List<CreateAndUpdateWhyUsDto> createAndUpdateWhyUsDto)
         {
             return await _services.CreateWhyUs(createAndUpdateWhyUsDto);
         }
         [HttpDelete("{id}")]
-        public async Task<IResponseDTO> DeletWhyUsQuestions([FromRoute]Guid id)
+        public async Task<IResponseDTO> Delete([FromRoute]Guid id)
         {
             return await _services.DeleteWhyUs(id);
         }
         [HttpPut("{id}")]
-        public async Task<IResponseDTO> CreateWhyUs([FromBody] CreateAndUpdateWhyUsDto createAndUpdateWhyUsDto,[FromRoute]Guid id)
+        public async Task<IResponseDTO> Update([FromBody] CreateAndUpdateWhyUsDto createAndUpdateWhyUsDto,[FromRoute]Guid id)
         {
             return await _services.UpdateWhyUs(createAndUpdateWhyUsDto, id);
         }

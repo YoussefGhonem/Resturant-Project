@@ -34,6 +34,8 @@ import { AddGalleryComponent } from './components/application-settings/gallery/a
 import { PrivateDiningImagesComponent } from './components/application-settings/private-dining-images/private-dining-images.component';
 import { AddPrivateDiningImagesComponent } from './components/application-settings/private-dining-images/add-private-dining-images/add-private-dining-images.component';
 import { LocationsComponent } from './components/application-settings/locations/locations.component';
+import { PopularQuestionsComponent } from './components/application-settings/popular-questions/popular-questions.component';
+import { AddEditPopularQuestionComponent } from './components/application-settings/add-edit-popular-question/add-edit-popular-question.component';
 // Components
 
 @NgModule({
@@ -45,7 +47,9 @@ import { LocationsComponent } from './components/application-settings/locations/
     AddGalleryComponent,
     PrivateDiningImagesComponent,
     AddPrivateDiningImagesComponent,
-    LocationsComponent
+    LocationsComponent,
+    PopularQuestionsComponent,
+    AddEditPopularQuestionComponent
   ],
   imports: [
     SettingsRoutingModule,
