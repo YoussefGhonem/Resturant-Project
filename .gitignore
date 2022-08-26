@@ -392,3 +392,4 @@ testem.log
 .DS_Store
 Thumbs.db
 *.angulardoc.json
+/Resturant.Getway/wwwroot/Uploads/Gallery
