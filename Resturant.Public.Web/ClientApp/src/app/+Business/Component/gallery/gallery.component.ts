@@ -6,7 +6,7 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.css']
+  styleUrls: ['./gallay.componant.scss','./gallery.component.css']
 })
 export class GalleryComponent extends BaseComponent implements OnInit {
   formGallery!: FormGroup;
@@ -18,6 +18,7 @@ export class GalleryComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.initSearchForm();
+    this.loadData();
   }
   private initSearchForm(): void {
   
@@ -44,7 +45,7 @@ export class GalleryComponent extends BaseComponent implements OnInit {
     this.httpService.GET(BusinessController.GetGallery,filterGalery).pipe(takeUntil(this.ngUnsubscribe))
     .subscribe(res => {
       this.Gallery = res.data;
-      this.totalGallery = this.totalGallery;
+      this.totalGallery = res.total;
       console.log(this.Gallery);
     });
 
