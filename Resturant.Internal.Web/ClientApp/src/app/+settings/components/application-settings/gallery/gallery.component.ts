@@ -64,7 +64,7 @@ export class GalleryComponent extends BaseComponent implements OnInit {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
         this.images = res.data;
-        this.total = this.total;
+        this.total = res.total;
         console.log("images", this.images);
       });
   }

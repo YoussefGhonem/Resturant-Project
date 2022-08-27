@@ -1,3 +1,4 @@
+<section *ngIf="Settingdata?.length > 0 || TeamsData?.length>0 ;else emptyTemp">
 <section id="hero"  class="d-flex align-items-center hero2" style="background: url('{{Settingdata.aboutAttachmentPath}}'); background-size: cover;background-repeat: no-repeat !important;" >
     <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
         <div class="row text-align-center" style="text-align: center;">
@@ -46,6 +47,14 @@
                 </div>
             </div>
         </section>
-        <!-- End Chefs Section -->
+                <!-- End Chefs Section -->
+</section>
+<ng-template #emptyTemp>
+    <div class="text-center my-3 ngModelStyle">
+        <img alt="" class="un-draw" style="    padding-top: 18%;" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>
+
 
 

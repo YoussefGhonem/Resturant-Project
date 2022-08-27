@@ -13,6 +13,8 @@ import { ContactComponent } from './Component/contact/contact.component';
 import { JopComponent } from './Component/jop/jop.component';
 import { GalleryComponent } from './Component/gallery/gallery.component';
 import { SharedComponentsModule } from "@shared/components/shared-components.module";
+import { PrivateDiningComponent } from './Component/private-dining/private-dining.component';
+import { NgImageSliderModule } from 'ng-image-slider';
 
 @NgModule({
     declarations: [
@@ -23,7 +25,8 @@ import { SharedComponentsModule } from "@shared/components/shared-components.mod
     HappeningsComponent,
     ContactComponent,
     JopComponent,
-    GalleryComponent
+    GalleryComponent,
+    PrivateDiningComponent
   ],
   imports: [
     CommonModule,   
@@ -32,6 +35,7 @@ import { SharedComponentsModule } from "@shared/components/shared-components.mod
     ReactiveFormsModule,
     NgbModule,
     SharedComponentsModule,
+    NgImageSliderModule
 
   ]
 })

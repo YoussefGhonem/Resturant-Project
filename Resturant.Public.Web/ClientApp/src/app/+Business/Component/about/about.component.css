@@ -6,3 +6,10 @@
     background-repeat: no-repeat !important;
     background-size: cover !important;
 }
+.ngModelStyle{
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

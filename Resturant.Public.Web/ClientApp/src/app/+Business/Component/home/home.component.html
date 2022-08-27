@@ -1,4 +1,4 @@
-<div  *ngIf="Gallery?.length > 0 && data?.length>0 && WhyUsData?.length>0 ;else emptyTemp">
+<div  *ngIf="Gallery?.length > 0 || data?.length>0 || WhyUsData?.length>0 ;else emptyTemp">
 
 <section id="hero" >
   <!-- <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100"> -->
@@ -70,7 +70,7 @@
 
       <!-- End Gallery Section -->
     <ng-template #emptyTemp>
-        <div class="text-center my-3" style="height:80vh;">
+        <div class="text-center my-3 ngModelStyle">
             <img alt="" class="un-draw" style="    padding-top: 18%;" width="260px" src="assets/images/no-data.svg">
             <h5 class="py-3 text-muted">There is no data to show</h5>
         </div>
