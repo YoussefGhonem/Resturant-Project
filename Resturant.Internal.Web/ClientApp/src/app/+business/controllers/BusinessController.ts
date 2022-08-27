@@ -23,5 +23,6 @@ export const BusinessController = {
   // out Team
   Teams: 'teams',
   CreateTeam: 'teams',
+  UpdateTeam: 'teams',
 
 }

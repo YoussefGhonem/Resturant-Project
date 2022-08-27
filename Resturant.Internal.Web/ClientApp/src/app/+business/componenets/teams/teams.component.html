@@ -1,5 +1,15 @@
+<app-breadcrumbs title="our Teams" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<div class="d-flex align-items-center ">
+    <h5 class="card-title mb-0 flex-grow-1"></h5>
+    <div class="flex-shrink-0 hstack gap-2">
+        <button (click)="create()" type="button" class="btn btn-success add-btn" data-bs-toggle="modal" id="create-btn"
+            data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i>
+            Create</button>
+    </div>
+</div>
 <div *ngIf="persons?.length > 0 ;else emptyTemp">
-    <div class="col-xl-4" *ngFor="let item of persons">
+
+    <!-- <div class="col-xl-4" *ngFor="let item of persons">
         <div class="card">
             <div class="card-body p-4 text-center">
                 <div class="mx-auto avatar-md mb-3">
@@ -21,8 +31,9 @@
                 </ul>
             </div>
         </div>
-    </div><!-- end col -->
+    </div> -->
 </div>
+
 
 <ng-template #emptyTemp>
     <div class="text-center my-3">

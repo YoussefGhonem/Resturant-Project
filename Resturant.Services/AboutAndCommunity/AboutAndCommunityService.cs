@@ -70,7 +70,7 @@ namespace Resturant.Services.AboutAndCommunity
         //            _response.IsPassed = false;
         //            _response.Message = "Invalid object Id";
         //            return _response;
-                    
+
         //        }
         //        About.IsDeleted = true;
         //        About.UpdatedOn = DateTime.Now;
@@ -182,28 +182,26 @@ namespace Resturant.Services.AboutAndCommunity
 
 
         // Team Started impemtation
-        public async Task<IResponseDTO> CreateTeamMember(CreateAndUpdateTeams createAndUpdateTeams)
+        public async Task<IResponseDTO> CreateTeamMember(CreateAndUpdateTeams options)
         {
             try
             {
-                foreach (var image in createAndUpdateTeams.Images)
+
+                Random rnd = new Random();
+                var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                var attachmentPath = $"{path}\\{options.Image?.FileName}";
+
+                var obj = new Data.DbModels.BusinessSchema.About.Team()
                 {
-                    Random rnd = new Random();
-                    var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
-                    var attachmentPath = $"{path}\\{image?.FileName}";
+                    Name = options?.Name,
+                    ImageUrl = attachmentPath,
+                    JopTitle = options?.JopTitle,
+                    Description = options?.Description
+                };
 
-                    var obj = new Data.DbModels.BusinessSchema.About.Team()
-                    {
-                        Name = createAndUpdateTeams?.Name,
-                        ImageUrl= attachmentPath,
-                        JopTitle= createAndUpdateTeams?.JopTitle,
-                        Description=createAndUpdateTeams?.Description
-                    };
-
-                    await _context.Teams.AddAsync(obj);
-                    await _context.SaveChangesAsync();
-                    await _uploadFilesService.UploadFile(path, image);
-                }
+                await _context.Teams.AddAsync(obj);
+                await _context.SaveChangesAsync();
+                await _uploadFilesService.UploadFile(path, options.Image);
 
                 _response.IsPassed = true;
                 return _response;
@@ -224,7 +222,7 @@ namespace Resturant.Services.AboutAndCommunity
             }
             return _response;
         }
-        public async Task<IResponseDTO> UpdateTeamMember(Guid TeamId, CreateAndUpdateTeams createAndUpdateTeams)
+        public async Task<IResponseDTO> UpdateTeamMember(Guid TeamId, CreateAndUpdateTeams options)
         {
             try
             {
@@ -235,22 +233,19 @@ namespace Resturant.Services.AboutAndCommunity
                     _response.Message = "Invalid object Id";
                     return _response;
                 }
-                foreach (var image in createAndUpdateTeams?.Images)
-                {
-                    Random rnd = new Random();
-                    var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
-                    var attachmentPath = $"{path}\\{image?.FileName}";
+                Random rnd = new Random();
+                var path = $"\\Uploads\\Team\\Team_{DateTime.Now.Year}_{DateTime.Now.Month}_{DateTime.Now.Day}_{DateTime.Now.Second}_{rnd.Next(9000)}";
+                var attachmentPath = $"{path}\\{options.Image?.FileName}";
 
 
-                    OneMemberTeam.Name = createAndUpdateTeams?.Name;
-                    OneMemberTeam.ImageUrl = attachmentPath;
-                    OneMemberTeam.JopTitle = createAndUpdateTeams?.JopTitle;
-                    OneMemberTeam.Description = createAndUpdateTeams?.Description;
+                OneMemberTeam.Name = options?.Name;
+                OneMemberTeam.ImageUrl = attachmentPath;
+                OneMemberTeam.JopTitle = options?.JopTitle;
+                OneMemberTeam.Description = options?.Description;
 
-                    _context.Teams.Attach(OneMemberTeam);
-                    await _context.SaveChangesAsync();
-                    await _uploadFilesService.UploadFile(path, image);
-                }
+                _context.Teams.Attach(OneMemberTeam);
+                await _context.SaveChangesAsync();
+                await _uploadFilesService.UploadFile(path, options.Image);
 
                 _response.IsPassed = true;
                 return _response;
@@ -289,7 +284,7 @@ namespace Resturant.Services.AboutAndCommunity
                 await _context.SaveChangesAsync();
                 await _uploadFilesService.DeleteFile(DeleteMember?.ImageUrl);
                 _response.IsPassed = true;
-                
+
             }
             catch (Exception ex)
             {
@@ -310,7 +305,7 @@ namespace Resturant.Services.AboutAndCommunity
         {
             var paginationResult = _context.Teams.Where(T => T.IsDeleted == false)
                  .Paginate(filterDto.PageSize, filterDto.PageNumber);
-            
+
             var dataList = paginationResult.list.Adapt<List<ReturnTeamForAboutDto>>();
 
             foreach (var item in dataList)
@@ -392,9 +387,9 @@ namespace Resturant.Services.AboutAndCommunity
                     OnlyOneCommunity.name = createAndUpdateCommunity?.name;
                     OnlyOneCommunity.ImageUrl = attachmentPath;
                     OnlyOneCommunity.Desciption = createAndUpdateCommunity?.Desciption;
-                    
 
-                     _context.Communitys.Attach(OnlyOneCommunity);
+
+                    _context.Communitys.Attach(OnlyOneCommunity);
                     await _context.SaveChangesAsync();
                     await _uploadFilesService.UploadFile(path, image);
                 }
@@ -455,7 +450,7 @@ namespace Resturant.Services.AboutAndCommunity
         }
         public async Task<List<ReturnCommunityDto>> GetMainCommunity(string serverRootPath)
         {
-            var AllAbout = await _context.Communitys.Where(A=>A.IsDeleted == false).OrderByDescending(c=>c.CreatedOn).ToListAsync();
+            var AllAbout = await _context.Communitys.Where(A => A.IsDeleted == false).OrderByDescending(c => c.CreatedOn).ToListAsync();
             var AboutToReturn = AllAbout.Adapt<List<ReturnCommunityDto>>();
             foreach (var item in AboutToReturn)
             {

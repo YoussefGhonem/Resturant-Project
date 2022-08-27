@@ -1,1 +1,50 @@
-<p>add-edit-person works!</p>
+<!-- Order Create Model -->
+<ng-container #content role="document">
+    <div class="modal-header bg-light p-3">
+        <h5 class="modal-title" id="addModal" *ngIf="mode == 'add'"> Create New</h5>
+        <h5 class="modal-title" id="addModal" *ngIf="mode == 'update'"> Update '{{data.title}}'</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"
+            (click)="modalService.close()"></button>
+    </div>
+    <form (ngSubmit)="submit()" [formGroup]="form">
+        <div class="modal-body">
+            <div class="row gy-4 mb-3">
+                <div class="col-md-6 form-group">
+                    <label for="amount-field" class="form-label">Name<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input [ngClass]="{ 'is-invalid': isInvalid('name') }" type="text" id="customername-field"
+                        class="form-control" placeholder="Name" formControlName="name" />
+                    <arv-validation-messages for="name">
+                    </arv-validation-messages>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="amount-field" class="form-label">Jop Title<small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input [ngClass]="{ 'is-invalid': isInvalid('jopTitle') }" type="text" id="customername-field"
+                        class="form-control" placeholder="jopTitle" formControlName="jopTitle" />
+                    <arv-validation-messages for="jopTitle">
+                    </arv-validation-messages>
+                </div>
+
+                <div class="mb-3 form-group">
+                    <label class="form-label">Upload Image <small style="color : rgb(179, 62, 62);">
+                            *</small></label>
+                    <input class="form-control" [ngClass]="{'is-invalid': isInvalid('image')}" id="image"
+                        formControlName="image" type="file" (change)="onChange($event)" />
+                    <arv-validation-messages for="image"></arv-validation-messages>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <div class="hstack gap-2 justify-content-end">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modalService.close()">Close
+                </button>
+                <button [disabled]="form.invalid" type="submit" class="btn btn-success" id="add-btn">Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+</ng-container>
+<!--End Modal -->

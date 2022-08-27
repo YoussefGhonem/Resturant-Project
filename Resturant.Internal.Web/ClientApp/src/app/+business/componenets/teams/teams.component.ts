@@ -29,6 +29,7 @@ export class TeamsComponent extends BaseComponent implements OnInit {
       { label: 'our Teams', active: true }
     ];
     this.initSearchForm()
+    this.loadData()
   }
 
   private initSearchForm(): void {
@@ -53,6 +54,19 @@ export class TeamsComponent extends BaseComponent implements OnInit {
 
   delete() {
 
+  }
+
+  create() {
+    const modalRef = this.modalService.open(AddEditPersonComponent, {
+      ...ngbModalOptions,
+      windowClass: 'modal modal-success',
+      size: 'xl'
+    });
+    modalRef
+      .result
+      .then((actionCompleted: boolean) => !actionCompleted || this.activeModal.close(true) || this.loadData())
+      .catch(() => {
+      });
   }
 
   edit(item: any) {
