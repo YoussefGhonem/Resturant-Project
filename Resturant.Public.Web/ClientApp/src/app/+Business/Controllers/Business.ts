@@ -8,5 +8,6 @@ export const BusinessController = {
     GetCommunity:`Community`,
     PostJop:`Jop`,
     PostContactUs:`ContactUs`,
-    PrivateDiningImages:`private-dining-images`
+    PrivateDiningImages:`private-dining-images`,
+    PrivateDiningForm:`private-dining`
   }

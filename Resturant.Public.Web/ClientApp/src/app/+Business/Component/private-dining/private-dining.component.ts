@@ -91,7 +91,15 @@ pageChange(pageNumber: number) {
 
     // submit form 
     submit(){
-      
+      console.log(this.PrivateDiningForm.value);
+      this.httpService.POST(BusinessController.PrivateDiningForm,this.PrivateDiningForm.value).subscribe({
+        next:()=>{
+          this.notificationService.success("Success", "Private Dining Submited ,We Will Contact with You As Soon As");
+          this.PrivateDiningForm.reset();
+          document.getElementById("Private-Dining").style.display="none";
+        },
+        error:()=>{this.notificationService.error("Error", "Private Dining Not Submited");}
+      });
     }
 
 }

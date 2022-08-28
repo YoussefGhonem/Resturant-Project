@@ -10,8 +10,11 @@
     <!-- Cover End -->
 
     <!-- Description Start Private Dining -->
-    <section class="pb-0" >
+    <section class="pb-0 pt-2" >
         <div class="container">
+            <div class="d-flex justify-content-center">
+                <h2 class="colorPragraph">Private Dining Description</h2>
+            </div>
             <div class="d-flex text-center p-3" [innerHTML]="SettingData.privateDiningDescription"></div>
         </div>
     </section>
@@ -27,13 +30,13 @@
             slideImage="1">
         </ng-image-slider>
         <div class="pt-2 d-flex justify-content-center">
-            <input (click)="openFile(SettingData.privateDiningAttachmentPath)" type="button" class="btn btn-success PrivateDining" value="Private Dining Packet" style="width: 13%;">
+            <input (click)="openFile(SettingData.privateDiningAttachmentPath)" type="button" class="btn btn-success PrivateDining" value="Private Dining Packet">
         </div>
      </section>
     <!-- End private Dining Image -->
 
     <!-- Start Form Private Dining -->
-    <section>
+    <section id="Private-Dining">
         <div class="container">
             <form [formGroup]="PrivateDiningForm" (ngSubmit)="submit()" class="php-email-form">
                 <div class="row">
@@ -56,7 +59,7 @@
                     <div class="col-md-6 form-group">
                         <input type="text" formControlName="phoneNumber"  name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Your Phone Number" required>
                         <div *ngIf="PrivateDiningForm.get('phoneNumber').touched && PrivateDiningForm.get('phoneNumber').invalid" class="alert alert-danger Nofication">
-                            <div *ngIf="PrivateDiningForm.get('phoneNumber').hasError('phoneNumber')">Phone Number is required.</div>
+                            <div *ngIf="PrivateDiningForm.get('phoneNumber').hasError('required')">Phone Number is required.</div>
                             <div *ngIf="PrivateDiningForm.get('phoneNumber').hasError('minlength')">Phone Number should be 2 character.</div>
                         </div>
                     </div>
@@ -69,18 +72,40 @@
                     </div>
                 </div>
                 <div class="form-group mt-3">
-                    <input type="text" formControlName="PhoneNumber" class="form-control" name="PhoneNumber" id="PhoneNumber" placeholder="Phone Number" required>
-                    <div *ngIf="PrivateDiningForm.get('PhoneNumber').touched && PrivateDiningForm.get('PhoneNumber').invalid" class="alert alert-danger Nofication">
-                        <div *ngIf="PrivateDiningForm.get('PhoneNumber').hasError('required')">Phone Number is required.</div>
-                        <div *ngIf="PrivateDiningForm.get('PhoneNumber').hasError('minlength')">Phone Number should be 3 character.</div>
+                    <input type="text" formControlName="company" class="form-control" name="company" id="company" placeholder="Company" required>
+                    <div *ngIf="PrivateDiningForm.get('company').touched && PrivateDiningForm.get('company').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="PrivateDiningForm.get('company').hasError('required')">Phone Number is required.</div>
+                        <div *ngIf="PrivateDiningForm.get('company').hasError('minlength')">Company should be 3 character.</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 form-group">
+                        <input type="date" formControlName="eventDate"  name="eventDate" class="form-control" id="eventDate" placeholder="Event Date  " required>
+                        <div *ngIf="PrivateDiningForm.get('eventDate').touched && PrivateDiningForm.get('eventDate').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('eventDate').hasError('required')">Event Date is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <input type="time" formControlName="startTime" class="form-control" name="startTime" id="startTime" placeholder="Start Time  " required>
+                        <div *ngIf="PrivateDiningForm.get('startTime').touched && PrivateDiningForm.get('startTime').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('startTime').hasError('required')">Start Time Is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <input type="time" formControlName="endTime" class="form-control" name="endTime" id="endTime" placeholder="End Time  " required>
+                        <div *ngIf="PrivateDiningForm.get('endTime').touched && PrivateDiningForm.get('endTime').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('endTime').hasError('required')">End Time Is required.</div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group mt-3">
-                    <textarea class="form-control" formControlName="CoverLatter" name="CoverLatter" rows="8" placeholder="Cover Letter " required></textarea>
-                    <div *ngIf="PrivateDiningForm.get('CoverLatter').touched && PrivateDiningForm.get('CoverLatter').invalid" class="alert alert-danger Nofication">
-                        <div *ngIf="PrivateDiningForm.get('CoverLatter').hasError('required')">Cover Latter is required.</div>
-                        <div *ngIf="PrivateDiningForm.get('CoverLatter').hasError('minlength')">Cover Latter should be 5 character.</div>
+                    <input type="number" formControlName="numberOfPeople" class="form-control" name="numberOfPeople" id="numberOfPeople" placeholder="Number Of People" required>
+                    <div *ngIf="PrivateDiningForm.get('numberOfPeople').touched && PrivateDiningForm.get('numberOfPeople').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="PrivateDiningForm.get('numberOfPeople').hasError('required')">Number Of People is required.</div>
                     </div>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" formControlName="additionalInformation" name="additionalInformation" rows="8" placeholder="Additional Information" required></textarea>
                 </div>        
                 <div class="text-center pt-2">
                     <button class="btn_custom" type="submit">Apply</button>

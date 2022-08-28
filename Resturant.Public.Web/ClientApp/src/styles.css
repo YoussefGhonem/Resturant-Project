@@ -14,3 +14,7 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.page-link.active, .active > .page-link{
+  background-color: #CDA45E !important;
+  border-color: #CDA45E !important;
+}

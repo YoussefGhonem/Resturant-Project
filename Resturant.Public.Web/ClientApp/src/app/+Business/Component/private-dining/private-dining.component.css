@@ -18,7 +18,6 @@
 }
 
 .PrivateDining{
-    width: 13%;
     background-color: transparent;
     color:#cda45e ;
     border: 1px solid #cda45e;
@@ -37,3 +36,34 @@
     padding: 0;
     padding-left: 13px;
 }
+.alert-danger{
+    border: none !important;
+    background-color: white !important;
+}
+input{
+    box-shadow:none !important;
+}
+input:focus{
+
+    border:1px solid #cda45e !important;
+}
+.btn_custom{
+    margin-right: 10px;
+    width: 98px;
+    color: #cda45e;
+    background: transparent;
+    font-size: 17px;
+    border-radius: 10%;
+    border: 2px solid;
+}
+.btn_custom:hover{
+    color: white;
+    background:#cda45e;
+    border: 2px solid #cda45e;
+}
+input[type='date']:after {
+    content: attr(placeholder)
+  }
+  .colorPragraph{
+    color: #cda45e;
+  }
