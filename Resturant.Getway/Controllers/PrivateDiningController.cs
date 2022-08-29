@@ -26,7 +26,7 @@ namespace Resturant.Getway.Controllers
         }
 
         [HttpPost]
-        public async Task<IResponseDTO> Create(CreatePrivateDiningDto options)
+        public async Task<IResponseDTO> Create([FromBody]  CreatePrivateDiningDto options)
         {
             _response = await _services.Create(options);
             return _response;

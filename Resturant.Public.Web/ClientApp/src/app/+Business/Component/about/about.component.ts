@@ -24,8 +24,9 @@ export class AboutComponent extends BaseComponent implements OnInit {
       console.log( this.Settingdata );
     });
     this.httpService.GET(BusinessController.Teams).pipe(takeUntil(this.ngUnsubscribe)).subscribe(res=>{
-      this.TeamsData=res;
+      this.TeamsData=res.data;
     })
+
   }
 
 }

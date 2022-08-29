@@ -1,6 +1,13 @@
+
+@font-face
+{
+	font-family: 'Edward';
+    src: url(../../../../assets/fonts/edwardian_script_itc.ttf),
+	url(../../../../assets/fonts/edwardian_script_itc.otf) format('opentype');
+}
 .hero2{
     width: 100%;
-    height: 96vh;
+    height: 50vh !important;
     position: relative;
     padding: 0;
     background-repeat: no-repeat !important;
@@ -12,4 +19,385 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.intro
+{
+	width: 100%;
+	background: #FFFFFF;
+	padding-top: 102px;
+}
+.intro_image
+{
+	width: 100%;
+}
+.intro_image img
+{
+	max-width: 100%;
+}
+.intro_content
+{
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+	right: -165px;
+	width: 679px;
+	background: #FFFFFF;
+	border: solid 2px #cda45e;
+	box-shadow: 0px 45px 70px rgba(0,0,0,0.24);
+	z-index: 1;
+	padding-top: 55px;
+	padding-bottom: 59px;
+	padding-left: 70px;
+	padding-right: 50px;
+}
+.intro_subtitle
+{
+	font-size: 45px;
+    font-family: Edward;
+    color: #cda45e;
+}
+.intro_title
+{
+	margin-top: 6px;
+}
+.intro_title h2
+{
+	font-size: 48px;
+}
+.intro_text
+{
+	margin-top: 32px;
+}
+
+@media only screen and (max-width: 1600px)
+{
+	.intro_content
+	{
+		width: 600px;
+		right: -100px;
+	}
+}
+
+/************
+2. 1440px
+************/
+
+@media only screen and (max-width: 1440px)
+{
+	
+}
+
+/************
+3. 1380px
+************/
+
+@media only screen and (max-width: 1380px)
+{
+	
+}
+
+/************
+3. 1280px
+************/
+
+@media only screen and (max-width: 1280px)
+{
+	
+}
+
+/************
+4. 1199px
+************/
+
+@media only screen and (max-width: 1199px)
+{
+	.main_nav
+	{
+		margin-left: 70px;
+	}
+	.main_nav ul li:not(:last-child)
+	{
+		margin-right: 35px;
+	}
+	.intro_content
+	{
+		right: -30px;
+	}
+	.chefs
+	{
+		padding-bottom: 23px;
+	}
+	.chef_col
+	{
+		margin-bottom: 40px;
+	}
+	.chef_image
+	{
+	    width: 75%;
+	    margin-left: auto;
+	    margin-right: auto;
+	}
+}
+
+/************
+4. 1100px
+************/
+
+@media only screen and (max-width: 1100px)
+{
+	
+}
+
+/************
+5. 1024px
+************/
+
+@media only screen and (max-width: 1024px)
+{
+	
+}
+
+/************
+6. 991px
+************/
+
+@media only screen and (max-width: 991px)
+{
+	.hamburger
+	{
+		display: block;
+	}
+	.hamburger_bar
+	{
+		display: block;
+	}
+	.main_nav,
+	.reservations_phone
+	{
+		display: none;
+	}
+	.intro_content
+	{
+		position: relative;
+		top: auto;
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+		right: auto;
+		margin-bottom: 102px;
+		width: 100%;
+	}
+	.footer_col:not(:last-child)
+	{
+		margin-bottom: 80px;
+	}
+}
+
+/************
+7. 959px
+************/
+
+@media only screen and (max-width: 959px)
+{
+	
+}
+
+/************
+8. 880px
+************/
+
+@media only screen and (max-width: 880px)
+{
+	
+}
+
+/************
+9. 768px
+************/
+
+@media only screen and (max-width: 768px)
+{
+	
+}
+
+/************
+10. 767px
+************/
+
+@media only screen and (max-width: 767px)
+{
+	.hamburger_bar
+	{
+		right: calc((100vw - 510px) / 2 - 15px);
+	}
+	.home_subtitle
+	{
+		font-size: 48px;
+	}
+	.home_title h1
+	{
+		font-size: 56px;
+	}
+	.intro_content
+	{
+		padding-left: 49px;
+	}
+	.intro_col:not(:last-child)
+	{
+		margin-bottom: 30px;
+	}
+	.res_input,
+	.res_select
+	{
+		width: 150px;
+	}
+}
+
+/************
+11. 575px
+************/
+
+@media only screen and (max-width: 575px)
+{
+	p
+	{
+		font-size: 14px;
+	}
+	.header_content,
+	.header.scrolled .header_content
+	{
+		height: 80px;
+	}
+	.hamburger_bar
+	{
+		right: 0px;
+		height: 80px;
+	}
+	.hamburger_bar.scrolled
+	{
+		height: 80px;
+	}
+	.home
+	{
+		height: 350px;
+	}
+	.home_container
+	{
+		bottom: 69px;
+	}
+	.home_subtitle
+	{
+		font-size: 30px;
+	}
+	.home_title h1
+	{
+		font-size: 36px;
+	}
+	.section_subtitle
+	{
+		font-size: 30px;
+	}
+	.section_title h1
+	{
+		font-size: 36px;
+	}
+	.intro_content
+	{
+		padding-left: 30px;
+	}
+	.intro_subtitle
+	{
+		font-size: 30px;
+	}
+	.intro_title h2
+	{
+		font-size: 36px;
+	}
+	.intro_text
+	{
+		margin-top: 24px;
+	}
+	.chef_image
+	{
+	    width: 50%;
+	}
+	.res_stars
+	{
+		font-size: 30px;
+	}
+	.res_title
+	{
+		font-size: 36px;
+	}
+	.res_form_container
+	{
+		width: 100%;
+		margin-top: 60px;
+	}
+	.res_input:not(:last-child)
+	{
+		margin-right: 0px;
+		margin-bottom: 12px;
+	}
+	.res_input,
+	.res_select
+	{
+		width: 100%;
+	}
+	.footer_logo_title
+	{
+		font-size: 36px;
+	}
+	.footer_logo_subtitle
+	{
+		font-size: 12px;
+	}
+	.footer_contact_title,
+	.footer_contact_text
+	{
+		font-size: 14px;
+	}
+}
+
+/************
+11. 539px
+************/
+
+@media only screen and (max-width: 539px)
+{
+	
+}
+
+/************
+12. 480px
+************/
+
+@media only screen and (max-width: 480px)
+{
+	
+}
+
+/************
+13. 479px
+************/
+
+@media only screen and (max-width: 479px)
+{
+	
+}
+
+/************
+14. 400px
+************/
+
+@media only screen and (max-width: 400px)
+{
+	
 }

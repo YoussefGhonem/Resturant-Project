@@ -1,3 +1,9 @@
+@font-face
+{
+	font-family: 'Edward';
+    src: url(../../../../assets/fonts/edwardian_script_itc.ttf),
+	url(../../../../assets/fonts/edwardian_script_itc.otf) format('opentype');
+}
 .ngModelStyle{
     height: 80vh;
     display: flex;
@@ -67,3 +73,9 @@ input[type='date']:after {
   .colorPragraph{
     color: #cda45e;
   }
+  .intro_subtitle
+{
+	font-size: 45px;
+    font-family: Edward;
+    color: #cda45e;
+}

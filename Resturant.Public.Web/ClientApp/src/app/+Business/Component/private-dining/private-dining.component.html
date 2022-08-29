@@ -12,9 +12,11 @@
     <!-- Description Start Private Dining -->
     <section class="pb-0 pt-2" >
         <div class="container">
-            <div class="d-flex justify-content-center">
+            <div class="intro_subtitle page_subtitle d-flex justify-content-center">Abobe Resturnat</div>
+            <!-- <div class="d-flex justify-content-center">
+          
                 <h2 class="colorPragraph">Private Dining Description</h2>
-            </div>
+            </div> -->
             <div class="d-flex text-center p-3" [innerHTML]="SettingData.privateDiningDescription"></div>
         </div>
     </section>
@@ -38,7 +40,7 @@
     <!-- Start Form Private Dining -->
     <section id="Private-Dining">
         <div class="container">
-            <form [formGroup]="PrivateDiningForm" (ngSubmit)="submit()" class="php-email-form">
+            <form [formGroup]="PrivateDiningForm" (ngSubmit)="submit()" class="php-email-form" >
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <input type="text" formControlName="firstName"  name="firstName" class="form-control" id="firstName" placeholder="Your First Name" required>
@@ -99,7 +101,7 @@
                     </div>
                 </div>
                 <div class="form-group mt-3">
-                    <input type="number" formControlName="numberOfPeople" class="form-control" name="numberOfPeople" id="numberOfPeople" placeholder="Number Of People" required>
+                    <input type="text" formControlName="numberOfPeople" class="form-control" name="numberOfPeople" id="numberOfPeople" placeholder="Number Of People" required>
                     <div *ngIf="PrivateDiningForm.get('numberOfPeople').touched && PrivateDiningForm.get('numberOfPeople').invalid" class="alert alert-danger Nofication">
                         <div *ngIf="PrivateDiningForm.get('numberOfPeople').hasError('required')">Number Of People is required.</div>
                     </div>
@@ -108,7 +110,7 @@
                     <textarea class="form-control" formControlName="additionalInformation" name="additionalInformation" rows="8" placeholder="Additional Information" required></textarea>
                 </div>        
                 <div class="text-center pt-2">
-                    <button class="btn_custom" type="submit">Apply</button>
+                    <button [disabled]="!PrivateDiningForm.valid" class="btn_custom" type="submit">Apply</button>
                 </div>
             </form>
         </div>

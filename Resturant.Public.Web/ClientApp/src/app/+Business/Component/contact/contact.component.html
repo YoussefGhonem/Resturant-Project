@@ -13,52 +13,101 @@
             Looking forward to hearing from you.
         </h6>
     </div>
-    <div class="container pt-5">
-        <form [formGroup]="ContactForm" (ngSubmit)="submit()" class="php-email-form">
-            <div class="row">
-                <div class="col-md-6 form-group">
-                    <input type="text" formControlName="name"  name="name" class="form-control" id="name" placeholder="Your Name" required>
-                    <div *ngIf="ContactForm.get('name').touched && ContactForm.get('name').invalid" class="alert alert-danger Nofication">
-                        <div *ngIf="ContactForm.get('name').hasError('required')">Name is required.</div>
-                        <div *ngIf="ContactForm.get('name').hasError('minlength')">Name should be 2 character.</div>
+    <div data-aos="fade-up">
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+            frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+    <div class="container" data-aos="fade-up">
+    
+        <div class="row mt-5">
+    
+            <div class="col-lg-4">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Location:</h4>
+                        <p>A108 Adam Street, New York, NY 535022</p>
                     </div>
-                </div>
-                <div class="col-md-6 form-group mt-3 mt-md-0">
-                    <input type="email" formControlName="email" class="form-control" name="email" id="Email" placeholder="Your Email" required>
-                    <div *ngIf="ContactForm.get('email').touched && ContactForm.get('email').invalid" class="alert alert-danger Nofication">
-                        <div *ngIf="ContactForm.get('email').hasError('required')">Email Is required.</div>
-                        <div *ngIf="ContactForm.get('email').hasError('email')">Email Shoud be an Email</div>
+    
+                    <div class="open-hours">
+                        <i class="bi bi-clock"></i>
+                        <h4>Open Hours:</h4>
+                        <p>
+                            Monday-Saturday:<br> 11:00 AM - 2300 PM
+                        </p>
                     </div>
+    
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>Email:</h4>
+                        <p>info@example.com</p>
+                    </div>
+    
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Call:</h4>
+                        <p>+28734237489s</p>
+                    </div>
+    
                 </div>
+    
             </div>
-            <div class="form-group mt-3">
-                <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required>
-                <div *ngIf="ContactForm.get('phoneNumber').touched && ContactForm.get('phoneNumber').invalid" class="alert alert-danger Nofication">
-                    <div *ngIf="ContactForm.get('phoneNumber').hasError('required')">Phone Number is required.</div>
-                    <div *ngIf="ContactForm.get('phoneNumber').hasError('minlength')">Phone Number should be 3 character.</div>
-                </div>
+    
+            <div class="col-lg-8 mt-5 mt-lg-0">
+    
+                <form [formGroup]="ContactForm" (ngSubmit)="submit()" class="php-email-form">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" formControlName="name"  name="name" class="form-control" id="name" placeholder="Your Name" required>
+                            <div *ngIf="ContactForm.get('name').touched && ContactForm.get('name').invalid" class="alert alert-danger Nofication">
+                                <div *ngIf="ContactForm.get('name').hasError('required')">Name is required.</div>
+                                <div *ngIf="ContactForm.get('name').hasError('minlength')">Name should be 2 character.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 form-group mt-3 mt-md-0">
+                            <input type="email" formControlName="email" class="form-control" name="email" id="Email" placeholder="Your Email" required>
+                            <div *ngIf="ContactForm.get('email').touched && ContactForm.get('email').invalid" class="alert alert-danger Nofication">
+                                <div *ngIf="ContactForm.get('email').hasError('required')">Email Is required.</div>
+                                <div *ngIf="ContactForm.get('email').hasError('email')">Email Shoud be an Email</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <input type="text" formControlName="phoneNumber" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="Phone Number" required>
+                        <div *ngIf="ContactForm.get('phoneNumber').touched && ContactForm.get('phoneNumber').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="ContactForm.get('phoneNumber').hasError('required')">Phone Number is required.</div>
+                            <div *ngIf="ContactForm.get('phoneNumber').hasError('minlength')">Phone Number should be 3 character.</div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">            
+                        <select  class="form-control" class="selectpicker" formControlName="touchAbout"  style="width: 100%; height: 46px;">
+                            <!-- <option value="default"  >What are you getting in touch about?</option> -->
+                            <option [ngValue]="1">General Inquiry</option>
+                            <option [ngValue]="2">Press Inquiry</option>
+                          </select>
+                        <div *ngIf="ContactForm.get('touchAbout').touched && ContactForm.get('touchAbout').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="ContactForm.get('touchAbout').hasError('required')">touchAbout is required.</div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <textarea class="form-control" formControlName="massage" name="massage" rows="8" placeholder="Massage " required></textarea>
+                        <div *ngIf="ContactForm.get('massage').touched && ContactForm.get('massage').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="ContactForm.get('massage').hasError('required')">Massage is required.</div>
+                            <div *ngIf="ContactForm.get('massage').hasError('minlength')">Massage should be 5 character.</div>
+                        </div>
+                    </div>
+        
+                    <div class="text-center pt-2">
+                        <button class="btn_custom" type="submit">Apply</button>
+                    </div>
+                </form>
+    
             </div>
-            <div class="form-group mt-3">            
-                <select  class="form-control" class="selectpicker" formControlName="touchAbout"  style="width: 100%; height: 46px;">
-                    <!-- <option value="default"  >What are you getting in touch about?</option> -->
-                    <option [ngValue]="1">General Inquiry</option>
-                    <option [ngValue]="2">Press Inquiry</option>
-                  </select>
-                <div *ngIf="ContactForm.get('touchAbout').touched && ContactForm.get('touchAbout').invalid" class="alert alert-danger Nofication">
-                    <div *ngIf="ContactForm.get('touchAbout').hasError('required')">touchAbout is required.</div>
-                </div>
-            </div>
-            <div class="form-group mt-3">
-                <textarea class="form-control" formControlName="massage" name="massage" rows="8" placeholder="Massage " required></textarea>
-                <div *ngIf="ContactForm.get('massage').touched && ContactForm.get('massage').invalid" class="alert alert-danger Nofication">
-                    <div *ngIf="ContactForm.get('massage').hasError('required')">Massage is required.</div>
-                    <div *ngIf="ContactForm.get('massage').hasError('minlength')">Massage should be 5 character.</div>
-                </div>
-            </div>
-
-            <div class="text-center pt-2">
-                <button class="btn_custom" type="submit">Apply</button>
-            </div>
-        </form>
+    
+        </div>
+    
     </div>
 </section>
+
+
