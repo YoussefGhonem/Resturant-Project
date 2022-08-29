@@ -1,11 +1,13 @@
 export const BusinessController = {
     // Auth
-    GetSeeting:`CoverSlider`,
+    GetSeeting:`cover-slider`,
     GetWhyUs:`WhyUs`,
     GetGallery:`Gallery`,
     Settings:`settings`,
-    Teams:`Team`,
+    Teams:`teams`,
     GetCommunity:`Community`,
     PostJop:`Jop`,
-    PostContactUs:`ContactUs`
+    PostContactUs:`ContactUs`,
+    PrivateDiningImages:`private-dining-images`,
+    PrivateDiningForm:`private-dining`
   }

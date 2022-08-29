@@ -10,9 +10,9 @@ import { takeUntil, debounceTime } from 'rxjs/operators';
 })
 export class CommunityComponent extends BaseComponent implements OnInit {
  data:any=[];
-  constructor(private _formBuilder: UntypedFormBuilder,public override injector: Injector) { 
-    super(injector);
-  }
+ constructor(private _formBuilder: UntypedFormBuilder,public override injector: Injector) { 
+  super(injector);
+}
 
   ngOnInit(): void {
     this.loadData();

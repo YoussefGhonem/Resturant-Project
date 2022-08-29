@@ -2,3 +2,17 @@
     padding: 0;
 padding-left: 13px;
   }
+  .btn_custom{
+    margin-right: 10px;
+    width: 98px;
+    color: #cda45e;
+    background: transparent;
+    font-size: 17px;
+    border-radius: 10%;
+    border: 2px solid;
+}
+.btn_custom:hover{
+    color: white;
+    background:#cda45e;
+    border: 2px solid #cda45e;
+}

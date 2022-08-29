@@ -8,6 +8,7 @@ import { HappeningsComponent } from "./Component/happenings/happenings.component
 import { HomeComponent } from "./Component/home/home.component";
 import { JopComponent } from "./Component/jop/jop.component";
 import { MenuComponent } from "./Component/menu/menu.component";
+import { PrivateDiningComponent } from "./Component/private-dining/private-dining.component";
 
 
 //#endregion
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: "Contact",
     component: ContactComponent
+  },
+  {
+    path: "PrivateDining",
+    component: PrivateDiningComponent
   }
 ];
 

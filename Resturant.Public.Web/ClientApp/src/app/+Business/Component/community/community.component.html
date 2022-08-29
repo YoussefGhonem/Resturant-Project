@@ -1,17 +1,17 @@
-<section style="background-color:#EFC;;">
+<section style="background-color:#EFC;;" *ngIf="data?.length > 0 ;else emptyTemp">
   <div  *ngFor="let x of data;let i=index">
     <div *ngIf="i%2==0" class="row card_specifc" >
       <div class="col-lg-6 col-md-12 col-sm-12 p-0">
         <img [src]="x.imageUrl">
       </div>
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <h2>{{x.name}}</h2>
+      <div class="col-lg-6 col-md-12 col-sm-12" style="    text-align: center; ">
+        <h2 style="font-family: cursive;color: #CDA45E;">{{x.name}}</h2>
       <p>{{x.desciption}}</p>
       </div>
     </div>
     <div *ngIf="i%2!=0" class="row card_specifc">
-      <div class="col-lg-6 col-md-12 col-sm-12">
-        <h2>{{x.name}}</h2>
+      <div class="col-lg-6 col-md-12 col-sm-12"  style="    text-align: center;    ">
+        <h2 style="font-family: cursive;color: #CDA45E;">{{x.name}}</h2>
       <p>{{x.desciption}}</p>
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12 p-0">
@@ -21,3 +21,31 @@
   </div>
 </section>
 
+<ng-template #emptyTemp>
+  <div class="text-center my-3 ngModelStyle">
+      <img alt="" class="un-draw" style="    padding-top: 18%;" width="260px" src="assets/images/no-data.svg">
+      <h5 class="py-3 text-muted">There is no data to show</h5>
+  </div>
+</ng-template>
+
+
+<!-- 
+<div class="intro">
+  <div class="container">
+      <div class="row">
+          <div class="col">
+              <div class="intro_content">
+                  <div class="intro_subtitle page_subtitle">Abobe Resturnat</div>
+                  <div class="intro_text"  [innerHTML]="Settingdata.aboutUs" >
+                      
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-lg-8">
+                      <div class="intro_image"><img [src]="Settingdata?.aboutAttachmentPath" alt="https://unsplash.com/@quanle2819"></div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div> -->

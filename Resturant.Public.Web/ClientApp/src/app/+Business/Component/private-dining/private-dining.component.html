@@ -1,0 +1,128 @@
+<section class="Custome_section">
+    <!-- Cover Start -->
+    <section id="hero"  class="d-flex align-items-center hero2" style="background: url('{{SettingData.privateDiningCoverAttachmentPath}}');" >
+        <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">
+            <div class="row text-align-center" style="text-align: center;">              
+                    <h1>Private Dining</h1>    
+            </div>
+        </div>
+    </section>
+    <!-- Cover End -->
+
+    <!-- Description Start Private Dining -->
+    <section class="pb-0 pt-2" >
+        <div class="container">
+            <div class="intro_subtitle page_subtitle d-flex justify-content-center">Abobe Resturnat</div>
+            <!-- <div class="d-flex justify-content-center">
+          
+                <h2 class="colorPragraph">Private Dining Description</h2>
+            </div> -->
+            <div class="d-flex text-center p-3" [innerHTML]="SettingData.privateDiningDescription"></div>
+        </div>
+    </section>
+     <!-- Description End Private Dining -->
+
+     <!-- Start private Dining Image -->
+     <section class="Custome_section ">
+        <ng-image-slider #nav
+            [images]="PrivateDiningImages"
+            [infinite]="true"
+            [autoSlide]="1"
+            [imageSize]="{width: '20%', height: 200}"
+            slideImage="1">
+        </ng-image-slider>
+        <div class="pt-2 d-flex justify-content-center">
+            <input (click)="openFile(SettingData.privateDiningAttachmentPath)" type="button" class="btn btn-success PrivateDining" value="Private Dining Packet">
+        </div>
+     </section>
+    <!-- End private Dining Image -->
+
+    <!-- Start Form Private Dining -->
+    <section id="Private-Dining">
+        <div class="container">
+            <form [formGroup]="PrivateDiningForm" (ngSubmit)="submit()" class="php-email-form" >
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input type="text" formControlName="firstName"  name="firstName" class="form-control" id="firstName" placeholder="Your First Name" required>
+                        <div *ngIf="PrivateDiningForm.get('firstName').touched && PrivateDiningForm.get('firstName').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('firstName').hasError('required')">First Name is required.</div>
+                            <div *ngIf="PrivateDiningForm.get('firstName').hasError('minlength')">First Name should be 2 character.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="text" formControlName="lastName" class="form-control" name="lastName" id="lastName" placeholder="Your Last Name" required>
+                        <div *ngIf="PrivateDiningForm.get('lastName').touched && PrivateDiningForm.get('lastName').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('lastName').hasError('required')">Last Name Is required.</div>
+                            <div *ngIf="PrivateDiningForm.get('lastName').hasError('minlength')">Last Name should be 2 character.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6 form-group">
+                        <input type="text" formControlName="phoneNumber"  name="phoneNumber" class="form-control" id="phoneNumber" placeholder="Your Phone Number" required>
+                        <div *ngIf="PrivateDiningForm.get('phoneNumber').touched && PrivateDiningForm.get('phoneNumber').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('phoneNumber').hasError('required')">Phone Number is required.</div>
+                            <div *ngIf="PrivateDiningForm.get('phoneNumber').hasError('minlength')">Phone Number should be 2 character.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="email" formControlName="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                        <div *ngIf="PrivateDiningForm.get('email').touched && PrivateDiningForm.get('email').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('email').hasError('required')">Last Name Is required.</div>
+                            <div *ngIf="PrivateDiningForm.get('email').hasError('email')">Email should be an Email.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="text" formControlName="company" class="form-control" name="company" id="company" placeholder="Company" required>
+                    <div *ngIf="PrivateDiningForm.get('company').touched && PrivateDiningForm.get('company').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="PrivateDiningForm.get('company').hasError('required')">Phone Number is required.</div>
+                        <div *ngIf="PrivateDiningForm.get('company').hasError('minlength')">Company should be 3 character.</div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-4 form-group">
+                        <input type="date" formControlName="eventDate"  name="eventDate" class="form-control" id="eventDate" placeholder="Event Date  " required>
+                        <div *ngIf="PrivateDiningForm.get('eventDate').touched && PrivateDiningForm.get('eventDate').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('eventDate').hasError('required')">Event Date is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <input type="time" formControlName="startTime" class="form-control" name="startTime" id="startTime" placeholder="Start Time  " required>
+                        <div *ngIf="PrivateDiningForm.get('startTime').touched && PrivateDiningForm.get('startTime').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('startTime').hasError('required')">Start Time Is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 form-group mt-3 mt-md-0">
+                        <input type="time" formControlName="endTime" class="form-control" name="endTime" id="endTime" placeholder="End Time  " required>
+                        <div *ngIf="PrivateDiningForm.get('endTime').touched && PrivateDiningForm.get('endTime').invalid" class="alert alert-danger Nofication">
+                            <div *ngIf="PrivateDiningForm.get('endTime').hasError('required')">End Time Is required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="text" formControlName="numberOfPeople" class="form-control" name="numberOfPeople" id="numberOfPeople" placeholder="Number Of People" required>
+                    <div *ngIf="PrivateDiningForm.get('numberOfPeople').touched && PrivateDiningForm.get('numberOfPeople').invalid" class="alert alert-danger Nofication">
+                        <div *ngIf="PrivateDiningForm.get('numberOfPeople').hasError('required')">Number Of People is required.</div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <textarea class="form-control" formControlName="additionalInformation" name="additionalInformation" rows="8" placeholder="Additional Information" required></textarea>
+                </div>        
+                <div class="text-center pt-2">
+                    <button [disabled]="!PrivateDiningForm.valid" class="btn_custom" type="submit">Apply</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- End Form Private Dining -->
+</section>
+
+
+<!-- Empty Data Templte -->
+<ng-template #emptyTemp>
+    <div class="text-center my-3 ngModelStyle">
+        <img alt="" class="un-draw" style="    padding-top: 18%;" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">There is no data to show</h5>
+    </div>
+</ng-template>

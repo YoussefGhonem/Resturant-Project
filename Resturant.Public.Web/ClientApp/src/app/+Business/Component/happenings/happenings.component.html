@@ -1,1 +1,9 @@
-<p>happenings works!</p>
+<Section *ngIf="Data?.lenght>0;else emptyTemp">
+    
+</Section>
+<ng-template #emptyTemp>
+    <div class="text-center my-3 ngModelStyle">
+        <img alt="" class="un-draw" style="    padding-top: 18%;" width="260px" src="assets/images/no-data.svg">
+        <h5 class="py-3 text-muted">Under Construction</h5>
+    </div>
+</ng-template>
