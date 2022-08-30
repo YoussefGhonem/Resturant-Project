@@ -73,15 +73,18 @@ pageChange(pageNumber: number) {
       this.httpService.GET(BusinessController.PrivateDiningImages,filterPrivateDiningImage)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(res => {
+        
+        this.total = res.total;
         this.PrivateDiningImages = res.data.map(item => {
+          console.log(this.PrivateDiningImages.length);
           return {
             image: item.attachmentPath,
             thumbImage:item.attachmentPath,
             title: item.attachmentName,
             createdOn:item.createdOn
           };
-        });;
-        this.total = res.total;
+
+        });
       });
   }
 

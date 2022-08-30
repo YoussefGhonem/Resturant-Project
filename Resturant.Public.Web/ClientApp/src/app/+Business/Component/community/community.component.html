@@ -1,6 +1,6 @@
 <section style="background-color:#EFC;;" *ngIf="data?.length > 0 ;else emptyTemp">
   <div  *ngFor="let x of data;let i=index">
-    <div *ngIf="i%2==0" class="row card_specifc" >
+    <!-- <div *ngIf="i%2==0" class="row card_specifc" >
       <div class="col-lg-6 col-md-12 col-sm-12 p-0">
         <img [src]="x.imageUrl">
       </div>
@@ -8,17 +8,56 @@
         <h2 style="font-family: cursive;color: #CDA45E;">{{x.name}}</h2>
       <p>{{x.desciption}}</p>
       </div>
-    </div>
-    <div *ngIf="i%2!=0" class="row card_specifc">
-      <div class="col-lg-6 col-md-12 col-sm-12"  style="    text-align: center;    ">
+    </div> -->
+    <div class="intro" *ngIf="i%2==0">
+      <div class="container">
+          <div class="row">
+              <div class="col">
+                  <div class="intro_content">
+                      <div class="intro_subtitle page_subtitle">{{x.name}}</div>
+                      <div class="intro_text"  [innerHTML]="x.desciption" >
+                          
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-8">
+                          <div class="intro_image"><img [src]="x.imageUrl" [alt]="x.imageUrl"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div> 
+    <!-- <div *ngIf="i%2!=0" class="row card_specifc"> -->
+      <!-- <div class="col-lg-6 col-md-12 col-sm-12"  style="    text-align: center;    ">
         <h2 style="font-family: cursive;color: #CDA45E;">{{x.name}}</h2>
       <p>{{x.desciption}}</p>
       </div>
       <div class="col-lg-6 col-md-12 col-sm-12 p-0">
         <img [src]="x.imageUrl">
-      </div>
+      </div> -->
+      <div class="intro" *ngIf="i%2!=0">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+
+                    <div class="intro_content">
+                        <div class="intro_subtitle page_subtitle">{{x.name}}</div>
+                        <div class="intro_text"  [innerHTML]="x.desciption" >
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-8">
+                          <div class="intro_image"><img [src]="x.imageUrl" [alt]="x.imageUrl"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div> 
     </div>
-  </div>
+  <!-- </div> -->
 </section>
 
 <ng-template #emptyTemp>

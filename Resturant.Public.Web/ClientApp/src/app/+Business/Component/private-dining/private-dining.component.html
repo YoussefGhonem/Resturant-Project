@@ -1,4 +1,4 @@
-<section class="Custome_section">
+<section class="Custome_section" *ngIf="PrivateDiningImages?.lenght>0 || SettingData.privateDiningCoverAttachmentPath!='' ;else emptyTemp">
     <!-- Cover Start -->
     <section id="hero"  class="d-flex align-items-center hero2" style="background: url('{{SettingData.privateDiningCoverAttachmentPath}}');" >
         <div class="container position-relative text-center text-lg-start" data-aos="zoom-in" data-aos-delay="100">

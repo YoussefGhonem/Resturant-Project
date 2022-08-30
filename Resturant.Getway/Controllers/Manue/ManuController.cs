@@ -18,7 +18,7 @@ namespace Resturant.Getway.Controllers.Manue
         }
 
         [HttpPost]
-        public async Task<IResponseDTO> CreateCategoryManu([FromForm] CreateManuCategoryDto options)
+        public async Task<IResponseDTO> CreateCategoryManu([FromForm]CreateManuCategoryDto options)
         {
             _response = await _iManueService.CreateCategoryManu(options);
             return _response;
